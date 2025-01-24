@@ -42,7 +42,7 @@ highlight_code = false
 # Put all your custom variables here
 
 socials = [
-  {name = "linkedin", url = "linkedin.com/in/jacklong257", icon = "linkedin" },
+  {name = "linkedin", url = "https://linkedin.com/in/jacklong257", icon = "linkedin" },
   {name = "github", url = "https://github.com/jaacklong/", icon = "github"}
 ]
 menu = [
