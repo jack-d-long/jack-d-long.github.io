@@ -43,7 +43,7 @@ highlight_code = false
 
 socials = [
   {name = "linkedin", url = "https://linkedin.com/in/jacklong257", icon = "linkedin" },
-  {name = "github", url = "https://github.com/jaacklong/", icon = "github"}
+  {name = "github", url = "https://github.com/jack-d-long/", icon = "github"}
 ]
 menu = [
   { name = "/fast robots", url = "/fast-robots", weight = 1 },
