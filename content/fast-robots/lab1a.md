@@ -1,6 +1,6 @@
 +++
-title = "Lab 11"
-date = "2025-01-30"
+title = "Lab 1a"
+date = "2025-01-24"
 
 [taxonomies]
 
@@ -10,6 +10,7 @@ comment = true
 
 Image should be here
 
-![dog](dawgg.png)
+<img src="/files/lab1/artemisnobg.png" alt="Picture of Artemis" width = 350 height = 300>
+
 
 and not past here

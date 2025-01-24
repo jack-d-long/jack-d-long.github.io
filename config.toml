@@ -25,7 +25,7 @@ highlight_theme = "ayu-light"
 [extra]
 toc = true
 use_cdn = false
-# favicon = "/icon/favicon.png"
+favicon = "/alien.png"
 theme = "toggle"              # light, dark, auto, toggle
 fancy_code = true
 dynamic_note = true           # a note that can be toggled
@@ -52,7 +52,6 @@ menu = [
     
 ]
 
-favicon = "/resources/smallalien.png"
 mathjax = true
 mathjax_dollar_inline_enable = true
 
