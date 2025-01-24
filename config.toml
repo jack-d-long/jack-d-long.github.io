@@ -2,7 +2,7 @@
 # theme config
 theme = "apollo"
 
-base_url = "https://jaacklong.github.io/"
+base_url = "https://jack-d-long.github.io/"
 title = "jdl298"
 description = "This is an example description"
 build_search_index = true
