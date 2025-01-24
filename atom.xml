@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>jdl298</title>
+    <subtitle>This is an example description</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://jack-d-long.github.io/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://jack-d-long.github.io/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-02-07T00:00:00+00:00</updated>
+    <id>https://jack-d-long.github.io/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Lab 1b</title>
+        <published>2025-02-07T00:00:00+00:00</published>
+        <updated>2025-02-07T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://jack-d-long.github.io/fast-robots/lab1b/"/>
+        <id>https://jack-d-long.github.io/fast-robots/lab1b/</id>
+        
+        <content type="html" xml:base="https://jack-d-long.github.io/fast-robots/lab1b/">&lt;p&gt;Note: This requires the &lt;code&gt;mathjax&lt;&#x2F;code&gt; and &lt;code&gt;mathjax_dollar_inline_enable&lt;&#x2F;code&gt; option set to &lt;code&gt;true&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;inline-math&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#inline-math&quot; aria-label=&quot;Anchor link for: inline-math&quot;&gt;Inline Math&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;ul&gt;
+&lt;li&gt;$(a+b)^2$ = $a^2 + 2ab + b^2$&lt;&#x2F;li&gt;
+&lt;li&gt;A polynomial P of degree d over $\mathbb{F}_p$ is an expression of the form
+$P(s) = a_0 + a_1 . s + a_2 . s^2 + ... + a_d . s^d$ for some
+$a_0,..,a_d \in \mathbb{F}_p$&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h1 id=&quot;displayed-math&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#displayed-math&quot; aria-label=&quot;Anchor link for: displayed-math&quot;&gt;Displayed Math&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;$$
+p := (\sum_{k∈I}{c_k.v_k} + \delta_v.t(x))·(\sum_{k∈I}{c_k.w_k} + \delta_w.t(x)) − (\sum_{k∈I}{c_k.y_k} + \delta_y.t(x))
+$$&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Lab 1a</title>
+        <published>2025-01-24T00:00:00+00:00</published>
+        <updated>2025-01-24T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://jack-d-long.github.io/fast-robots/lab1a/"/>
+        <id>https://jack-d-long.github.io/fast-robots/lab1a/</id>
+        
+        <content type="html" xml:base="https://jack-d-long.github.io/fast-robots/lab1a/">&lt;p&gt;Image should be here&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab1&#x2F;artemisnobg.png&quot; alt=&quot;Picture of Artemis&quot; width = 350 height = 300&gt;
+&lt;p&gt;and not past here&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
