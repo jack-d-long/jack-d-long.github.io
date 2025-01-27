@@ -14,3 +14,11 @@ Image should be here
 
 
 and not past here
+
+
+<img src="/files/lab1/virtualenv.png" alt="Picture of Artemis" width = 540 height = auto>
+
+<img src="/files/lab1/jupyter.png" alt="Picture of Artemis"  width = 700 height = auto>
+
+
+
