@@ -1,13 +1,14 @@
 +++
-title = "Lab 1b"
+title = "Lab 1B"
 
-date = "2025-02-07"
+date = "2025-01-29"
 
 [taxonomies]
 
 [extra]
 comment = true
 +++
+# Previous: [Lab 1A](/fast-robots/lab1a)
 # Setup and Configurations
 
 I created a Python environment and installed Jupyter Lab along with the other required packages and class codebase. I was able to start the Jupyter server successfully.
@@ -16,9 +17,10 @@ I created a Python environment and installed Jupyter Lab along with the other re
 
 I uploaded **ble_arduino.ino** to the Artemis and was able to read its unique MAC address, as well as generate a uuid to update **connection.yaml**. 
 
-***INSERT MAC ADDRESS SS HERE***
+<img src="/files/lab1/bleMAC.png" alt="ble MAC" width = 350 height = auto >
 
-<img src="/files/lab1/uuid.png" alt="UUID" width = 350 height = auto style="border-radius: 15px 50px">
+<br>
+<img src="/files/lab1/uuid.png" alt="UUID" width = 350 height = auto >
 
 
 # Lab
@@ -26,15 +28,43 @@ I uploaded **ble_arduino.ino** to the Artemis and was able to read its unique MA
 ## Task 1
 
 I sent a string value from the computer to the Artemis board using the ECHO command. The computer received and printed an augmented string.
+{% note(clickable=true,hidden = true,header = "ECHO") %}
 
-***INSERT ECHO HERE***
+```c++
+case ECHO:
+
+            char char_arr[MAX_MSG_SIZE];
+
+            // Extract the next value from the command string as a character array
+            success = robot_cmd.get_next_value(char_arr);
+            
+            if (!success)
+                return;
+            
+            /*
+             * Your code goes here.
+             
+             */
+            tx_estring_value.clear();
+            tx_estring_value.append("Robot says ");
+            Serial.println(char_arr);
+            tx_estring_value.append(char_arr);
+            tx_estring_value.append(" :)");
+            tx_characteristic_string.writeValue(tx_estring_value.c_str());
+            break;
+```
+
+{% end %}
+
+<br>
+<br>
 
 ## Task 2
 
-I sent three floats to the Artemis board using the SEND_THREE_FLOATS command and extracted the three float values in the Arduino sketch.
+I sent three floats to the Artemis board using the *SEND_THREE_FLOATS* command and extracted the three float values in the Arduino sketch.
 
 
-{% note(clickable=true,header = "*SEND_THREE_FLOATS*") %}
+{% note(clickable=true,hidden = true,header = "SEND_THREE_FLOATS") %}
 
 ```c++
 case SEND_THREE_FLOATS:
@@ -70,12 +100,15 @@ case SEND_THREE_FLOATS:
 
 
 
+<br>
+<br>
+
 ## Task 3
 
 I added a command *GET_TIME_MILLIS* which makes the robot reply write a string such as *T:123456* to the string characteristic.
 
 
-{% note(clickable=true,header = "*GET_TIME_MILLIS*") %}
+{% note(clickable=true,hidden = true, header = "GET_TIME_MILLIS") %}
 
 ```c++
     case GET_TIME_MILLIS:
@@ -91,23 +124,19 @@ I added a command *GET_TIME_MILLIS* which makes the robot reply write a string s
 
 {% end %}
 
+<br>
+<br>
+
 
 ## Task 4
 
-I set up a notification handler in Python to receive the string value (the BLEStringCharacteristic in Arduino) from the Artemis board. It uses the *ble* function *start_notify()* with my *notification_handler()* to receive updates to BLE GATT characteristics concurrent with other code. 
+I set up a notification handler in Python to receive the string value (*BLEStringCharacteristic* in Arduino) from the Artemis board. It uses the *ble* function *start_notify()* with my *notification_handler()* to receive updates to BLE GATT characteristics concurrent with other code. 
 
-{% note(clickable=true,header = "*notification_handler()*") %}
+{% note(clickable=true,hidden = true,header = "notification_handler()") %}
 
 ```python
 def notification_handler(uuid, data):
-    """
-    Handles notifications from the BLE characteristic.
-    Extracts time from the string sent by the Artemis board.
-    
-    Args:
-        uuid: The BLE address of the sender.
-        data: The raw bytes received from the BLE characteristic.
-    """
+
     # Decode the byte data into a string
 
     received_string = ble.bytearray_to_string(data)
@@ -129,6 +158,9 @@ def notification_handler(uuid, data):
 
 {% end %}
 
+<br>
+<br>
+
 ## Task 5
 
 I wrote a loop that gets the current time in milliseconds and sends it to my laptop to be received and processed by *notification_handler()*. After collecting these values, I found that each was transmitted approximately 60 ms after the last. This is around 17 transmissions per second, and with 13 bytes per message (for a *char* array of length 12), approximately 200 bytes per second.
@@ -136,11 +168,14 @@ I wrote a loop that gets the current time in milliseconds and sends it to my lap
 <img src="/files/lab1/test_RX_speed.png" alt="test RX speed" width = 700 height = auto >
 
 
+<br>
+<br>
+
 ## Task 6
 
 I then defined a global array *timeStamps* to store time stamps, and modified *GET_TIME_MILLIS* to place each time stamp into the array rather than writing each one to the string GATT characteristic. This required another global counter *stampsWritten* to ensure I didn't index a value greater than the size of *timeStamps*. Then, I added a command *SEND_TIME_DATA* which loops over *timeStamps* and sends each data point as a string to my laptop to be processed. 
 
-{% note(clickable=true,header = "*GET_TIME_MILLIS*") %}
+{% note(clickable=true,hidden = true,header = "GET_TIME_MILLIS") %}
 
 ```c++
     case GET_TIME_MILLIS:
@@ -162,7 +197,7 @@ I then defined a global array *timeStamps* to store time stamps, and modified *G
 ```
 {% end %}
 
-{% note(clickable=true,header = "*SEND_TIME_DATA*") %}
+{% note(clickable=true,hidden = true,header = "SEND_TIME_DATA") %}
 
 ```c++
 
@@ -180,12 +215,15 @@ I then defined a global array *timeStamps* to store time stamps, and modified *G
 {% end %}
 
 
+<br>
+<br>
+
 ## Task 7
 
 I implemented a similar assignment process for temperature readings from the Artemis using the command *SEND_TEMP_DATA*. The notification handler is able to parse both time and temprature. 
 
 
-{% note(clickable=true,header = "*SEND_TEMP_DATA*") %}
+{% note(clickable=true,hidden = true,header = "SEND_TEMP_DATA") %}
 
 ```c++
 case SEND_TEMP_DATA: //lowkey also records data bc i didn't want to write a separate GET_TEMP as with GET_TIME_MILLIS and SEND_TIME_DATA
@@ -206,11 +244,20 @@ case SEND_TEMP_DATA: //lowkey also records data bc i didn't want to write a sepa
 break;
 ```
 {% end %}
-
+<br>
+<br>
 
 ## Task 8
 
-Final writeup goes here 
+Method 1 records data at a significantly lower rate, but outputs to the computer after every round of collection. This could be useful if real-time decisions must be made based on sensor readings. For an open-loop test, method 2 is much more useful. The data recorded generated has much higher resolution than that of method 1, but there is a delay between the Artemis recording data and the computer receiving it. 
+
+With *int* timestamps and *float* temperatures, the data recorded at each step is 8 bytes. Currently defined global variables use about 30kB, so with the 354kB remaining, we can store just over **40,000 temp and timestamp sets**
+
+<br>
+<br>
+
+# Next: [Lab 2](../lab2)
+
 
 
 

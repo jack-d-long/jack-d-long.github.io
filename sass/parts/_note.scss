@@ -43,8 +43,14 @@
 }
 
 .note-toggle {
+  font-family: inherit; /* Ensures it inherits the theme's font */
+  font-weight: bold;
+  background: none; /* Removes default button styling */
+  border: none; /* Removes default button border */
+  padding: 30px;
   cursor: pointer;
   position: relative;
+
 }
 
 .note-toggle::before {
@@ -71,7 +77,7 @@
 }
 
 .note-icon::before {
-  content: '✎';
+  content: '👾';
   color: var(--primary-color);
   position: absolute;
   left: 20px;
