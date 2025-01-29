@@ -5,7 +5,7 @@ template = "homepage.html"
 
 +++
 
-<img src="/files/Jack.jpg" alt="Picture of Jack" style="border-radius: 15px 50px" width="400" height="200">
+<img src="/files/Jack.jpg" alt="Picture of Jack" style="border-radius: 15px 50px" width="400" height="auto">
 
 Third-year Mechanical Engineering student at Cornell University
 
