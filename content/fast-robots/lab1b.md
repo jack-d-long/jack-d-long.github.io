@@ -33,25 +33,25 @@ I sent a string value from the computer to the Artemis board using the ECHO comm
 ```c++
 case ECHO:
 
-            char char_arr[MAX_MSG_SIZE];
+    char char_arr[MAX_MSG_SIZE];
 
-            // Extract the next value from the command string as a character array
-            success = robot_cmd.get_next_value(char_arr);
-            
-            if (!success)
-                return;
-            
-            /*
-             * Your code goes here.
-             
-             */
-            tx_estring_value.clear();
-            tx_estring_value.append("Robot says ");
-            Serial.println(char_arr);
-            tx_estring_value.append(char_arr);
-            tx_estring_value.append(" :)");
-            tx_characteristic_string.writeValue(tx_estring_value.c_str());
-            break;
+    // Extract the next value from the command string as a character array
+    success = robot_cmd.get_next_value(char_arr);
+    
+    if (!success)
+        return;
+    
+    /*
+    * Your code goes here.
+    
+    */
+    tx_estring_value.clear();
+    tx_estring_value.append("Robot says ");
+    Serial.println(char_arr);
+    tx_estring_value.append(char_arr);
+    tx_estring_value.append(" :)");
+    tx_characteristic_string.writeValue(tx_estring_value.c_str());
+break;
 ```
 
 {% end %}
@@ -68,32 +68,32 @@ I sent three floats to the Artemis board using the *SEND_THREE_FLOATS* command a
 
 ```c++
 case SEND_THREE_FLOATS:
-            float float_a, float_b, float_c;
+    float float_a, float_b, float_c;
 
-            // Extract the next value from the command string as an integer
-            success = robot_cmd.get_next_value(float_a);
-            if (!success)
-                return;
+    // Extract the next value from the command string as an integer
+    success = robot_cmd.get_next_value(float_a);
+    if (!success)
+        return;
 
-            // Extract the next value from the command string as an integer
-            success = robot_cmd.get_next_value(float_b);
-            if (!success)
-                return;
-
-
-            success = robot_cmd.get_next_value(float_c);
-            if (!success)
-                return;
+    // Extract the next value from the command string as an integer
+    success = robot_cmd.get_next_value(float_b);
+    if (!success)
+        return;
 
 
-            Serial.print("Three Floats: ");
-            Serial.print(float_a);
-            Serial.print(", ");
-            Serial.print(float_b);
-            Serial.print(", ");
-            Serial.println(float_c);
+    success = robot_cmd.get_next_value(float_c);
+    if (!success)
+        return;
 
-            break;
+
+    Serial.print("Three Floats: ");
+    Serial.print(float_a);
+    Serial.print(", ");
+    Serial.print(float_b);
+    Serial.print(", ");
+    Serial.println(float_c);
+
+break;
 ```
 
 {% end %}
@@ -111,15 +111,15 @@ I added a command *GET_TIME_MILLIS* which makes the robot reply write a string s
 {% note(clickable=true,hidden = true, header = "GET_TIME_MILLIS") %}
 
 ```c++
-    case GET_TIME_MILLIS:
-            // clear and update string characteristic with current time
-            currentMillis = millis();
-            tx_estring_value.clear();
-            tx_estring_value.append("T:");
-            tx_estring_value.append((int)currentMillis);
-            tx_characteristic_string.writeValue(tx_estring_value.c_str());
-            
-    break;
+case GET_TIME_MILLIS:
+    // clear and update string characteristic with current time
+    currentMillis = millis();
+    tx_estring_value.clear();
+    tx_estring_value.append("T:");
+    tx_estring_value.append((int)currentMillis);
+    tx_characteristic_string.writeValue(tx_estring_value.c_str());
+        
+break;
 ```
 
 {% end %}
@@ -178,22 +178,22 @@ I then defined a global array *timeStamps* to store time stamps, and modified *G
 {% note(clickable=true,hidden = true,header = "GET_TIME_MILLIS") %}
 
 ```c++
-    case GET_TIME_MILLIS:
-            //loop through timeStamps
-            if (!success){
-              return;
-            }
-              currentMillis = millis();
-              if(timeStamps[19]!=0){
-                stampsWritten++;
-                timeStamps[stampsWritten] = (int)currentMillis;
-                
-              }else{
-                tx_estring_value.clear();
-                tx_estring_value.append("timeStamps full");
-                tx_characteristic_string.writeValue(tx_estring_value.c_str());
-              }
-    break;
+case GET_TIME_MILLIS:
+    //loop through timeStamps
+    if (!success){
+        return;
+    }
+        currentMillis = millis();
+        if(timeStamps[19]!=0){
+        stampsWritten++;
+        timeStamps[stampsWritten] = (int)currentMillis;
+        
+        }else{
+        tx_estring_value.clear();
+        tx_estring_value.append("timeStamps full");
+        tx_characteristic_string.writeValue(tx_estring_value.c_str());
+        }
+break;
 ```
 {% end %}
 
@@ -201,16 +201,16 @@ I then defined a global array *timeStamps* to store time stamps, and modified *G
 
 ```c++
 
-    case SEND_TIME_DATA:
+case SEND_TIME_DATA:
 
-          for (int i=0; i<20; i++){
-            tx_estring_value.clear();
-            tx_estring_value.append("T:");
-            tx_estring_value.append((int)currentMillis);
-            tx_characteristic_string.writeValue(tx_estring_value.c_str());
-          }
+    for (int i=0; i<20; i++){
+    tx_estring_value.clear();
+    tx_estring_value.append("T:");
+    tx_estring_value.append((int)currentMillis);
+    tx_characteristic_string.writeValue(tx_estring_value.c_str());
+    }
 
-    break;
+break;
 ```
 {% end %}
 
