@@ -105,7 +105,7 @@ case SEND_THREE_FLOATS:
 
 ## Task 3
 
-I added a command *GET_TIME_MILLIS* which makes the robot reply write a string such as *T:123456* to the string characteristic.
+I added a command *GET_TIME_MILLIS* which makes the robot reply write a string such as "T:123456" to the string characteristic.
 
 
 {% note(clickable=true,hidden = true, header = "GET_TIME_MILLIS") %}
