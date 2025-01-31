@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>jdl298</title>
+    <subtitle>This is an example description</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://jack-d-long.github.io/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://jack-d-long.github.io/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-02-07T00:00:00+00:00</updated>
+    <id>https://jack-d-long.github.io/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Lab 2</title>
+        <published>2025-02-07T00:00:00+00:00</published>
+        <updated>2025-02-07T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://jack-d-long.github.io/fast-robots/lab2/"/>
+        <id>https://jack-d-long.github.io/fast-robots/lab2/</id>
+        
+        <content type="html" xml:base="https://jack-d-long.github.io/fast-robots/lab2/">&lt;h1 id=&quot;previous-lab-1b&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#previous-lab-1b&quot; aria-label=&quot;Anchor link for: previous-lab-1b&quot;&gt;Previous: &lt;a href=&quot;&#x2F;fast-robots&#x2F;lab1b&quot;&gt;Lab 1B&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;h1 id=&quot;lab-tasks&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#lab-tasks&quot; aria-label=&quot;Anchor link for: lab-tasks&quot;&gt;Lab Tasks&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;set-up-the-imu&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#set-up-the-imu&quot; aria-label=&quot;Anchor link for: set-up-the-imu&quot;&gt;Set up the IMU&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Picture of your Artemis IMU connections&lt;&#x2F;p&gt;
+&lt;p&gt;Show that the IMU example code works&lt;&#x2F;p&gt;
+&lt;p&gt;AD0_VAL definition discussion&lt;&#x2F;p&gt;
+&lt;p&gt;Acceleration and gyroscope data discussion (pictures recommended)&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;accelerometer&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#accelerometer&quot; aria-label=&quot;Anchor link for: accelerometer&quot;&gt;Accelerometer&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Image of output at {-90, 0, 90} degrees for pitch and roll (include equations)&lt;&#x2F;p&gt;
+&lt;p&gt;Accelerometer accuracy discussion&lt;&#x2F;p&gt;
+&lt;p&gt;Noise in the frequency spectrum analysis&lt;&#x2F;p&gt;
+&lt;p&gt;Include graphs for your fourier transform&lt;&#x2F;p&gt;
+&lt;p&gt;Discuss the results&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;gyroscope&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#gyroscope&quot; aria-label=&quot;Anchor link for: gyroscope&quot;&gt;Gyroscope&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Include documentation for pitch, roll, and yaw with images of the results of different IMU positions&lt;&#x2F;p&gt;
+&lt;p&gt;Demonstrate the accuracy and range of the complementary filter, and discuss any design choices&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;sample-data&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#sample-data&quot; aria-label=&quot;Anchor link for: sample-data&quot;&gt;Sample Data&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Speed of sampling discussion&lt;&#x2F;p&gt;
+&lt;p&gt;Demonstrate collected and stored time-stamped IMU data in arrays&lt;&#x2F;p&gt;
+&lt;p&gt;Demonstrate 5s of ToF and IMU data sent over Bluetooth&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;record-a-stunt&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#record-a-stunt&quot; aria-label=&quot;Anchor link for: record-a-stunt&quot;&gt;Record a Stunt&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Include a video (or some videos) of you playing with the car and discuss your observations&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;next-lab-3&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#next-lab-3&quot; aria-label=&quot;Anchor link for: next-lab-3&quot;&gt;Next: &lt;a href=&quot;&#x2F;fast-robots&#x2F;lab3&quot;&gt;Lab 3&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Lab 1B</title>
+        <published>2025-01-29T00:00:00+00:00</published>
+        <updated>2025-01-29T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://jack-d-long.github.io/fast-robots/lab1b/"/>
+        <id>https://jack-d-long.github.io/fast-robots/lab1b/</id>
+        
+        <content type="html" xml:base="https://jack-d-long.github.io/fast-robots/lab1b/">&lt;h1 id=&quot;previous-lab-1a&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#previous-lab-1a&quot; aria-label=&quot;Anchor link for: previous-lab-1a&quot;&gt;Previous: &lt;a href=&quot;&#x2F;fast-robots&#x2F;lab1a&quot;&gt;Lab 1A&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;h1 id=&quot;setup-and-configurations&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#setup-and-configurations&quot; aria-label=&quot;Anchor link for: setup-and-configurations&quot;&gt;Setup and Configurations&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;I created a Python environment and installed Jupyter Lab along with the other required packages and class codebase. I was able to start the Jupyter server successfully.&lt;&#x2F;p&gt;
+ &lt;img src=&quot;&#x2F;files&#x2F;lab1&#x2F;jupyter.png&quot; alt=&quot;Picture of successful Jupyter serve&quot;  width = 700 height = auto &gt;
+&lt;p&gt;I uploaded &lt;strong&gt;ble_arduino.ino&lt;&#x2F;strong&gt; to the Artemis and was able to read its unique MAC address, as well as generate a uuid to update &lt;strong&gt;connection.yaml&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab1&#x2F;bleMAC.png&quot; alt=&quot;ble MAC&quot; width = 350 height = auto &gt;
+&lt;br&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab1&#x2F;uuid.png&quot; alt=&quot;UUID&quot; width = 350 height = auto &gt;
+&lt;h1 id=&quot;lab&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#lab&quot; aria-label=&quot;Anchor link for: lab&quot;&gt;Lab&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;task-1&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-1&quot; aria-label=&quot;Anchor link for: task-1&quot;&gt;Task 1&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I sent a string value from the computer to the Artemis board using the ECHO command. The computer received and printed an augmented string.
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;ECHO&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;case&lt;&#x2F;span&gt;&lt;span&gt; ECHO&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;char&lt;&#x2F;span&gt;&lt;span&gt; char_arr[MAX_MSG_SIZE]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; Extract the next value from the command string as a character array
+&lt;&#x2F;span&gt;&lt;span&gt;    success &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; robot_cmd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get_next_value&lt;&#x2F;span&gt;&lt;span&gt;(char_arr)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;!&lt;&#x2F;span&gt;&lt;span&gt;success)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;*
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;    * Your code goes here.
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;    
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;    *&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Robot says &amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;println&lt;&#x2F;span&gt;&lt;span&gt;(char_arr)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(char_arr)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot; :)&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_characteristic_string&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;writeValue&lt;&#x2F;span&gt;&lt;span&gt;(tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;c_str&lt;&#x2F;span&gt;&lt;span&gt;())&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-2&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-2&quot; aria-label=&quot;Anchor link for: task-2&quot;&gt;Task 2&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I sent three floats to the Artemis board using the &lt;em&gt;SEND_THREE_FLOATS&lt;&#x2F;em&gt; command and extracted the three float values in the Arduino sketch.&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;SEND_THREE_FLOATS&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;case&lt;&#x2F;span&gt;&lt;span&gt; SEND_THREE_FLOATS&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;float&lt;&#x2F;span&gt;&lt;span&gt; float_a&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; float_b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; float_c&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; Extract the next value from the command string as an integer
+&lt;&#x2F;span&gt;&lt;span&gt;    success &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; robot_cmd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get_next_value&lt;&#x2F;span&gt;&lt;span&gt;(float_a)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;!&lt;&#x2F;span&gt;&lt;span&gt;success)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; Extract the next value from the command string as an integer
+&lt;&#x2F;span&gt;&lt;span&gt;    success &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; robot_cmd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get_next_value&lt;&#x2F;span&gt;&lt;span&gt;(float_b)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;!&lt;&#x2F;span&gt;&lt;span&gt;success)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    success &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; robot_cmd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get_next_value&lt;&#x2F;span&gt;&lt;span&gt;(float_c)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;!&lt;&#x2F;span&gt;&lt;span&gt;success)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Three Floats: &amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(float_a)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(float_b)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;println&lt;&#x2F;span&gt;&lt;span&gt;(float_c)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-3&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-3&quot; aria-label=&quot;Anchor link for: task-3&quot;&gt;Task 3&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I added a command &lt;em&gt;GET_TIME_MILLIS&lt;&#x2F;em&gt; which makes the robot reply write a string such as &quot;T:123456&quot; to the string characteristic.&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;GET_TIME_MILLIS&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;case&lt;&#x2F;span&gt;&lt;span&gt; GET_TIME_MILLIS&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; clear and update string characteristic with current time
+&lt;&#x2F;span&gt;&lt;span&gt;    currentMillis &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;millis&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;T:&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;((&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt;)currentMillis)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_characteristic_string&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;writeValue&lt;&#x2F;span&gt;&lt;span&gt;(tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;c_str&lt;&#x2F;span&gt;&lt;span&gt;())&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-4&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-4&quot; aria-label=&quot;Anchor link for: task-4&quot;&gt;Task 4&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I set up a notification handler in Python to receive the string value (&lt;em&gt;BLEStringCharacteristic&lt;&#x2F;em&gt; in Arduino) from the Artemis board. It uses the &lt;em&gt;ble&lt;&#x2F;em&gt; function &lt;em&gt;start_notify()&lt;&#x2F;em&gt; with my &lt;em&gt;notification_handler()&lt;&#x2F;em&gt; to receive updates to BLE GATT characteristics concurrent with other code.&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;notification_handler()&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;notification_handler&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;uuid&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;data&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;# Decode the byte data into a string
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    received_string &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;ble&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;bytearray_to_string&lt;&#x2F;span&gt;&lt;span&gt;(data)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;#print(f&amp;quot;Received string: {received_string}&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;try&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;# Split the string into key-value pairs
+&lt;&#x2F;span&gt;&lt;span&gt;        key_value_pairs &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#55b4d4;&quot;&gt;dict&lt;&#x2F;span&gt;&lt;span&gt;(pair&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;split&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;:&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;pair &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;received_string&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;split&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;,&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;))
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;# Extract the time value
+&lt;&#x2F;span&gt;&lt;span&gt;        time_value &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;key_value_pairs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;T&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Time not found&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;# extract temp value
+&lt;&#x2F;span&gt;&lt;span&gt;        temp_value &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;key_value_pairs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;F&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Temp not found&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f07171;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;f&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Extracted time: &lt;&#x2F;span&gt;&lt;span&gt;{time_value}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f07171;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;f&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Extracted temp: &lt;&#x2F;span&gt;&lt;span&gt;{temp_value}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;except &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#55b4d4;&quot;&gt;Exception &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;as &lt;&#x2F;span&gt;&lt;span&gt;e:
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f07171;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;f&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Error parsing the string: &lt;&#x2F;span&gt;&lt;span&gt;{e}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-5&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-5&quot; aria-label=&quot;Anchor link for: task-5&quot;&gt;Task 5&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I wrote a loop that gets the current time in milliseconds and sends it to my laptop to be received and processed by &lt;em&gt;notification_handler()&lt;&#x2F;em&gt;. After collecting these values, I found that each was transmitted approximately 60 ms after the last. This is around 17 transmissions per second, and with 13 bytes per message (for a &lt;em&gt;char&lt;&#x2F;em&gt; array of length 12), approximately 200 bytes per second.&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab1&#x2F;test_RX_speed.png&quot; alt=&quot;test RX speed&quot; width = 700 height = auto &gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-6&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-6&quot; aria-label=&quot;Anchor link for: task-6&quot;&gt;Task 6&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I then defined a global array &lt;em&gt;timeStamps&lt;&#x2F;em&gt; to store time stamps, and modified &lt;em&gt;GET_TIME_MILLIS&lt;&#x2F;em&gt; to place each time stamp into the array rather than writing each one to the string GATT characteristic. This required another global counter &lt;em&gt;stampsWritten&lt;&#x2F;em&gt; to ensure I didn&#x27;t index a value greater than the size of &lt;em&gt;timeStamps&lt;&#x2F;em&gt;. Then, I added a command &lt;em&gt;SEND_TIME_DATA&lt;&#x2F;em&gt; which loops over &lt;em&gt;timeStamps&lt;&#x2F;em&gt; and sends each data point as a string to my laptop to be processed.&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;GET_TIME_MILLIS&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;case&lt;&#x2F;span&gt;&lt;span&gt; GET_TIME_MILLIS&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;loop through timeStamps
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;!&lt;&#x2F;span&gt;&lt;span&gt;success){
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;        currentMillis &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;millis&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;(timeStamps[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;19&lt;&#x2F;span&gt;&lt;span&gt;]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;!=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;){
+&lt;&#x2F;span&gt;&lt;span&gt;        stampsWritten&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        timeStamps[stampsWritten] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt;)currentMillis&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        
+&lt;&#x2F;span&gt;&lt;span&gt;        }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;timeStamps full&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        tx_characteristic_string&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;writeValue&lt;&#x2F;span&gt;&lt;span&gt;(tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;c_str&lt;&#x2F;span&gt;&lt;span&gt;())&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;SEND_TIME_DATA&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;case&lt;&#x2F;span&gt;&lt;span&gt; SEND_TIME_DATA&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;20&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span&gt;){
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;T:&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;((&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt;)currentMillis)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_characteristic_string&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;writeValue&lt;&#x2F;span&gt;&lt;span&gt;(tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;c_str&lt;&#x2F;span&gt;&lt;span&gt;())&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-7&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-7&quot; aria-label=&quot;Anchor link for: task-7&quot;&gt;Task 7&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I implemented a similar assignment process for temperature readings from the Artemis using the command &lt;em&gt;SEND_TEMP_DATA&lt;&#x2F;em&gt;. The notification handler is able to parse both time and temprature.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;SEND_TEMP_DATA&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;case&lt;&#x2F;span&gt;&lt;span&gt; SEND_TEMP_DATA&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;lowkey also records data bc i didn&amp;#39;t want to write a separate GET_TEMP as with GET_TIME_MILLIS and SEND_TIME_DATA
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;20&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span&gt;){
+&lt;&#x2F;span&gt;&lt;span&gt;    currentMillis &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;millis&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    timeSteps[i] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt;)currentMillis&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    temps[i] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;float&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;getTempDegF&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;20&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span&gt;){
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;T:&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(timeSteps[i])&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;,&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;F:&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(temps[i])&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_characteristic_string&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;writeValue&lt;&#x2F;span&gt;&lt;span&gt;(tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;c_str&lt;&#x2F;span&gt;&lt;span&gt;())&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+
+&lt;br&gt;
+&lt;br&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;task-8&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-8&quot; aria-label=&quot;Anchor link for: task-8&quot;&gt;Task 8&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Method 1 records data at a significantly lower rate, but outputs to the computer after every round of collection. This could be useful if real-time decisions must be made based on sensor readings. For an open-loop test, method 2 is much more useful. The data recorded generated has much higher resolution than that of method 1, but there is a delay between the Artemis recording data and the computer receiving it.&lt;&#x2F;p&gt;
+&lt;p&gt;With &lt;em&gt;int&lt;&#x2F;em&gt; timestamps and &lt;em&gt;float&lt;&#x2F;em&gt; temperatures, the data recorded at each step is 8 bytes. Currently defined global variables use about 30kB, so with the 354kB remaining, we can store just over &lt;strong&gt;40,000 temp and timestamp sets&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h1 id=&quot;next-lab-2&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#next-lab-2&quot; aria-label=&quot;Anchor link for: next-lab-2&quot;&gt;Next: &lt;a href=&quot;..&#x2F;lab2&quot;&gt;Lab 2&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Lab 1A</title>
+        <published>2025-01-24T00:00:00+00:00</published>
+        <updated>2025-01-24T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://jack-d-long.github.io/fast-robots/lab1a/"/>
+        <id>https://jack-d-long.github.io/fast-robots/lab1a/</id>
+        
+        <content type="html" xml:base="https://jack-d-long.github.io/fast-robots/lab1a/">&lt;h1 id=&quot;lab&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#lab&quot; aria-label=&quot;Anchor link for: lab&quot;&gt;Lab&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;task-1&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-1&quot; aria-label=&quot;Anchor link for: task-1&quot;&gt;Task 1&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I connected the Arduino successfully, but found no way to fix the macOS Sequoia connection issue.
+&lt;br&gt;
+&lt;br&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;task-2&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-2&quot; aria-label=&quot;Anchor link for: task-2&quot;&gt;Task 2&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;In File-&amp;gt;Examples-&amp;gt;01.Basics, I ran Blink. The code successfully uploaded and the Artemis blinked.&lt;&#x2F;p&gt;
+&lt;iframe width=&quot;450&quot; height=&quot;315&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;9YBieJHNG9I&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-3&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-3&quot; aria-label=&quot;Anchor link for: task-3&quot;&gt;Task 3&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;In File-&amp;gt;Examples-&amp;gt;Apollo3, I ran Example4_Serial. The Artemis successfully echoed serial inputs.&lt;&#x2F;p&gt;
+&lt;iframe width=&quot;450&quot; height=&quot;315&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;ZFASvjhig5k&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-4&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-4&quot; aria-label=&quot;Anchor link for: task-4&quot;&gt;Task 4&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;In File-&amp;gt;Examples-&amp;gt;Apollo3, I ran Example2_analogRead to test my temperature sensor. I blew hot air over the board and the temp sensor successfully displayed a temperature increase.&lt;&#x2F;p&gt;
+&lt;iframe width=&quot;450&quot; height=&quot;315&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;4Q5Nn3rsS-w&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-5&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-5&quot; aria-label=&quot;Anchor link for: task-5&quot;&gt;Task 5&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;In File-&amp;gt;Examples-&amp;gt;PDM, I ran Example1_MicrophoneOutput to test my microphone. I attempted to maintain one note in my voice and the loudest frquency output was pretty consistent, sometimes outputting resonant frequencies of my voice.&lt;&#x2F;p&gt;
+&lt;iframe width=&quot;450&quot; height=&quot;315&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;hwPn8Ey0Lfw&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h1 id=&quot;next-lab-1b&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#next-lab-1b&quot; aria-label=&quot;Anchor link for: next-lab-1b&quot;&gt;Next: &lt;a href=&quot;&#x2F;fast-robots&#x2F;lab1b&quot;&gt;Lab 1B&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+</content>
+        
+    </entry>
+</feed>
