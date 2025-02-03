@@ -11,7 +11,7 @@ comment = true
 # Lab
 
 ## Task 1
-I connected the Arduino successfully, but found no way to fix the macOS Sequoia connection issue. 
+I connected the Artemis successfully, but found no way to fix the macOS Sequoia connection issue. 
 <br>
 <br>
 

@@ -14,7 +14,7 @@ Picture of your Artemis IMU connections
 
 Show that the IMU example code works
 
-AD0_VAL definition discussion
+AD0_VAL definition discussion: We set AD0_VAL to 1 to define the I2C address of the IMU. In this case, it maintains the default address of 0x12. 
 
 Acceleration and gyroscope data discussion (pictures recommended)
 ## Accelerometer
