@@ -48,6 +48,10 @@ In File->Examples->PDM, I ran Example1_MicrophoneOutput to test my microphone. I
 <br>
 <br>
 
+## Collaboration
+
+I worked with [Lucca Correia](https://correial.github.io/) and [Trevor Dales](https://trevordales.github.io/) in lab. 
+
 
 # Next: [Lab 1B](/fast-robots/lab1b)
 

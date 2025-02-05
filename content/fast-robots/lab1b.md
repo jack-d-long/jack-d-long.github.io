@@ -64,6 +64,7 @@ break;
 I sent three floats to the Artemis board using the *SEND_THREE_FLOATS* command and extracted the three float values in the Arduino sketch.
 
 
+{% note(clickable=true,hidden = true,header = "SEND_THREE_FLOATS") %}
 
 ```c++
 case SEND_THREE_FLOATS:
@@ -95,6 +96,7 @@ case SEND_THREE_FLOATS:
 break;
 ```
 
+{% end %}
 
 
 
@@ -171,29 +173,8 @@ I wrote a loop that gets the current time in milliseconds and sends it to my lap
 
 ## Task 6
 
-I then defined a global array *timeStamps* to store time stamps, and modified *GET_TIME_MILLIS* to place each time stamp into the array rather than writing each one to the string GATT characteristic. This required another global counter *stampsWritten* to ensure I didn't index a value greater than the size of *timeStamps*. Then, I added a command *SEND_TIME_DATA* which loops over *timeStamps* and sends each data point as a string to my laptop to be processed. 
+I then defined a global array *timeStamps* to store time stamps, and added a command *SEND_TIME_DATA* to place each time stamp into the array rather than writing each one to the string GATT characteristic. Then, I looped over *timeStamps* and sent each data point as a string to my laptop to be processed. 
 
-{% note(clickable=true,hidden = true,header = "GET_TIME_MILLIS") %}
-
-```c++
-case GET_TIME_MILLIS:
-    //loop through timeStamps
-    if (!success){
-        return;
-    }
-        currentMillis = millis();
-        if(timeStamps[19]!=0){
-        stampsWritten++;
-        timeStamps[stampsWritten] = (int)currentMillis;
-        
-        }else{
-        tx_estring_value.clear();
-        tx_estring_value.append("timeStamps full");
-        tx_characteristic_string.writeValue(tx_estring_value.c_str());
-        }
-break;
-```
-{% end %}
 
 {% note(clickable=true,hidden = true,header = "SEND_TIME_DATA") %}
 
@@ -201,16 +182,26 @@ break;
 
 case SEND_TIME_DATA:
 
-    for (int i=0; i<20; i++){
-    tx_estring_value.clear();
-    tx_estring_value.append("T:");
-    tx_estring_value.append((int)currentMillis);
-    tx_characteristic_string.writeValue(tx_estring_value.c_str());
-    }
+          for (int i=0; i<100; i++){
+            currentMillis = millis();
+            timeStamps[i] = currentMillis;
+          }
+    
 
+          for (int i=0; i<100; i++){
+            tx_estring_value.clear();
+            tx_estring_value.append("T:");
+            tx_estring_value.append(timeStamps[i]);
+            tx_characteristic_string.writeValue(tx_estring_value.c_str());
+          }
 break;
 ```
 {% end %}
+<img src="/files/lab1/SEND_TIME_DATA_results.png" alt="send time millis"  width = 400 >
+<br>
+... and after a while ...
+<br>
+<img src="/files/lab1/times2.png" alt="send time millis"  width = 400 >
 
 
 <br>
@@ -224,7 +215,7 @@ I implemented a similar assignment process for temperature readings from the Art
 {% note(clickable=true,hidden = true,header = "SEND_TEMP_DATA") %}
 
 ```c++
-case SEND_TEMP_DATA: //lowkey also records data bc i didn't want to write a separate GET_TEMP as with GET_TIME_MILLIS and SEND_TIME_DATA
+case SEND_TEMP_DATA: 
     for (int i=0; i<20; i++){
     currentMillis = millis();
     timeSteps[i] = (int)currentMillis;
@@ -242,6 +233,9 @@ case SEND_TEMP_DATA: //lowkey also records data bc i didn't want to write a sepa
 break;
 ```
 {% end %}
+
+<img src="/files/lab1/SEND_TEMP_DATA_results.png" alt="send temp"  width = 400 >
+
 <br>
 <br>
 
@@ -249,10 +243,18 @@ break;
 
 Method 1 records data at a significantly lower rate, but outputs to the computer after every round of collection. This could be useful if real-time decisions must be made based on sensor readings. For an open-loop test, method 2 is much more useful. The data recorded generated has much higher resolution than that of method 1, but there is a delay between the Artemis recording data and the computer receiving it. 
 
-With *int* timestamps and *float* temperatures, the data recorded at each step is 8 bytes. Currently defined global variables use about 30kB, so with the 354kB remaining, we can store just over **40,000 temp and timestamp sets**
+It took just over 25 ms for the Artemis to store 100 time and temp readings. With *int* timestamps and *float* temperatures, the data recorded at each step is 8 bytes, for a data rate of about 320 bytes per second. Currently defined global variables use about 30kB, so with the 354kB remaining, we can store just over **40,000 temp and timestamp sets**. 
 
 <br>
-<br>
+
+
+
+## Collaboration
+
+I worked with [Lucca Correia](https://correial.github.io/) and [Trevor Dales](https://trevordales.github.io/) extensively, and referenced [Daria's site](https://pages.github.coecis.cornell.edu/dak267/dak267.github.io/#contact) for some notification handler and SEND_TIME_DATA pointers. 
+
+
+
 
 # Next: [Lab 2](../lab2)
 

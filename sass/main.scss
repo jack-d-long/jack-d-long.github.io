@@ -21,6 +21,12 @@
   --code-font: 'Jetbrains Mono';
 }
 
+img {
+  border: none;
+  padding: 0;
+  box-shadow: none;
+}
+
 html {
   background-color: var(--bg-0);
   color: var(--text-0);
