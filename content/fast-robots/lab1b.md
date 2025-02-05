@@ -64,7 +64,6 @@ break;
 I sent three floats to the Artemis board using the *SEND_THREE_FLOATS* command and extracted the three float values in the Arduino sketch.
 
 
-{% note(clickable=true,hidden = true,header = "SEND_THREE_FLOATS") %}
 
 ```c++
 case SEND_THREE_FLOATS:
@@ -96,7 +95,6 @@ case SEND_THREE_FLOATS:
 break;
 ```
 
-{% end %}
 
 
 
