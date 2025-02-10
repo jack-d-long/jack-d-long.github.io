@@ -48,8 +48,8 @@ $$
 
 Where $T_s$ is the sampling period of the IMU, given in seconds. For the given noise spectrum, I calculated $\alpha = .077$, producing the following low-pass-filtered car noise and ringdown readings. 
 
-<img src="/files/lab2/fftLPF.png" alt="FFT LPF car noise"  width = 800 >
- <img src="/files/lab2/lpfRingdown.png" alt="FFT LPF ringdown"  width = 800 >
+<img src="/files/lab2/FFTLPF.png" alt="FFT LPF car noise"  width = 800 >
+ <img src="/files/lab2/lpfringdown.png" alt="FFT LPF ringdown"  width = 800 >
 
 
 
@@ -57,7 +57,7 @@ Where $T_s$ is the sampling period of the IMU, given in seconds. For the given n
 ## Gyroscope
 The accelerometer roughly tracked the changes in pitch, roll, and yaw expected from movement of the IMU and accelerometer readings, but struggled with the angle offset due to lack of initial conditions in the integrator. I also saw significant integrated error, especially in yaw. When the Artemis was kept static about the accelerometer and gyroscope z axis, yaw appeared to vary linearly. 
 
-<img src="/files/lab2/gyrointtro.png" alt="Gyro unfilterd"  width = 800 >
+<img src="/files/lab2/gyroInttro.png" alt="Gyro unfilterd"  width = 800 >
 
 With the complementary filter in place (in this case with $\alpha=.08$, similar to the pitch and roll LPF), pitch and roll values appeared to track the actual motion of the IMU much more closely, and lacked the high-frequency noise present even in the LPF accelerometer readings. 
 
