@@ -61,6 +61,10 @@
   /* Center vertically */
   
 }
+.note-toggle.expanded:before{
+  transform: rotate(180deg);
+}
+
 
 .note-toggle:hover,
 .note-toggle:focus {
@@ -72,6 +76,7 @@
 .note-content {
   padding: 10px 20px;
   background-color: var(--note-content-bg);
+  font-size: .8em;
 }
 
 .note-icon::before {
