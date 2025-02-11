@@ -92,7 +92,9 @@ Yaw remained unfiltered as there is no accelerometer data to complement it.
 ## Sample Data
 With serial monitor prints removed, the IMU sampled at approximately 320 Hz. I didn't find the GET_IMU_DATA loop to be running any faster -- *myICM.dataReady()* never returned false.
 
-I stored sample data in arrays and then sent to my laptop all at once, as in Lab 1. I got about 6.5 seconds of data with a 2048-element array, stored like so: 
+I decided to store IMU data as float. The high precision of doubles doesn't really make sense for the IMU, whose outputs have significant noise even after filtering. I stored time as an int, because (at least for now) I don't expect to run the device for more than INT_MAX milliseconds (25 days). 
+
+I chose 2D arrays for each data set (e.g. filtered accelerometer, raw gyro) because it made my code more organized. However, it's slightly more difficult to determine whether pitch, roll, and yaw are being indexed for a particular data set. There may be slight performance benefits for using 2D arrays over multiple 1D arrays due to locality, but I was unable to measure any difference in this use case. 
 
 {% note(clickable=true,hidden = true,header = "GET_IMU_DATA") %}
 
@@ -211,6 +213,16 @@ case GET_IMU_DATA:
     break;
 ```
 {% end %}
+
+At each time step, the Artemis records the following data, as shown above: 
+- time (one int)
+- raw accelerometer  (two floats)
+- filtered accelerometer (two floats)
+- raw gyroscope (three floats)
+- filtered gyroscope (three floats)
+
+This means a total of 44 bytes are being stored at a time, so, assuming the 350kB of dynamic memory available as in lab 1B, we can store just under 8000 time steps. For an average measured sample rate of 300 Hz, this gives us around **27 seconds of IMU data recording**. 
+
 
 
 The above plots show well over 5 seconds of data transmitted by BLE. 
