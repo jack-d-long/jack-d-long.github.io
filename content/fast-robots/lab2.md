@@ -102,7 +102,7 @@ while (central.connected()) {
             looped++;
             if(startRecording&&myICM.dataReady()){
               record_IMU();
-
+            }
             // Read data
             read_data();
         }
