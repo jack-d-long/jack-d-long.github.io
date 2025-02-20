@@ -10,30 +10,32 @@ comment = true
 # Previous: [Lab 2](/fast-robots/lab2)
 
 # Prelab
-Note the I2C sensor address: 0x69 is IMU, 0x29 is TOF
 
-Briefly discuss the approach to using 2 ToF sensors: We don't have great sample rate per TOF, so we make up for it with more samples. 
+
+We use two sensors because don't have great sample rate per TOF, so we make up for it with more samples. But because both sensors have the same default I2C address, we must include an additional connection to shut off one TOF while we modify the I2C address of the other. 
 
 I plan to put both TOFs on the front of my robot. While this may cause it to miss some obstacles to its left and right, I believe that these issues will be mitigated with proper angle control of the robot. When placed in an unfamiliar environment, it can simply do a 360 degree spin to map it out. I believe that interpretation of the sensor data will be easiest with them both in the same location on the robot. 
 
-***Sketch of wiring diagram (with brief explanation if you want)***
+
 
 # Lab Tasks
-***Picture of your ToF sensor connected to your QWIIC breakout board***
+<img src="/files/lab3/setup.png" alt="setup"  width = 600 >
+
 ***Screenshot of Artemis scanning for I2C device (and discussion on I2C address)***
 
-
-
+Initially, the Artemis reads the default I2C address of the TOF as 0x29 (0b 0010 1001). Because the least significant bit of this address is used to indicate read/write, we can shift it left to obtain the I2C address as printed on the datasheet, 0x52 (0b 0101 0010). 
 
 I chose the long mode - The resolution at short distances is still sufficient to avoid collisions, but is better at long (on a room scale) distances where mapping will be more useful.
 
-I used the shutoff pin to change the I2C address of one of the TOFs, allowing both to be read separately. 
-
 Using two TOFs allowed me to measure differences in performance based on material measured. TOF1 in this case measured my bare hand, while TOF2 measured my matte black jacket sleeve. My hand, the more reflective material, made the TOF much more precise.  
+
+From the below code snippet and output, it's clear that the TOF ready time is the bottleneck in this case. New TOF values ready approximately every 50 ms. However, ranging does add a small delay to the loop in addition to the various serial prints of 1-2 ms. 
+
+
+
 
 <img src="/files/lab3/Tof2black.png" alt="TOF bottleneck"  width = 600 >
 
-Tof sensor speed: Discussion on speed and limiting factor; include code snippet of how you do this
 
 {% note(clickable=true,hidden = true,header = "TOF Bottleneck Test") %}
 
@@ -77,11 +79,7 @@ Output:
 
 <img src="/files/lab3/bottleneck.png" alt="TOF bottleneck"  width = 600 >
 
-It's clear that the TOF ready time is the bottleneck in this case. New TOF values ready approximately every 50 ms. However, ranging does add a small delay to the loop in addition to the various serial prints of 1-2 ms. 
 
-
-
-Time v Distance: Include graph of data sent over bluetooth (2 sensors)
 
 I wrote a command *RECORD_TOF* which grabs 100 values from each TOF sensor and sends via BLE using my existing *GET_DATA* command. 
 
