@@ -12,7 +12,12 @@ comment = true
 # Prelab
 
 
-We use two sensors because don't have great sample rate per TOF, so we make up for it with more samples. But because both sensors have the same default I2C address, we must include an additional connection to shut off one TOF while we modify the I2C address of the other. 
+We use two sensors because don't have great sample rate per TOF, so we make up for it with more samples. But because both sensors have the same default I2C address, we must include an additional connection to shut off one TOF while we modify the I2C address of the other, like so:
+
+
+<img src="/files/lab3/wiring.png" alt="wiring"  width = 600 >
+
+EZeENgkbHYw
 
 I plan to put both TOFs on the front of my robot. While this may cause it to miss some obstacles to its left and right, I believe that these issues will be mitigated with proper angle control of the robot. When placed in an unfamiliar environment, it can simply do a 360 degree spin to map it out. I believe that interpretation of the sensor data will be easiest with them both in the same location on the robot. 
 
@@ -21,7 +26,8 @@ I plan to put both TOFs on the front of my robot. While this may cause it to mis
 # Lab Tasks
 <img src="/files/lab3/setup.png" alt="setup"  width = 600 >
 
-***Screenshot of Artemis scanning for I2C device (and discussion on I2C address)***
+<iframe width="600" height = "400" src="https://youtube.com/embed/EZeENgkbHYw"allowfullscreen></iframe>
+
 
 Initially, the Artemis reads the default I2C address of the TOF as 0x29 (0b 0010 1001). Because the least significant bit of this address is used to indicate read/write, we can shift it left to obtain the I2C address as printed on the datasheet, 0x52 (0b 0101 0010). 
 
