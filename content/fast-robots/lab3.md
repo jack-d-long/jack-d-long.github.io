@@ -17,7 +17,6 @@ We use two sensors because don't have great sample rate per TOF, so we make up f
 
 <img src="/files/lab3/wiring.png" alt="wiring"  width = 600 >
 
-EZeENgkbHYw
 
 I plan to put both TOFs on the front of my robot. While this may cause it to miss some obstacles to its left and right, I believe that these issues will be mitigated with proper angle control of the robot. When placed in an unfamiliar environment, it can simply do a 360 degree spin to map it out. I believe that interpretation of the sensor data will be easiest with them both in the same location on the robot. 
 
