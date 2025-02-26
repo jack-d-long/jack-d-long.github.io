@@ -9,4 +9,4 @@ template = "homepage.html"
 
 Third-year Mechanical Engineering student at Cornell University
 
-See [fast robots](./fast-robots) for MAE4190/ECE4160 work and [projects](./tags/projects/) for other stuff (work in progress).
+See [fast robots](./fast-robots) for MAE4190/ECE4160 work and [projects](./projects/) for other stuff (work in progress).
