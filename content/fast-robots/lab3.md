@@ -199,4 +199,4 @@ THis resulted in even less recorded TOF values -- an average of 56 per TOF per 2
 ## Collaborations
 I worked with [Lucca Correia](https://correial.github.io/) and [Trevor Dales](https://trevordales.github.io/) extensively, and referenced [Daria's](https://pages.github.coecis.cornell.edu/dak267/dak267.github.io/#contact) and [Mavis'](https://mavisfu.github.io/lab3.html) site for multi-TOF operation. 
 
-# Next: [Lab 4](/fast-robots/lab3)
+# Next: [Lab 4](/fast-robots/lab4)
