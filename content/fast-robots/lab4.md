@@ -12,8 +12,14 @@ comment = true
 # Prelab
 
 
-**Diagram with your intended connections between the motor drivers, Artemis, and battery (with specific pin numbers)**
-**Battery discussion**
+
+
+I decided to connect my motor drivers to Artemis pins A13, A14, A15, and A16, and wire the car like so: 
+
+<img src="/files/lab/wired.jpg" alt="Wiring diagram"  width = 600 >
+
+We power the motors with a separate battery from the Artemis to reduce the effect of back-EMF on the Artemis. There's no reason to have the varying load of the motors effect the stability of the Artemis' computations. Two smaller batteries in separate locations also helps with reducing the form factor of the whole car. 
+
 
 
 # Lab Tasks
@@ -100,11 +106,14 @@ With battery leads soldered and batteries attached, I performed the following te
 
 <iframe width="600" height = "400" src="https://youtube.com/embed/ubOYevCqdug"allowfullscreen></iframe>
 
-**Picture of all the components secured in the car**
-**Consider labeling your picture if you can’t see all the components**
+
+This was my initial setup:
+
+<img src="/files/lab/wired.jpg" alt="wired"  width = 600 >
 
 
-I found that my motors failed to drive the car forward and backward (with a fully-charged battery) up to a PWM value of around 30. It failed to turn about its own axis up to PWM 50, however, due to the increased slip friction of the wheels. 
+
+I found that my motors failed to drive the car forward and backward (with a fully-charged battery) up to a PWM value of around 30. It failed to turn about its own axis up to PWM 90, however, due to the increased slip friction of the wheels. All tests were performed on vinyl tiling. 
 
 To calibrate the motor, I simply multiplied the input to the side with greater friction by a constant. It took a bit of tuning, but I landed on a constant coefficient of around 1.4 for the left motor. It's worth noting, though, that the required coefficient dropped significantly as the battery lost charge -- on the last few tests of a battery, the car kept straight with a constant of around 1.2. 
 
@@ -172,4 +181,4 @@ void spin(int speed, float scale) {
 I worked with [Lucca Correia](https://correial.github.io/) and [Trevor Dales](https://trevordales.github.io/) extensively, and referenced [Daria's](https://pages.github.coecis.cornell.edu/dak267/dak267.github.io/#contact) and [Mavis'](https://mavisfu.github.io/lab3.html) site for wiring and local test code snippets.
 
 
-# Next: [Lab 5](/fast-robots/lab4)
+# Next: [Lab 5](/fast-robots/lab5)
