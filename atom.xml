@@ -1,0 +1,1224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>jdl298</title>
+    <subtitle>This is an example description</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://jack-d-long.github.io/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://jack-d-long.github.io/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-03-02T00:00:00+00:00</updated>
+    <id>https://jack-d-long.github.io/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Lab 4</title>
+        <published>2025-03-02T00:00:00+00:00</published>
+        <updated>2025-03-02T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://jack-d-long.github.io/fast-robots/lab4/"/>
+        <id>https://jack-d-long.github.io/fast-robots/lab4/</id>
+        
+        <content type="html" xml:base="https://jack-d-long.github.io/fast-robots/lab4/">&lt;h1 id=&quot;previous-lab-3&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#previous-lab-3&quot; aria-label=&quot;Anchor link for: previous-lab-3&quot;&gt;Previous: &lt;a href=&quot;&#x2F;fast-robots&#x2F;lab3&quot;&gt;Lab 3&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;h1 id=&quot;prelab&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#prelab&quot; aria-label=&quot;Anchor link for: prelab&quot;&gt;Prelab&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;I decided to connect my motor drivers to Artemis pins A13, A14, A15, and A16, and wire the car like so:&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab4&#x2F;diag.png&quot; alt=&quot;Wiring diagram&quot;  width = 600 &gt;
+&lt;p&gt;We power the motors with a separate battery from the Artemis to reduce the effect of back-EMF on the Artemis. There&#x27;s no reason to have the varying load of the motors effect the stability of the Artemis&#x27; computations. Two smaller batteries in separate locations also helps with reducing the form factor of the whole car.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;lab-tasks&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#lab-tasks&quot; aria-label=&quot;Anchor link for: lab-tasks&quot;&gt;Lab Tasks&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;After soldering my motor drivers, I passed a PWM value of 200, leading to the following duty cycle when supplied with 3.7V from the lab power supply.&lt;&#x2F;p&gt;
+&lt;iframe width=&quot;600&quot; height = &quot;400&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;O-vv-xoWVM8&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;p&gt;I chose to set the supply for 3.7 V because the 1S LiPos we use operate at the same voltage. I set a maximum current draw of 1.5A, well below the limits of the parallel motor driver, for safety.&lt;&#x2F;p&gt;
+&lt;p&gt;To initially test the drivers, I wrote functions to move the car forward, backward, and spin it.&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;Motor Test&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span style=&quot;color:#399ee6;&quot;&gt;AB1IN_LEFT &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;13
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span style=&quot;color:#399ee6;&quot;&gt;AB2IN_LEFT &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;14
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span style=&quot;color:#399ee6;&quot;&gt;AB1IN_RIGHT &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;16
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span style=&quot;color:#399ee6;&quot;&gt;AB2IN_RIGHT &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;15
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span style=&quot;color:#399ee6;&quot;&gt;SCALEFACTOR &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;2
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;setup&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;pinMode&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;OUTPUT)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;pinMode&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;OUTPUT)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;pinMode&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;OUTPUT)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;pinMode&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;OUTPUT)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;forward&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;  Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;println&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;going forward&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;60&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;SCALEFACTOR&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;60&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;backward&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;  Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;println&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;going backward&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;60&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;SCALEFACTOR&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;60&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;stop&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;  Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;println&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;stopped&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;threeSixty&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;  Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;println&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;360&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;60&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;SCALEFACTOR&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;60&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;loop&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;forward&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;delay&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;2000&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;stop&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;delay&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;2000&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;backward&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;delay&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;2000&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;stop&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;delay&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;2000&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;threeSixty&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;delay&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;2000&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;stop&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;delay&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;2000&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;p&gt;This resulted in the following motor output:&lt;&#x2F;p&gt;
+&lt;iframe width=&quot;600&quot; height = &quot;400&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;iCxTIqge7iY&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;p&gt;With battery leads soldered and batteries attached, I performed the following test without any motor compensation:&lt;&#x2F;p&gt;
+&lt;iframe width=&quot;600&quot; height = &quot;400&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;ubOYevCqdug&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;p&gt;This was my initial setup:&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab4&#x2F;wired.jpg&quot; alt=&quot;Wiring diagram&quot;  width = 600 &gt;
+&lt;p&gt;I found that my motors failed to drive the car forward and backward (with a fully-charged battery) up to a PWM value of around 30. It failed to turn about its own axis up to PWM 90, however, due to the increased slip friction of the wheels. All tests were performed on vinyl tiling.&lt;&#x2F;p&gt;
+&lt;p&gt;To calibrate the motor, I simply multiplied the input to the side with greater friction by a constant. It took a bit of tuning, but I landed on a constant coefficient of around 1.4 for the left motor. It&#x27;s worth noting, though, that the required coefficient dropped significantly as the battery lost charge -- on the last few tests of a battery, the car kept straight with a constant of around 1.2.&lt;&#x2F;p&gt;
+&lt;iframe width=&quot;600&quot; height = &quot;400&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;0G7V5y0Lh2U&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;p&gt;I used the following code to narrow down this constant, where the coefficient is passed via BLE.&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;Motor Test&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;...
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;case&lt;&#x2F;span&gt;&lt;span&gt; DRIVE_OPENLOOP&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;         success &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; robot_cmd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get_next_value&lt;&#x2F;span&gt;&lt;span&gt;(PWM)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;!&lt;&#x2F;span&gt;&lt;span&gt;success) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        success &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; robot_cmd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get_next_value&lt;&#x2F;span&gt;&lt;span&gt;(scaleOL)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;!&lt;&#x2F;span&gt;&lt;span&gt;success) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(PWM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;amp;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt; PWM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;255&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;forward&lt;&#x2F;span&gt;&lt;span&gt;(PWM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; scaleOL)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;else if &lt;&#x2F;span&gt;&lt;span&gt;(PWM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;amp;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt; PWM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;255&lt;&#x2F;span&gt;&lt;span&gt;){
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;backward&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;PWM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; scaleOL)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;else if &lt;&#x2F;span&gt;&lt;span&gt;(PWM &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;== &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;999&lt;&#x2F;span&gt;&lt;span&gt;){
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;spin&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;150&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; scaleOL)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;        }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;stop&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;...
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;forward&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;scale&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;scale)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;speed)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;backward&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;scale&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;scale)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;speed)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;stop&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;spin&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;scale&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;scale)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;speed)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;h2 id=&quot;collaborations&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#collaborations&quot; aria-label=&quot;Anchor link for: collaborations&quot;&gt;Collaborations&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I worked with &lt;a href=&quot;https:&#x2F;&#x2F;correial.github.io&#x2F;&quot;&gt;Lucca Correia&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;trevordales.github.io&#x2F;&quot;&gt;Trevor Dales&lt;&#x2F;a&gt; extensively, and referenced &lt;a href=&quot;https:&#x2F;&#x2F;pages.github.coecis.cornell.edu&#x2F;dak267&#x2F;dak267.github.io&#x2F;#contact&quot;&gt;Daria&#x27;s&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;mavisfu.github.io&#x2F;lab3.html&quot;&gt;Mavis&#x27;&lt;&#x2F;a&gt; site for wiring and local test code snippets.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;next-lab-5&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#next-lab-5&quot; aria-label=&quot;Anchor link for: next-lab-5&quot;&gt;Next: &lt;a href=&quot;&#x2F;fast-robots&#x2F;lab5&quot;&gt;Lab 5&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Lab 5</title>
+        <published>2025-03-02T00:00:00+00:00</published>
+        <updated>2025-03-02T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://jack-d-long.github.io/fast-robots/lab5/"/>
+        <id>https://jack-d-long.github.io/fast-robots/lab5/</id>
+        
+        <content type="html" xml:base="https://jack-d-long.github.io/fast-robots/lab5/">&lt;h1 id=&quot;previous-lab-4&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#previous-lab-4&quot; aria-label=&quot;Anchor link for: previous-lab-4&quot;&gt;Previous: &lt;a href=&quot;&#x2F;fast-robots&#x2F;lab4&quot;&gt;Lab 4&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;h1 id=&quot;prelab&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#prelab&quot; aria-label=&quot;Anchor link for: prelab&quot;&gt;Prelab&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;By implementing control of the Artemis over BLE via a command DRIVE_OPENLOOP, I was able to validate my motor calibration constand and deadband much more easily.&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;Open-Loop Drive&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;...
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;case&lt;&#x2F;span&gt;&lt;span&gt; DRIVE_OPENLOOP&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;         success &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; robot_cmd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get_next_value&lt;&#x2F;span&gt;&lt;span&gt;(PWM)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;!&lt;&#x2F;span&gt;&lt;span&gt;success) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        success &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; robot_cmd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get_next_value&lt;&#x2F;span&gt;&lt;span&gt;(scaleOL)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;!&lt;&#x2F;span&gt;&lt;span&gt;success) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(PWM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;amp;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt; PWM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;255&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;forward&lt;&#x2F;span&gt;&lt;span&gt;(PWM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; scaleOL)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;else if &lt;&#x2F;span&gt;&lt;span&gt;(PWM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;amp;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt; PWM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;255&lt;&#x2F;span&gt;&lt;span&gt;){
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;backward&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;PWM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; scaleOL)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;else if &lt;&#x2F;span&gt;&lt;span&gt;(PWM &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;== &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;999&lt;&#x2F;span&gt;&lt;span&gt;){
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;spin&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;150&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; scaleOL)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;        }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;stop&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;...
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;forward&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;scale&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;scale)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;speed)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;backward&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;scale&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;scale)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;speed)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;stop&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;spin&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;scale&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_LEFT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;scale)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB1IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;speed)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;analogWrite&lt;&#x2F;span&gt;&lt;span&gt;(AB2IN_RIGHT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;p&gt;I also implemented PID control of the robot via a command PID_POSITION_CONTROL, which simply loops the following section, where pid_position_tof() returns a PWM input value.&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;PID Loop&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      pid_time[i] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;millis&lt;&#x2F;span&gt;&lt;span&gt;() &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt; currentMillis&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      pid_tof[i] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;getDistance&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clearInterrupt&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;stopRanging&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      pid_speed[i] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;pid_position_tof&lt;&#x2F;span&gt;&lt;span&gt;(Kp&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; Ki&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; Kd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; pid_tof[i]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; target_tof)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      pid_p[i] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; Kp &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; err&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      pid_i[i] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; Ki &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; integral_err&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      pid_d[i] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; Kd &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; err_d&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;h1 id=&quot;lab-tasks&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#lab-tasks&quot; aria-label=&quot;Anchor link for: lab-tasks&quot;&gt;Lab Tasks&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;I used the following function to implement PID control, with some logic to eliminate the deadband. :
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;PID Control&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;pid_position_tof &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;Kp&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;Ki&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;Kd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;current_pos&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;target_pos&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;  
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  currentMillis &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;millis&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  dt &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; currentMillis &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt; prev_time&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  prev_time &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; currentMillis&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  err &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; current_pos &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt; target_pos&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  err_d &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;(err &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt; prev_err) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span&gt; dt&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; Calculate speed control signal
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt;)(Kp &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; err &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+&lt;&#x2F;span&gt;&lt;span&gt; Ki &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; err_i &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+&lt;&#x2F;span&gt;&lt;span&gt; Kd &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; err_d)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; max_speed) {
+&lt;&#x2F;span&gt;&lt;span&gt;    speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; max_speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt; &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; max_speed)) {
+&lt;&#x2F;span&gt;&lt;span&gt;    speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= -&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; max_speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; deadband){
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;forward&lt;&#x2F;span&gt;&lt;span&gt;(speed_control&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; globalscale)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;forward&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; globalscale)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;else if &lt;&#x2F;span&gt;&lt;span&gt;(speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt; -&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;deadband){
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;backward&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;speed_control&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; globalscale)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;backward&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; globalscale)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;  prev_err &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; err&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; speed_control&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;&#x2F;p&gt;
+&lt;p&gt;My TOF readings averaged around 9.6 Hz, an improvement on the previous lab. The system provided a PID control input at around 75 Hz, so we&#x27;ll eventuallyneed some sort of extrapolation in the TOF values to take advantage of the higher-frequency control input.&lt;&#x2F;p&gt;
+&lt;p&gt;To compensate for the motor deadband, I used the following logic:
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;Deadband Removal&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;... 
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt;)(Kp &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; err &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+&lt;&#x2F;span&gt;&lt;span&gt; Ki &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; integral_err &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+&lt;&#x2F;span&gt;&lt;span&gt; Kd &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; err_d)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; max_speed) {
+&lt;&#x2F;span&gt;&lt;span&gt;    speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; max_speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt; &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; max_speed)) {
+&lt;&#x2F;span&gt;&lt;span&gt;    speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= -&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; max_speed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; deadband){
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;forward&lt;&#x2F;span&gt;&lt;span&gt;(speed_control&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; globalscale)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;forward&lt;&#x2F;span&gt;&lt;span&gt;(deadband&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; globalscale)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;else if &lt;&#x2F;span&gt;&lt;span&gt;(speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(speed_control &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt; -&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;deadband){
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;backward&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;speed_control&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; globalscale)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;backward&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;deadband&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; globalscale)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;...
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;&#x2F;p&gt;
+&lt;p&gt;I ran into a bit of trouble with my integrator maxing out my anti-windup logic and providing a giant impulse near the setpoint:&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab5&#x2F;PID_Nointerp_samegain_fixtimes.png&quot; alt=&quot;PID_Nointerp_samegain_fixtimes&quot;  width = 600 &gt;
+&lt;p&gt;So I had to modify the max values a bit:&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;collaborations&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#collaborations&quot; aria-label=&quot;Anchor link for: collaborations&quot;&gt;Collaborations&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I worked with &lt;a href=&quot;https:&#x2F;&#x2F;correial.github.io&#x2F;&quot;&gt;Lucca Correia&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;trevordales.github.io&#x2F;&quot;&gt;Trevor Dales&lt;&#x2F;a&gt; extensively, and referenced &lt;a href=&quot;https:&#x2F;&#x2F;pages.github.coecis.cornell.edu&#x2F;dak267&#x2F;dak267.github.io&#x2F;#contact&quot;&gt;Daria&#x27;s&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;mavisfu.github.io&#x2F;lab3.html&quot;&gt;Mavis&#x27;&lt;&#x2F;a&gt; site for wiring and local test code snippets.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;next-lab-5-fast-robots-lab4&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#next-lab-5-fast-robots-lab4&quot; aria-label=&quot;Anchor link for: next-lab-5-fast-robots-lab4&quot;&gt;Next: [Lab 5](&#x2F;fast-robots&#x2F;lab4&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Lab 3</title>
+        <published>2025-02-13T00:00:00+00:00</published>
+        <updated>2025-02-13T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://jack-d-long.github.io/fast-robots/lab3/"/>
+        <id>https://jack-d-long.github.io/fast-robots/lab3/</id>
+        
+        <content type="html" xml:base="https://jack-d-long.github.io/fast-robots/lab3/">&lt;h1 id=&quot;previous-lab-2&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#previous-lab-2&quot; aria-label=&quot;Anchor link for: previous-lab-2&quot;&gt;Previous: &lt;a href=&quot;&#x2F;fast-robots&#x2F;lab2&quot;&gt;Lab 2&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;h1 id=&quot;prelab&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#prelab&quot; aria-label=&quot;Anchor link for: prelab&quot;&gt;Prelab&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;We use two sensors because don&#x27;t have great sample rate per TOF, so we make up for it with more samples. But because both sensors have the same default I2C address, we must include an additional connection to shut off one TOF while we modify the I2C address of the other, like so:&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab3&#x2F;wiring.png&quot; alt=&quot;wiring&quot;  width = 600 &gt;
+&lt;p&gt;I plan to put both TOFs on the front of my robot. While this may cause it to miss some obstacles to its left and right, I believe that these issues will be mitigated with proper angle control of the robot. When placed in an unfamiliar environment, it can simply do a 360 degree spin to map it out. I believe that interpretation of the sensor data will be easiest with them both in the same location on the robot.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;lab-tasks&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#lab-tasks&quot; aria-label=&quot;Anchor link for: lab-tasks&quot;&gt;Lab Tasks&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;Below, you can see my implementation of this wiring scheme, with a video of the demo I2C scanning code.&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab3&#x2F;setup.png&quot; alt=&quot;setup&quot;  width = 600 &gt;
+&lt;iframe width=&quot;600&quot; height = &quot;400&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;EZeENgkbHYw&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;p&gt;Initially, the Artemis reads the default I2C address of the TOF as 0x29 (0b 0010 1001). Because the least significant bit of this address is used to indicate read&#x2F;write, we can shift it left to obtain the I2C address as printed on the datasheet, 0x52 (0b 0101 0010).&lt;&#x2F;p&gt;
+&lt;p&gt;I chose the long mode - The resolution at short distances is still sufficient to avoid collisions, but is better at long (on a room scale) distances where mapping will be more useful.&lt;&#x2F;p&gt;
+&lt;p&gt;Using two TOFs allowed me to measure differences in performance based on material measured. TOF1 in this case measured my bare hand, while TOF2 measured my matte black jacket sleeve. My hand, the more reflective material, made the TOF much more precise.&lt;&#x2F;p&gt;
+&lt;p&gt;From the below code snippet and output, it&#x27;s clear that the TOF ready time is the bottleneck in this case. New TOF values ready approximately every 50 ms. However, ranging does add a small delay to the loop in addition to the various serial prints of 1-2 ms.&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab3&#x2F;Tof2black.png&quot; alt=&quot;TOF bottleneck&quot;  width = 600 &gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;TOF Bottleneck Test&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;distanceSensor1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;startRanging&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;  distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;startRanging&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; int start_time, delay_time;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; start_time = millis();
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(distanceSensor1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;checkForDataReady&lt;&#x2F;span&gt;&lt;span&gt;())
+&lt;&#x2F;span&gt;&lt;span&gt;  {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; distance1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; distanceSensor1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;getDistance&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    distanceSensor1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clearInterrupt&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    distanceSensor1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;stopRanging&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Distance1(mm): &amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(distance1)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;println&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;   &amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;checkForDataReady&lt;&#x2F;span&gt;&lt;span&gt;())
+&lt;&#x2F;span&gt;&lt;span&gt;  {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; distance2 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;getDistance&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;    distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clearInterrupt&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;stopRanging&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Distance2(mm): &amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(distance2)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;println&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;   &amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;time delay
+&lt;&#x2F;span&gt;&lt;span&gt;  Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;T: &amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;millis&lt;&#x2F;span&gt;&lt;span&gt;())&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;   &amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;println&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;p&gt;Output:&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab3&#x2F;bottleneck.png&quot; alt=&quot;TOF bottleneck&quot;  width = 600 &gt;
+&lt;p&gt;I wrote a command &lt;em&gt;RECORD_TOF&lt;&#x2F;em&gt; which grabs 100 values from each TOF sensor and sends via BLE using my existing &lt;em&gt;GET_DATA&lt;&#x2F;em&gt; command.&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;RECORD_TOF&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;case&lt;&#x2F;span&gt;&lt;span&gt; RECORD_TOF&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;          tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;          distanceSensor1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;startRanging&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;          distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;startRanging&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;digitalWrite&lt;&#x2F;span&gt;&lt;span&gt;(blinkPin&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; HIGH)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;record
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; i &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span&gt; TOFStore&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;            
+&lt;&#x2F;span&gt;&lt;span&gt;            TOFs[i][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; distanceSensor1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;getDistance&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            TOFs[i][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;getDistance&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            TOFs[i][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;millis&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;delay&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;50&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            
+&lt;&#x2F;span&gt;&lt;span&gt;          }
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;digitalWrite&lt;&#x2F;span&gt;&lt;span&gt;(blinkPin&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; LOW)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;stop recording
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;p&gt;I generated the following values with the testing setup below:
+&lt;img src=&quot;&#x2F;files&#x2F;lab3&#x2F;TOF6inResults.png&quot; alt=&quot;TOF6 in results&quot;  width = 700 &gt;&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab3&#x2F;TOF6inTest.png&quot; alt=&quot;TOF6 in results&quot;  width = 600 &gt;
+&lt;p&gt;I implemented the TOF recording into my main loop via a &lt;em&gt;record_TOF()&lt;&#x2F;em&gt; function which is called when either of the two TOFs are ready.&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;record_TOF() V1&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;record_TOF&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; distance1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; distanceSensor1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;getDistance&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;Get the result of the measurement from the sensor
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; distance2 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;getDistance&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;Get the result of the measurement from the sensor
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  distanceSensor1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clearInterrupt&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  distanceSensor1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;stopRanging&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clearInterrupt&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;stopRanging&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  TOFs[TOFStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; distance1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;tof1
+&lt;&#x2F;span&gt;&lt;span&gt;  TOFs[TOFStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; distance2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;  &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;tof2
+&lt;&#x2F;span&gt;&lt;span&gt;  TOFs[TOFStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;millis&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;toftime
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  TOFStored&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;p&gt;This significantly slowed IMU and TOF data from their standalone tests. The IMU recorded 3079 datapoints in 20 seconds, and the TOF recorded 86, for sample rates of 154Hz and 4.3Hz, respectively. The IMU sample rate is reasonable, but TOF appears too low to be useful -- We want about 10Hz from it. I collected the data below with a series of pitches, rolls, yaws, and oscillations in the z-axis (where TOFs point).&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab3&#x2F;finalIMU.png&quot; alt=&quot;IMU&quot;  width = 1200 &gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab3&#x2F;finalTOF.png&quot; alt=&quot;TOF&quot;  width = 800 &gt;
+&lt;p&gt;To try and speed up execution, I created two separate lenArrx2 arrays for storing individual TOF data and their timestamps, making my &lt;em&gt;record_TOF()&lt;&#x2F;em&gt; look like this:&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;record_TOF() V2&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;record_TOF&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; i)
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;(i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;==&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;){
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; distance1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; distanceSensor1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;getDistance&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;Get the result of the measurement from the sensor
+&lt;&#x2F;span&gt;&lt;span&gt;    distanceSensor1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clearInterrupt&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    distanceSensor1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;stopRanging&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    TOF1s[TOF1Stored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; distance1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;tof1
+&lt;&#x2F;span&gt;&lt;span&gt;    TOF1s[TOF1Stored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;millis&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;tof1time
+&lt;&#x2F;span&gt;&lt;span&gt;    TOF1Stored&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;else if&lt;&#x2F;span&gt;&lt;span&gt;(i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;==&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;){
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; distance2 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;getDistance&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;Get the result of the measurement from the sensor
+&lt;&#x2F;span&gt;&lt;span&gt;    distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clearInterrupt&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    distanceSensor2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;stopRanging&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    TOF2s[TOF2Stored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; distance2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;  &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;tof2
+&lt;&#x2F;span&gt;&lt;span&gt;    TOF2s[TOF2Stored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;millis&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;tof2time
+&lt;&#x2F;span&gt;&lt;span&gt;    TOF2Stored&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;println&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;bad TOF index&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;p&gt;THis resulted in even less recorded TOF values -- an average of 56 per TOF per 20 seconds, or 2.8 Hz. Though this seems lower than the last test, the TOFs are likely readying at the same interval and some values were just being double counted before. Still, the sample rate of the TOFs is too low.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;collaborations&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#collaborations&quot; aria-label=&quot;Anchor link for: collaborations&quot;&gt;Collaborations&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I worked with &lt;a href=&quot;https:&#x2F;&#x2F;correial.github.io&#x2F;&quot;&gt;Lucca Correia&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;trevordales.github.io&#x2F;&quot;&gt;Trevor Dales&lt;&#x2F;a&gt; extensively, and referenced &lt;a href=&quot;https:&#x2F;&#x2F;pages.github.coecis.cornell.edu&#x2F;dak267&#x2F;dak267.github.io&#x2F;#contact&quot;&gt;Daria&#x27;s&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;mavisfu.github.io&#x2F;lab3.html&quot;&gt;Mavis&#x27;&lt;&#x2F;a&gt; site for multi-TOF operation.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;next-lab-4&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#next-lab-4&quot; aria-label=&quot;Anchor link for: next-lab-4&quot;&gt;Next: &lt;a href=&quot;&#x2F;fast-robots&#x2F;lab4&quot;&gt;Lab 4&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Lab 2</title>
+        <published>2025-02-07T00:00:00+00:00</published>
+        <updated>2025-02-07T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://jack-d-long.github.io/fast-robots/lab2/"/>
+        <id>https://jack-d-long.github.io/fast-robots/lab2/</id>
+        
+        <content type="html" xml:base="https://jack-d-long.github.io/fast-robots/lab2/">&lt;h1 id=&quot;previous-lab-1b&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#previous-lab-1b&quot; aria-label=&quot;Anchor link for: previous-lab-1b&quot;&gt;Previous: &lt;a href=&quot;&#x2F;fast-robots&#x2F;lab1b&quot;&gt;Lab 1B&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;h1 id=&quot;lab-tasks&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#lab-tasks&quot; aria-label=&quot;Anchor link for: lab-tasks&quot;&gt;Lab Tasks&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;set-up-the-imu&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#set-up-the-imu&quot; aria-label=&quot;Anchor link for: set-up-the-imu&quot;&gt;Set up the IMU&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;br&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab2&#x2F;IMUsetup.jpg&quot; alt=&quot;Artemis and IMU&quot;  width = 400 &gt;
+&lt;p&gt;The serial output of the example code given is as shown:&lt;&#x2F;p&gt;
+&lt;iframe width=&quot;450&quot; height=&quot;315&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;ytyu0kU6aGI&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;p&gt;We set AD0_VAL to 1 to define the I2C address of the IMU. In this case, it maintains the default address of 0x12.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;accelerometer&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#accelerometer&quot; aria-label=&quot;Anchor link for: accelerometer&quot;&gt;Accelerometer&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;The accelerometer seems to be accurate and responsive to angle changes, but not at all precise.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab2&#x2F;AccelerometerPitchRollTime.png&quot; alt=&quot;Initial accelerometer data&quot;  width = 550 &gt;
+&lt;iframe width=&quot;450&quot; height=&quot;315&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;DPVjiCiOTgU&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;Pitch and Roll&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span&gt;    pitch_a &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f07171;&quot;&gt;atan2&lt;&#x2F;span&gt;&lt;span&gt;(myICM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;accX&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;myICM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;accZ&lt;&#x2F;span&gt;&lt;span&gt;())&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;180&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span&gt;M_PI&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;    roll_a  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f07171;&quot;&gt;atan2&lt;&#x2F;span&gt;&lt;span&gt;(myICM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;accY&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;myICM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;accZ&lt;&#x2F;span&gt;&lt;span&gt;())&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;180&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span&gt;M_PI&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+
+&lt;p&gt;The accelerometer is very noisy, and becomes less accurate as pitch and roll tend to 90 degrees. This is because when either the pitch or roll axes approach the gravitational acceleration vector, the accelerometer is no longer able to read rotation data about that axis. I found the following noise spectrum when running the car nearby the IMU.&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab2&#x2F;fftGood.png&quot; alt=&quot;Initial accelerometer data&quot;  width = 600 &gt;
+&lt;p&gt;With strong noise peaks above 10 Hz, especially in pitch, a cutoff frequency of 10 Hz seemed reasonable for my calculation of $\alpha$. We first found $RC$ and substituted to find $\alpha$ using the equations
+$$
+f_c = \frac{1}{2\pi RC}
+$$
+$$
+\alpha = \frac{T_s}{T_s + RC}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Where $T_s$ is the sampling period of the IMU, given in seconds. For the given noise spectrum, I calculated $\alpha = .077$, producing the following low-pass-filtered car noise and ringdown readings.&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab2&#x2F;FFTLPF.png&quot; alt=&quot;FFT LPF car noise&quot;  width = 800 &gt;
+ &lt;img src=&quot;&#x2F;files&#x2F;lab2&#x2F;lpfringdown.png&quot; alt=&quot;FFT LPF ringdown&quot;  width = 800 &gt;
+&lt;h2 id=&quot;gyroscope&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#gyroscope&quot; aria-label=&quot;Anchor link for: gyroscope&quot;&gt;Gyroscope&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;The accelerometer roughly tracked the changes in pitch, roll, and yaw expected from movement of the IMU and accelerometer readings, but struggled with the angle offset due to lack of initial conditions in the integrator. I also saw significant integrated error, especially in yaw. When the Artemis was kept static about the accelerometer and gyroscope z axis, yaw appeared to vary linearly.&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab2&#x2F;gyroInttro.png&quot; alt=&quot;Gyro unfilterd&quot;  width = 800 &gt;
+&lt;p&gt;With the complementary filter in place (in this case with $\alpha=.08$, similar to the pitch and roll LPF), pitch and roll values appeared to track the actual motion of the IMU much more closely, and lacked the high-frequency noise present even in the LPF accelerometer readings.&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;Complementary Filter&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;const float&lt;&#x2F;span&gt;&lt;span&gt; alpha_gyro &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;08&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;dt &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;micros&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;last_time)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1000000&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;.;
+&lt;&#x2F;span&gt;&lt;span&gt;last_time &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;micros&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;gyroFiltered[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;(gyroFiltered[valsStored &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+&lt;&#x2F;span&gt;&lt;span&gt; gyrosPitchRollYaws[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; dt) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;* &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt; alpha_gyro) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+ &lt;&#x2F;span&gt;&lt;span&gt;(LPFPitchRolls[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; alpha_gyro)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; pitch 
+&lt;&#x2F;span&gt;&lt;span&gt;gyroFiltered[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;]  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;(gyroFiltered[valsStored &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;]  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+&lt;&#x2F;span&gt;&lt;span&gt; gyrosPitchRollYaws[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;]  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; dt) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;* &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt; alpha_gyro) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+ &lt;&#x2F;span&gt;&lt;span&gt;(LPFPitchRolls[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; alpha_gyro)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; roll
+&lt;&#x2F;span&gt;&lt;span&gt;gyroFiltered[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;]   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; gyrosPitchRollYaws[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab2&#x2F;compfilter.png&quot; alt=&quot;Gyro fitered&quot;  width = 800 &gt;
+&lt;p&gt;Yaw remained unfiltered as there is no accelerometer data to complement it.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;sample-data&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#sample-data&quot; aria-label=&quot;Anchor link for: sample-data&quot;&gt;Sample Data&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;With serial monitor prints removed, the IMU sampled at approximately 300 Hz. I found that, over a 5 sceond period, the main loop ran 3573921 times and only stored 1538 values. This means that the IMU is definitely bottlenecking our data recording.
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;main loop&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;while &lt;&#x2F;span&gt;&lt;span&gt;(central&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;connected&lt;&#x2F;span&gt;&lt;span&gt;()) {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; Send data
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;write_data&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;            looped&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;(startRecording&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;amp;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt;myICM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;dataReady&lt;&#x2F;span&gt;&lt;span&gt;()){
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;record_IMU&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            }
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; Read data
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;read_data&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;record_IMU()&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;void
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;record_IMU&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(valsStored &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span&gt; storeThisMuch){
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; computation variables global
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;    myICM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;getAGMT&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;    pitch_a &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f07171;&quot;&gt;atan2&lt;&#x2F;span&gt;&lt;span&gt;(myICM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;accX&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;myICM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;accZ&lt;&#x2F;span&gt;&lt;span&gt;())&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;180&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span&gt;M_PI&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;    roll_a  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f07171;&quot;&gt;atan2&lt;&#x2F;span&gt;&lt;span&gt;(myICM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;accY&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt;myICM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;accZ&lt;&#x2F;span&gt;&lt;span&gt;())&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;180&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span&gt;M_PI&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;    pitchRollsTimes[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; pitch_a&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    pitchRollsTimes[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; roll_a&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; LPF
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;const float&lt;&#x2F;span&gt;&lt;span&gt; alpha &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;08&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;for now same for pitch, roll
+&lt;&#x2F;span&gt;&lt;span&gt;    pitch_a_LPF[n] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; alpha&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;pitch_a &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+ &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;alpha)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;pitch_a_LPF[n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    pitch_a_LPF[n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; pitch_a_LPF[n]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; Serial.print(&amp;quot;, pitch_LPF:&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; Serial.println(pitch_a_LPF[n]);
+&lt;&#x2F;span&gt;&lt;span&gt;    LPFPitchRolls[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; pitch_a_LPF[n]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    roll_a_LPF[n] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; alpha&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;roll_a &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+ &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;alpha)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;roll_a_LPF[n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    roll_a_LPF[n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; roll_a_LPF[n]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    LPFPitchRolls[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; roll_a_LPF[n]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; end LPF
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; Start gyro
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    dt &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;micros&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;last_time)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1000000&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;.;
+&lt;&#x2F;span&gt;&lt;span&gt;    last_time &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;micros&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    pitch_g &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; pitch_g &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+&lt;&#x2F;span&gt;&lt;span&gt; myICM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;gyrX&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;dt&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    roll_g &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; roll_g &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+&lt;&#x2F;span&gt;&lt;span&gt; myICM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;gyrY&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;dt&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    yaw_g &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; yaw_g &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+&lt;&#x2F;span&gt;&lt;span&gt; myICM&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;gyrZ&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;dt&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    gyrosPitchRollYaws[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; pitch_g&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    gyrosPitchRollYaws[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; roll_g&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    gyrosPitchRollYaws[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; yaw_g&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;[pitch, roll, yaw]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; Filter 
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;const float&lt;&#x2F;span&gt;&lt;span&gt; alpha_gyro &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;08&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    dt &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;micros&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;last_time)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1000000&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;.;
+&lt;&#x2F;span&gt;&lt;span&gt;    last_time &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;micros&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; 
+&lt;&#x2F;span&gt;&lt;span&gt;    gyroFiltered[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;(gyroFiltered[valsStored &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+&lt;&#x2F;span&gt;&lt;span&gt; gyrosPitchRollYaws[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; dt) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;* &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt; alpha_gyro) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+ &lt;&#x2F;span&gt;&lt;span&gt;(LPFPitchRolls[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; alpha_gyro)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; pitch 
+&lt;&#x2F;span&gt;&lt;span&gt;    gyroFiltered[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;]  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;(gyroFiltered[valsStored &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;]  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+&lt;&#x2F;span&gt;&lt;span&gt; gyrosPitchRollYaws[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;]  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; dt) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;* &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt; alpha_gyro) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;+ &lt;&#x2F;span&gt;&lt;span&gt;(LPFPitchRolls[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; alpha_gyro)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; roll
+&lt;&#x2F;span&gt;&lt;span&gt;    gyroFiltered[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;]   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; gyrosPitchRollYaws[valsStored][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;end filter 
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; end gyro
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;    currentMillis &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;millis&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    timeStamps[valsStored] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; currentMillis&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    valsStored&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F;endif
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+
+I decided to store IMU data as float. The high precision of doubles doesn&#x27;t really make sense for the IMU, whose outputs have significant noise even after filtering. I stored time as an int, because (at least for now) I don&#x27;t expect to run the device for more than INT_MAX milliseconds (25 days).&lt;&#x2F;p&gt;
+&lt;p&gt;I chose 2D arrays for each data set (e.g. filtered accelerometer, raw gyro) because it made my code more organized. However, it&#x27;s slightly more difficult to determine whether pitch, roll, and yaw are being indexed for a particular data set. There may be slight performance benefits for using 2D arrays over multiple 1D arrays due to locality, but I was unable to measure any difference in this use case.&lt;&#x2F;p&gt;
+&lt;p&gt;At each time step, the Artemis records the following data, as shown above:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;time (one int)&lt;&#x2F;li&gt;
+&lt;li&gt;raw accelerometer  (two floats)&lt;&#x2F;li&gt;
+&lt;li&gt;filtered accelerometer (two floats)&lt;&#x2F;li&gt;
+&lt;li&gt;raw gyroscope (three floats)&lt;&#x2F;li&gt;
+&lt;li&gt;filtered gyroscope (three floats)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;This means a total of 44 bytes are being stored at a time, so, assuming the 350kB of dynamic memory available as in lab 1B, we can store just under 8000 time steps. For an average measured sample rate of 300 Hz, this gives us around &lt;strong&gt;27 seconds of IMU data recording&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;The above plots show well over 5 seconds of data transmitted by BLE.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;record-a-stunt&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#record-a-stunt&quot; aria-label=&quot;Anchor link for: record-a-stunt&quot;&gt;Record a Stunt&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;iframe width=&quot;450&quot; height=&quot;315&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;TLcFdr-ZEDI&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;p&gt;Any fine control of the car appeared impossible -- I was only able to signal movements at full speed, leading to chronic oversteer and instability when control inputs were held for too long.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;collaborations&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#collaborations&quot; aria-label=&quot;Anchor link for: collaborations&quot;&gt;Collaborations&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I worked with &lt;a href=&quot;https:&#x2F;&#x2F;correial.github.io&#x2F;&quot;&gt;Lucca Correia&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;trevordales.github.io&#x2F;&quot;&gt;Trevor Dales&lt;&#x2F;a&gt; extensively, and referenced &lt;a href=&quot;https:&#x2F;&#x2F;pages.github.coecis.cornell.edu&#x2F;dak267&#x2F;dak267.github.io&#x2F;#contact&quot;&gt;Daria&#x27;s site&lt;&#x2F;a&gt; to troubleshoot FFT code.
+I used ChatGPT to generate a faster Python notification handler with less dictionary operations, for plotting syntax, and for more information on FFT implementation.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;next-lab-3&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#next-lab-3&quot; aria-label=&quot;Anchor link for: next-lab-3&quot;&gt;Next: &lt;a href=&quot;&#x2F;fast-robots&#x2F;lab3&quot;&gt;Lab 3&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Lab 1B</title>
+        <published>2025-01-29T00:00:00+00:00</published>
+        <updated>2025-01-29T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://jack-d-long.github.io/fast-robots/lab1b/"/>
+        <id>https://jack-d-long.github.io/fast-robots/lab1b/</id>
+        
+        <content type="html" xml:base="https://jack-d-long.github.io/fast-robots/lab1b/">&lt;h1 id=&quot;previous-lab-1a&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#previous-lab-1a&quot; aria-label=&quot;Anchor link for: previous-lab-1a&quot;&gt;Previous: &lt;a href=&quot;&#x2F;fast-robots&#x2F;lab1a&quot;&gt;Lab 1A&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;h1 id=&quot;setup-and-configurations&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#setup-and-configurations&quot; aria-label=&quot;Anchor link for: setup-and-configurations&quot;&gt;Setup and Configurations&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;I created a Python environment and installed Jupyter Lab along with the other required packages and class codebase. I was able to start the Jupyter server successfully.&lt;&#x2F;p&gt;
+ &lt;img src=&quot;&#x2F;files&#x2F;lab1&#x2F;jupyter.png&quot; alt=&quot;Picture of successful Jupyter serve&quot;  width = 700 height = auto &gt;
+&lt;p&gt;I uploaded &lt;strong&gt;ble_arduino.ino&lt;&#x2F;strong&gt; to the Artemis and was able to read its unique MAC address, as well as generate a uuid to update &lt;strong&gt;connection.yaml&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab1&#x2F;bleMAC.png&quot; alt=&quot;ble MAC&quot; width = 350 height = auto &gt;
+&lt;br&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab1&#x2F;uuid.png&quot; alt=&quot;UUID&quot; width = 350 height = auto &gt;
+&lt;h1 id=&quot;lab&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#lab&quot; aria-label=&quot;Anchor link for: lab&quot;&gt;Lab&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;task-1&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-1&quot; aria-label=&quot;Anchor link for: task-1&quot;&gt;Task 1&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I sent a string value from the computer to the Artemis board using the ECHO command. The computer received and printed an augmented string.
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;ECHO&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;case&lt;&#x2F;span&gt;&lt;span&gt; ECHO&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;char&lt;&#x2F;span&gt;&lt;span&gt; char_arr[MAX_MSG_SIZE]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; Extract the next value from the command string as a character array
+&lt;&#x2F;span&gt;&lt;span&gt;    success &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; robot_cmd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get_next_value&lt;&#x2F;span&gt;&lt;span&gt;(char_arr)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;!&lt;&#x2F;span&gt;&lt;span&gt;success)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;*
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;    * Your code goes here.
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;    
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;    *&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Robot says &amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;println&lt;&#x2F;span&gt;&lt;span&gt;(char_arr)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(char_arr)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot; :)&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_characteristic_string&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;writeValue&lt;&#x2F;span&gt;&lt;span&gt;(tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;c_str&lt;&#x2F;span&gt;&lt;span&gt;())&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-2&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-2&quot; aria-label=&quot;Anchor link for: task-2&quot;&gt;Task 2&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I sent three floats to the Artemis board using the &lt;em&gt;SEND_THREE_FLOATS&lt;&#x2F;em&gt; command and extracted the three float values in the Arduino sketch.&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;SEND_THREE_FLOATS&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;case&lt;&#x2F;span&gt;&lt;span&gt; SEND_THREE_FLOATS&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;float&lt;&#x2F;span&gt;&lt;span&gt; float_a&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; float_b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span&gt; float_c&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; Extract the next value from the command string as an integer
+&lt;&#x2F;span&gt;&lt;span&gt;    success &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; robot_cmd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get_next_value&lt;&#x2F;span&gt;&lt;span&gt;(float_a)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;!&lt;&#x2F;span&gt;&lt;span&gt;success)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; Extract the next value from the command string as an integer
+&lt;&#x2F;span&gt;&lt;span&gt;    success &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; robot_cmd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get_next_value&lt;&#x2F;span&gt;&lt;span&gt;(float_b)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;!&lt;&#x2F;span&gt;&lt;span&gt;success)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    success &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; robot_cmd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get_next_value&lt;&#x2F;span&gt;&lt;span&gt;(float_c)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;!&lt;&#x2F;span&gt;&lt;span&gt;success)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Three Floats: &amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(float_a)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(float_b)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    Serial&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;println&lt;&#x2F;span&gt;&lt;span&gt;(float_c)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-3&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-3&quot; aria-label=&quot;Anchor link for: task-3&quot;&gt;Task 3&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I added a command &lt;em&gt;GET_TIME_MILLIS&lt;&#x2F;em&gt; which makes the robot reply write a string such as &quot;T:123456&quot; to the string characteristic.&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;GET_TIME_MILLIS&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;case&lt;&#x2F;span&gt;&lt;span&gt; GET_TIME_MILLIS&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;&#x2F;&#x2F; clear and update string characteristic with current time
+&lt;&#x2F;span&gt;&lt;span&gt;    currentMillis &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;millis&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;T:&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;((&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt;)currentMillis)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_characteristic_string&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;writeValue&lt;&#x2F;span&gt;&lt;span&gt;(tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;c_str&lt;&#x2F;span&gt;&lt;span&gt;())&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-4&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-4&quot; aria-label=&quot;Anchor link for: task-4&quot;&gt;Task 4&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I set up a notification handler in Python to receive the string value (&lt;em&gt;BLEStringCharacteristic&lt;&#x2F;em&gt; in Arduino) from the Artemis board. It uses the &lt;em&gt;ble&lt;&#x2F;em&gt; function &lt;em&gt;start_notify()&lt;&#x2F;em&gt; with my &lt;em&gt;notification_handler()&lt;&#x2F;em&gt; to receive updates to BLE GATT characteristics concurrent with other code.&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;notification_handler()&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;notification_handler&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;uuid&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;data&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;# Decode the byte data into a string
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    received_string &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;ble&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;bytearray_to_string&lt;&#x2F;span&gt;&lt;span&gt;(data)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;#print(f&amp;quot;Received string: {received_string}&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;try&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;# Split the string into key-value pairs
+&lt;&#x2F;span&gt;&lt;span&gt;        key_value_pairs &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#55b4d4;&quot;&gt;dict&lt;&#x2F;span&gt;&lt;span&gt;(pair&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;split&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;:&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;pair &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;received_string&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;split&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;,&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;))
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;# Extract the time value
+&lt;&#x2F;span&gt;&lt;span&gt;        time_value &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;key_value_pairs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;T&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Time not found&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#abb0b6;&quot;&gt;# extract temp value
+&lt;&#x2F;span&gt;&lt;span&gt;        temp_value &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;key_value_pairs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;get&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;F&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Temp not found&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f07171;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;f&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Extracted time: &lt;&#x2F;span&gt;&lt;span&gt;{time_value}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f07171;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;f&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Extracted temp: &lt;&#x2F;span&gt;&lt;span&gt;{temp_value}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;except &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#55b4d4;&quot;&gt;Exception &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;as &lt;&#x2F;span&gt;&lt;span&gt;e:
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f07171;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;f&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;Error parsing the string: &lt;&#x2F;span&gt;&lt;span&gt;{e}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-5&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-5&quot; aria-label=&quot;Anchor link for: task-5&quot;&gt;Task 5&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I wrote a loop that gets the current time in milliseconds and sends it to my laptop to be received and processed by &lt;em&gt;notification_handler()&lt;&#x2F;em&gt;. After collecting these values, I found that each was transmitted approximately 60 ms after the last. This is around 17 transmissions per second, and with 13 bytes per message (for a &lt;em&gt;char&lt;&#x2F;em&gt; array of length 12), approximately 200 bytes per second.&lt;&#x2F;p&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab1&#x2F;test_RX_speed.png&quot; alt=&quot;test RX speed&quot; width = 700 height = auto &gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-6&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-6&quot; aria-label=&quot;Anchor link for: task-6&quot;&gt;Task 6&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I then defined a global array &lt;em&gt;timeStamps&lt;&#x2F;em&gt; to store time stamps, and added a command &lt;em&gt;SEND_TIME_DATA&lt;&#x2F;em&gt; to place each time stamp into the array rather than writing each one to the string GATT characteristic. Then, I looped over &lt;em&gt;timeStamps&lt;&#x2F;em&gt; and sent each data point as a string to my laptop to be processed.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;SEND_TIME_DATA&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;case&lt;&#x2F;span&gt;&lt;span&gt; SEND_TIME_DATA&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;100&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span&gt;){
+&lt;&#x2F;span&gt;&lt;span&gt;            currentMillis &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;millis&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            timeStamps[i] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; currentMillis&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;          }
+&lt;&#x2F;span&gt;&lt;span&gt;    
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;100&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span&gt;){
+&lt;&#x2F;span&gt;&lt;span&gt;            tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;T:&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(timeStamps[i])&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            tx_characteristic_string&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;writeValue&lt;&#x2F;span&gt;&lt;span&gt;(tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;c_str&lt;&#x2F;span&gt;&lt;span&gt;())&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;          }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+
+&lt;img src=&quot;&#x2F;files&#x2F;lab1&#x2F;SEND_TIME_DATA_results.png&quot; alt=&quot;send time millis&quot;  width = 400 &gt;
+&lt;br&gt;
+... and after a while ...
+&lt;br&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab1&#x2F;times2.png&quot; alt=&quot;send time millis&quot;  width = 400 &gt;&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-7&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-7&quot; aria-label=&quot;Anchor link for: task-7&quot;&gt;Task 7&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I implemented a similar assignment process for temperature readings from the Artemis using the command &lt;em&gt;SEND_TEMP_DATA&lt;&#x2F;em&gt;. The notification handler is able to parse both time and temprature.&lt;&#x2F;p&gt;
+&lt;div class=&quot;note-container&quot;&gt;
+  
+    &lt;button class=&quot;note-toggle&quot;&gt;
+      
+        &lt;div class=&quot;note-icon&quot;&gt;
+        &lt;p&gt;SEND_TEMP_DATA&lt;&#x2F;p&gt;
+
+        &lt;&#x2F;div&gt;
+      
+    &lt;&#x2F;button&gt;
+
+    
+    &lt;div class=&quot;note-content&quot; style=&quot;display: none;&quot;&gt;
+    
+    &lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#fafafa;color:#61676c;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;case&lt;&#x2F;span&gt;&lt;span&gt; SEND_TEMP_DATA&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;: 
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;20&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span&gt;){
+&lt;&#x2F;span&gt;&lt;span&gt;    currentMillis &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;millis&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    timeSteps[i] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt;)currentMillis&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    temps[i] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;float&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;getTempDegF&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff8f40;&quot;&gt;20&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;++&lt;&#x2F;span&gt;&lt;span&gt;){
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;T:&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(timeSteps[i])&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;,&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#86b300;&quot;&gt;&amp;quot;F:&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(temps[i])&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    tx_characteristic_string&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;writeValue&lt;&#x2F;span&gt;&lt;span&gt;(tx_estring_value&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ed9366;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29718;&quot;&gt;c_str&lt;&#x2F;span&gt;&lt;span&gt;())&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa6e32;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#61676ccc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+  
+&lt;&#x2F;div&gt;
+&lt;img src=&quot;&#x2F;files&#x2F;lab1&#x2F;SEND_TEMP_DATA_results.png&quot; alt=&quot;send temp&quot;  width = 400 &gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-8&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-8&quot; aria-label=&quot;Anchor link for: task-8&quot;&gt;Task 8&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Method 1 records data at a significantly lower rate, but outputs to the computer after every round of collection. This could be useful if real-time decisions must be made based on sensor readings. For an open-loop test, method 2 is much more useful. The data recorded generated has much higher resolution than that of method 1, but there is a delay between the Artemis recording data and the computer receiving it.&lt;&#x2F;p&gt;
+&lt;p&gt;It took just over 25 ms for the Artemis to store 100 time and temp readings. With &lt;em&gt;int&lt;&#x2F;em&gt; timestamps and &lt;em&gt;float&lt;&#x2F;em&gt; temperatures, the data recorded at each step is 8 bytes, for a data rate of about 320 bytes per second. Currently defined global variables use about 30kB, so with the 354kB remaining, we can store just over &lt;strong&gt;40,000 temp and timestamp sets&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;collaboration&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#collaboration&quot; aria-label=&quot;Anchor link for: collaboration&quot;&gt;Collaboration&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I worked with &lt;a href=&quot;https:&#x2F;&#x2F;correial.github.io&#x2F;&quot;&gt;Lucca Correia&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;trevordales.github.io&#x2F;&quot;&gt;Trevor Dales&lt;&#x2F;a&gt; extensively, and referenced &lt;a href=&quot;https:&#x2F;&#x2F;pages.github.coecis.cornell.edu&#x2F;dak267&#x2F;dak267.github.io&#x2F;#contact&quot;&gt;Daria&#x27;s site&lt;&#x2F;a&gt; for some notification handler and SEND_TIME_DATA pointers.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;next-lab-2&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#next-lab-2&quot; aria-label=&quot;Anchor link for: next-lab-2&quot;&gt;Next: &lt;a href=&quot;..&#x2F;lab2&quot;&gt;Lab 2&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Lab 1A</title>
+        <published>2025-01-24T00:00:00+00:00</published>
+        <updated>2025-01-24T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://jack-d-long.github.io/fast-robots/lab1a/"/>
+        <id>https://jack-d-long.github.io/fast-robots/lab1a/</id>
+        
+        <content type="html" xml:base="https://jack-d-long.github.io/fast-robots/lab1a/">&lt;h1 id=&quot;lab&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#lab&quot; aria-label=&quot;Anchor link for: lab&quot;&gt;Lab&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;task-1&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-1&quot; aria-label=&quot;Anchor link for: task-1&quot;&gt;Task 1&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I connected the Artemis successfully, but found no way to fix the macOS Sequoia connection issue.
+&lt;br&gt;
+&lt;br&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;task-2&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-2&quot; aria-label=&quot;Anchor link for: task-2&quot;&gt;Task 2&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;In File-&amp;gt;Examples-&amp;gt;01.Basics, I ran Blink. The code successfully uploaded and the Artemis blinked.&lt;&#x2F;p&gt;
+&lt;iframe width=&quot;450&quot; height=&quot;315&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;9YBieJHNG9I&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-3&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-3&quot; aria-label=&quot;Anchor link for: task-3&quot;&gt;Task 3&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;In File-&amp;gt;Examples-&amp;gt;Apollo3, I ran Example4_Serial. The Artemis successfully echoed serial inputs.&lt;&#x2F;p&gt;
+&lt;iframe width=&quot;450&quot; height=&quot;315&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;ZFASvjhig5k&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-4&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-4&quot; aria-label=&quot;Anchor link for: task-4&quot;&gt;Task 4&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;In File-&amp;gt;Examples-&amp;gt;Apollo3, I ran Example2_analogRead to test my temperature sensor. I blew hot air over the board and the temp sensor successfully displayed a temperature increase.&lt;&#x2F;p&gt;
+&lt;iframe width=&quot;450&quot; height=&quot;315&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;4Q5Nn3rsS-w&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;task-5&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#task-5&quot; aria-label=&quot;Anchor link for: task-5&quot;&gt;Task 5&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;In File-&amp;gt;Examples-&amp;gt;PDM, I ran Example1_MicrophoneOutput to test my microphone. I attempted to maintain one note in my voice and the loudest frquency output was pretty consistent, sometimes outputting resonant frequencies of my voice.&lt;&#x2F;p&gt;
+&lt;iframe width=&quot;450&quot; height=&quot;315&quot; src=&quot;https:&#x2F;&#x2F;youtube.com&#x2F;embed&#x2F;hwPn8Ey0Lfw&quot;allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;collaboration&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#collaboration&quot; aria-label=&quot;Anchor link for: collaboration&quot;&gt;Collaboration&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I worked with &lt;a href=&quot;https:&#x2F;&#x2F;correial.github.io&#x2F;&quot;&gt;Lucca Correia&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;trevordales.github.io&#x2F;&quot;&gt;Trevor Dales&lt;&#x2F;a&gt; in lab.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;next-lab-1b&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#next-lab-1b&quot; aria-label=&quot;Anchor link for: next-lab-1b&quot;&gt;Next: &lt;a href=&quot;&#x2F;fast-robots&#x2F;lab1b&quot;&gt;Lab 1B&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+</content>
+        
+    </entry>
+</feed>

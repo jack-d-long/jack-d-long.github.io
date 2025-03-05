@@ -1,0 +1,131 @@
+<!doctype html><html class="dark light" lang=en><head><meta charset=UTF-8><meta content="IE=edge" http-equiv=X-UA-Compatible><meta content="width=device-width,initial-scale=1.0" name=viewport><meta content=https://jack-d-long.github.io/ name=base><title>
+         Lab 5
+        
+    </title><meta content="Lab 5" property=og:title><meta content="This is an example description" property=og:description><meta content="This is an example description" name=description><link href=/alien.png rel=icon type=image/png><link href=https://jack-d-long.github.io/fonts.css rel=stylesheet><script src=https://jack-d-long.github.io/js/codeblock.js></script><script src=https://jack-d-long.github.io/js/toc.js></script><script src=https://jack-d-long.github.io/js/note.js></script><script>MathJax = {
+              tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+              }
+            };</script><script async id=MathJax-script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script><link href=https://jack-d-long.github.io/atom.xml rel=alternate title=jdl298 type=application/atom+xml><link href=https://jack-d-long.github.io/theme/light.css rel=stylesheet><link href=https://jack-d-long.github.io/theme/dark.css id=darkModeStyle rel=stylesheet><script src=https://jack-d-long.github.io/js/themetoggle.js></script><script>setTheme(getSavedTheme());</script><link href=https://jack-d-long.github.io/main.css media=screen rel=stylesheet><script src=https://jack-d-long.github.io/js/mermaid.js></script><script src="https://jack-d-long.github.io/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e" defer></script><body><div class=content><header><div class=main><a href=https://jack-d-long.github.io/>jdl298</a><div class=socials><a class=social href=https://linkedin.com/in/jacklong257 rel=me> <img alt=linkedin src=https://jack-d-long.github.io/social_icons/linkedin.svg> </a><a class=social href=https://github.com/jack-d-long/ rel=me> <img alt=github src=https://jack-d-long.github.io/social_icons/github.svg> </a></div></div><nav><a href=https://jack-d-long.github.io/fast-robots style=margin-left:.25em>/fast robots</a><a href=https://jack-d-long.github.io/projects style=margin-left:.25em>/projects</a><a href=https://jack-d-long.github.io/about style=margin-left:.25em>/about</a><button title="$SHORTCUT to open search" class=search-button id=search-button><img alt=Search class=search-icon src=https://jack-d-long.github.io/search.svg></button><div class="search-modal js" aria-labelledby=modalTitle id=searchModal role=dialog><div id=modal-content><h1 class=page-header id=modalTitle>Search</h1><div id=searchBar><input aria-controls=results-container aria-expanded=false autocomplete=off id=searchInput placeholder=Search... role=combobox spellcheck=false><button title="Clear search" class=clear-button id=clear-search><svg viewbox="0 -960 960 960" xmlns=http://www.w3.org/2000/svg><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button></div><div id=results-container><div id=results-info><span id=zero_results style=display:none>No results</span><span id=one_result style=display:none>1 result</span><span id=many_results style=display:none>$NUMBER results</span></div><div id=results role=listbox></div></div></div></div><a onclick="toggleTheme(); event.preventDefault();" href=# id=dark-mode-toggle> <img alt=Light id=sun-icon src=https://jack-d-long.github.io/feather/sun.svg style=filter:invert()> <img alt=Dark id=moon-icon src=https://jack-d-long.github.io/feather/moon.svg> </a><script>updateItemToggleTheme()</script></nav></header><main><article><div class=title><div class=page-header>Lab 5<span class=primary-color style=font-size:1.6em>.</span></div><div class=meta>Posted on <time>2025-03-02</time></div></div><div class=toc-container><h1 class=toc-title>Table of Contents</h1><ul class=toc-list><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#previous-lab-4>Previous: Lab 4</a><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#prelab>Prelab</a><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#lab-tasks>Lab Tasks</a> <ul><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#collaborations>Collaborations</a></ul><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#next-lab-5-fast-robots-lab4>Next: [Lab 5](/fast-robots/lab4</a></ul></div><section class=body><h1 id=previous-lab-4><a aria-label="Anchor link for: previous-lab-4" class=zola-anchor href=#previous-lab-4>Previous: <a href=/fast-robots/lab4>Lab 4</a></a></h1><h1 id=prelab><a aria-label="Anchor link for: prelab" class=zola-anchor href=#prelab>Prelab</a></h1><p>By implementing control of the Artemis over BLE via a command DRIVE_OPENLOOP, I was able to validate my motor calibration constand and deadband much more easily.<div class=note-container><button class=note-toggle><div class=note-icon><p>Open-Loop Drive</div></button><div class=note-content style=display:none><pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span style=color:#ed9366>...
+</span><span>
+</span><span style=color:#fa6e32>case</span><span> DRIVE_OPENLOOP</span><span style=color:#61676ccc>:
+</span><span>
+</span><span>         success </span><span style=color:#ed9366>=</span><span> robot_cmd</span><span style=color:#ed9366>.</span><span style=color:#f29718>get_next_value</span><span>(PWM)</span><span style=color:#61676ccc>;
+</span><span>        </span><span style=color:#fa6e32>if </span><span>(</span><span style=color:#ed9366>!</span><span>success) </span><span style=color:#fa6e32>return</span><span style=color:#61676ccc>;
+</span><span>        success </span><span style=color:#ed9366>=</span><span> robot_cmd</span><span style=color:#ed9366>.</span><span style=color:#f29718>get_next_value</span><span>(scaleOL)</span><span style=color:#61676ccc>;
+</span><span>        </span><span style=color:#fa6e32>if </span><span>(</span><span style=color:#ed9366>!</span><span>success) </span><span style=color:#fa6e32>return</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>      
+</span><span>        </span><span style=color:#fa6e32>if </span><span>(PWM</span><span style=color:#ed9366>></span><span style=color:#ff8f40>0 </span><span style=color:#ed9366>&&</span><span> PWM</span><span style=color:#ed9366><</span><span style=color:#ff8f40>255</span><span>) {
+</span><span>          </span><span style=color:#f29718>forward</span><span>(PWM</span><span style=color:#61676ccc>,</span><span> scaleOL)</span><span style=color:#61676ccc>;
+</span><span>        }</span><span style=color:#fa6e32>else if </span><span>(PWM</span><span style=color:#ed9366><</span><span style=color:#ff8f40>0 </span><span style=color:#ed9366>&&</span><span> PWM</span><span style=color:#ed9366>>-</span><span style=color:#ff8f40>255</span><span>){
+</span><span>          </span><span style=color:#f29718>backward</span><span>(</span><span style=color:#ed9366>-</span><span style=color:#ff8f40>1</span><span style=color:#ed9366>*</span><span>PWM</span><span style=color:#61676ccc>,</span><span> scaleOL)</span><span style=color:#61676ccc>;
+</span><span>        }</span><span style=color:#fa6e32>else if </span><span>(PWM </span><span style=color:#ed9366>== </span><span style=color:#ff8f40>999</span><span>){
+</span><span>          </span><span style=color:#f29718>spin</span><span>(</span><span style=color:#ff8f40>150</span><span style=color:#61676ccc>,</span><span> scaleOL)</span><span style=color:#61676ccc>; 
+</span><span>        }</span><span style=color:#fa6e32>else</span><span>{
+</span><span>          </span><span style=color:#f29718>stop</span><span>()</span><span style=color:#61676ccc>;
+</span><span>        }
+</span><span>
+</span><span style=color:#fa6e32>break</span><span style=color:#61676ccc>; 
+</span><span>
+</span><span style=color:#ed9366>...
+</span><span>
+</span><span style=color:#fa6e32>void </span><span style=color:#f29718>forward</span><span>(</span><span style=color:#fa6e32>int </span><span style=color:#ff8f40>speed</span><span style=color:#61676ccc>, </span><span style=color:#fa6e32>float </span><span style=color:#ff8f40>scale</span><span>) {
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB1IN_LEFT</span><span style=color:#61676ccc>,</span><span>speed</span><span style=color:#ed9366>*</span><span>scale)</span><span style=color:#61676ccc>; 
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB2IN_LEFT</span><span style=color:#61676ccc>,</span><span style=color:#ff8f40>0</span><span>)</span><span style=color:#61676ccc>;
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB1IN_RIGHT</span><span style=color:#61676ccc>,</span><span>speed)</span><span style=color:#61676ccc>; 
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB2IN_RIGHT</span><span style=color:#61676ccc>,</span><span style=color:#ff8f40>0</span><span>)</span><span style=color:#61676ccc>;
+</span><span>}
+</span><span style=color:#fa6e32>void </span><span style=color:#f29718>backward</span><span>(</span><span style=color:#fa6e32>int </span><span style=color:#ff8f40>speed</span><span style=color:#61676ccc>, </span><span style=color:#fa6e32>float </span><span style=color:#ff8f40>scale</span><span>) {
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB1IN_LEFT</span><span style=color:#61676ccc>,</span><span style=color:#ff8f40>0</span><span>)</span><span style=color:#61676ccc>; 
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB2IN_LEFT</span><span style=color:#61676ccc>,</span><span>speed</span><span style=color:#ed9366>*</span><span>scale)</span><span style=color:#61676ccc>;
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB1IN_RIGHT</span><span style=color:#61676ccc>,</span><span style=color:#ff8f40>0</span><span>)</span><span style=color:#61676ccc>; 
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB2IN_RIGHT</span><span style=color:#61676ccc>,</span><span>speed)</span><span style=color:#61676ccc>;
+</span><span>}
+</span><span style=color:#fa6e32>void </span><span style=color:#f29718>stop</span><span>() {
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB1IN_LEFT</span><span style=color:#61676ccc>,</span><span style=color:#ff8f40>0</span><span>)</span><span style=color:#61676ccc>; 
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB2IN_LEFT</span><span style=color:#61676ccc>,</span><span style=color:#ff8f40>0</span><span>)</span><span style=color:#61676ccc>;
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB1IN_RIGHT</span><span style=color:#61676ccc>,</span><span style=color:#ff8f40>0</span><span>)</span><span style=color:#61676ccc>; 
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB2IN_RIGHT</span><span style=color:#61676ccc>,</span><span style=color:#ff8f40>0</span><span>)</span><span style=color:#61676ccc>;
+</span><span>}
+</span><span style=color:#fa6e32>void </span><span style=color:#f29718>spin</span><span>(</span><span style=color:#fa6e32>int </span><span style=color:#ff8f40>speed</span><span style=color:#61676ccc>, </span><span style=color:#fa6e32>float </span><span style=color:#ff8f40>scale</span><span>) {
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB1IN_LEFT</span><span style=color:#61676ccc>,</span><span style=color:#ff8f40>0</span><span>)</span><span style=color:#61676ccc>; 
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB2IN_LEFT</span><span style=color:#61676ccc>,</span><span>speed</span><span style=color:#ed9366>*</span><span>scale)</span><span style=color:#61676ccc>;
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB1IN_RIGHT</span><span style=color:#61676ccc>,</span><span>speed)</span><span style=color:#61676ccc>; 
+</span><span>  </span><span style=color:#f29718>analogWrite</span><span>(AB2IN_RIGHT</span><span style=color:#61676ccc>,</span><span style=color:#ff8f40>0</span><span>)</span><span style=color:#61676ccc>;
+</span><span>}
+</span></code></pre></div></div><p>I also implemented PID control of the robot via a command PID_POSITION_CONTROL, which simply loops the following section, where pid_position_tof() returns a PWM input value.<div class=note-container><button class=note-toggle><div class=note-icon><p>PID Loop</div></button><div class=note-content style=display:none><pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span>
+</span><span>      pid_time[i] </span><span style=color:#ed9366>= </span><span style=color:#f29718>millis</span><span>() </span><span style=color:#ed9366>-</span><span> currentMillis</span><span style=color:#61676ccc>;
+</span><span>      pid_tof[i] </span><span style=color:#ed9366>=</span><span> distanceSensor2</span><span style=color:#ed9366>.</span><span style=color:#f29718>getDistance</span><span>()</span><span style=color:#61676ccc>;
+</span><span>      distanceSensor2</span><span style=color:#ed9366>.</span><span style=color:#f29718>clearInterrupt</span><span>()</span><span style=color:#61676ccc>;
+</span><span>      distanceSensor2</span><span style=color:#ed9366>.</span><span style=color:#f29718>stopRanging</span><span>()</span><span style=color:#61676ccc>;
+</span><span>      pid_speed[i] </span><span style=color:#ed9366>= </span><span style=color:#f29718>pid_position_tof</span><span>(Kp</span><span style=color:#61676ccc>,</span><span> Ki</span><span style=color:#61676ccc>,</span><span> Kd</span><span style=color:#61676ccc>,</span><span> pid_tof[i]</span><span style=color:#61676ccc>,</span><span> target_tof)</span><span style=color:#61676ccc>;
+</span><span>      pid_p[i] </span><span style=color:#ed9366>=</span><span> Kp </span><span style=color:#ed9366>*</span><span> err</span><span style=color:#61676ccc>;
+</span><span>      pid_i[i] </span><span style=color:#ed9366>=</span><span> Ki </span><span style=color:#ed9366>*</span><span> integral_err</span><span style=color:#61676ccc>;
+</span><span>      pid_d[i] </span><span style=color:#ed9366>=</span><span> Kd </span><span style=color:#ed9366>*</span><span> err_d</span><span style=color:#61676ccc>;
+</span></code></pre></div></div><h1 id=lab-tasks><a aria-label="Anchor link for: lab-tasks" class=zola-anchor href=#lab-tasks>Lab Tasks</a></h1><p>I used the following function to implement PID control, with some logic to eliminate the deadband. :<div class=note-container><button class=note-toggle><div class=note-icon><p>PID Control</div></button><div class=note-content style=display:none><pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span style=color:#fa6e32>int </span><span style=color:#f29718>pid_position_tof </span><span>(</span><span style=color:#fa6e32>float </span><span style=color:#ff8f40>Kp</span><span style=color:#61676ccc>, </span><span style=color:#fa6e32>float </span><span style=color:#ff8f40>Ki</span><span style=color:#61676ccc>, </span><span style=color:#fa6e32>float </span><span style=color:#ff8f40>Kd</span><span style=color:#61676ccc>, </span><span style=color:#fa6e32>float </span><span style=color:#ff8f40>current_pos</span><span style=color:#61676ccc>, </span><span style=color:#fa6e32>float </span><span style=color:#ff8f40>target_pos</span><span>) {
+</span><span>  
+</span><span>
+</span><span>  currentMillis </span><span style=color:#ed9366>= </span><span style=color:#f29718>millis</span><span>()</span><span style=color:#61676ccc>;
+</span><span>  dt </span><span style=color:#ed9366>=</span><span> currentMillis </span><span style=color:#ed9366>-</span><span> prev_time</span><span style=color:#61676ccc>; 
+</span><span>  prev_time </span><span style=color:#ed9366>=</span><span> currentMillis</span><span style=color:#61676ccc>;
+</span><span>  err </span><span style=color:#ed9366>=</span><span> current_pos </span><span style=color:#ed9366>-</span><span> target_pos</span><span style=color:#61676ccc>;
+</span><span>  err_d </span><span style=color:#ed9366>= </span><span>(err </span><span style=color:#ed9366>-</span><span> prev_err) </span><span style=color:#ed9366>/</span><span> dt</span><span style=color:#61676ccc>;
+</span><span>  
+</span><span>
+</span><span>  
+</span><span>  </span><span style=color:#abb0b6;font-style:italic>// Calculate speed control signal
+</span><span>  </span><span style=color:#fa6e32>int</span><span> speed_control </span><span style=color:#ed9366>= </span><span>(</span><span style=color:#fa6e32>int</span><span>)(Kp </span><span style=color:#ed9366>*</span><span> err </span><span style=color:#ed9366>+</span><span> Ki </span><span style=color:#ed9366>*</span><span> err_i </span><span style=color:#ed9366>+</span><span> Kd </span><span style=color:#ed9366>*</span><span> err_d)</span><span style=color:#61676ccc>;
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>></span><span> max_speed) {
+</span><span>    speed_control </span><span style=color:#ed9366>=</span><span> max_speed</span><span style=color:#61676ccc>;
+</span><span>  }
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>< </span><span>(</span><span style=color:#ed9366>-</span><span style=color:#ff8f40>1 </span><span style=color:#ed9366>*</span><span> max_speed)) {
+</span><span>    speed_control </span><span style=color:#ed9366>= -</span><span style=color:#ff8f40>1 </span><span style=color:#ed9366>*</span><span> max_speed</span><span style=color:#61676ccc>;
+</span><span>  }
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>> </span><span style=color:#ff8f40>0</span><span>) {
+</span><span>    </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>></span><span> deadband){
+</span><span>      </span><span style=color:#f29718>forward</span><span>(speed_control</span><span style=color:#61676ccc>,</span><span> globalscale)</span><span style=color:#61676ccc>;
+</span><span>    }</span><span style=color:#fa6e32>else </span><span>{
+</span><span>      </span><span style=color:#f29718>forward</span><span>(</span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>,</span><span> globalscale)</span><span style=color:#61676ccc>;
+</span><span>    }
+</span><span>    
+</span><span>  }
+</span><span>  </span><span style=color:#fa6e32>else if </span><span>(speed_control </span><span style=color:#ed9366>< </span><span style=color:#ff8f40>0</span><span>) {
+</span><span>    </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>< -</span><span style=color:#ff8f40>1</span><span style=color:#ed9366>*</span><span>deadband){
+</span><span>      </span><span style=color:#f29718>backward</span><span>(</span><span style=color:#ed9366>-</span><span style=color:#ff8f40>1</span><span style=color:#ed9366>*</span><span>speed_control</span><span style=color:#61676ccc>,</span><span> globalscale)</span><span style=color:#61676ccc>;
+</span><span>    }</span><span style=color:#fa6e32>else </span><span>{
+</span><span>      </span><span style=color:#f29718>backward</span><span>(</span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>,</span><span> globalscale)</span><span style=color:#61676ccc>;
+</span><span>    }
+</span><span>  }
+</span><span>  prev_err </span><span style=color:#ed9366>=</span><span> err</span><span style=color:#61676ccc>;
+</span><span>  </span><span style=color:#fa6e32>return</span><span> speed_control</span><span style=color:#61676ccc>;
+</span><span>
+</span></code></pre></div></div><p>My TOF readings averaged around 9.6 Hz, an improvement on the previous lab. The system provided a PID control input at around 75 Hz, so we'll eventuallyneed some sort of extrapolation in the TOF values to take advantage of the higher-frequency control input.<p>To compensate for the motor deadband, I used the following logic:<div class=note-container><button class=note-toggle><div class=note-icon><p>Deadband Removal</div></button><div class=note-content style=display:none><pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span>
+</span><span>  </span><span style=color:#ed9366>... 
+</span><span>  </span><span style=color:#fa6e32>int</span><span> speed_control </span><span style=color:#ed9366>= </span><span>(</span><span style=color:#fa6e32>int</span><span>)(Kp </span><span style=color:#ed9366>*</span><span> err </span><span style=color:#ed9366>+</span><span> Ki </span><span style=color:#ed9366>*</span><span> integral_err </span><span style=color:#ed9366>+</span><span> Kd </span><span style=color:#ed9366>*</span><span> err_d)</span><span style=color:#61676ccc>;
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>></span><span> max_speed) {
+</span><span>    speed_control </span><span style=color:#ed9366>=</span><span> max_speed</span><span style=color:#61676ccc>;
+</span><span>  }
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>< </span><span>(</span><span style=color:#ed9366>-</span><span style=color:#ff8f40>1 </span><span style=color:#ed9366>*</span><span> max_speed)) {
+</span><span>    speed_control </span><span style=color:#ed9366>= -</span><span style=color:#ff8f40>1 </span><span style=color:#ed9366>*</span><span> max_speed</span><span style=color:#61676ccc>;
+</span><span>  }
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>> </span><span style=color:#ff8f40>0</span><span>) {
+</span><span>    </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>></span><span> deadband){
+</span><span>      </span><span style=color:#f29718>forward</span><span>(speed_control</span><span style=color:#61676ccc>,</span><span> globalscale)</span><span style=color:#61676ccc>;
+</span><span>    }</span><span style=color:#fa6e32>else </span><span>{
+</span><span>      </span><span style=color:#f29718>forward</span><span>(deadband</span><span style=color:#61676ccc>,</span><span> globalscale)</span><span style=color:#61676ccc>;
+</span><span>    }
+</span><span>    
+</span><span>  }
+</span><span>  </span><span style=color:#fa6e32>else if </span><span>(speed_control </span><span style=color:#ed9366>< </span><span style=color:#ff8f40>0</span><span>) {
+</span><span>    </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>< -</span><span style=color:#ff8f40>1</span><span style=color:#ed9366>*</span><span>deadband){
+</span><span>      </span><span style=color:#f29718>backward</span><span>(</span><span style=color:#ed9366>-</span><span style=color:#ff8f40>1</span><span style=color:#ed9366>*</span><span>speed_control</span><span style=color:#61676ccc>,</span><span> globalscale)</span><span style=color:#61676ccc>;
+</span><span>    }</span><span style=color:#fa6e32>else </span><span>{
+</span><span>      </span><span style=color:#f29718>backward</span><span>(</span><span style=color:#ed9366>-</span><span style=color:#ff8f40>1</span><span style=color:#ed9366>*</span><span>deadband</span><span style=color:#61676ccc>,</span><span> globalscale)</span><span style=color:#61676ccc>;
+</span><span>    }
+</span><span>  }
+</span><span>  </span><span style=color:#ed9366>...
+</span><span>
+</span></code></pre></div></div><p>I ran into a bit of trouble with my integrator maxing out my anti-windup logic and providing a giant impulse near the setpoint:</p><img alt=PID_Nointerp_samegain_fixtimes src=/files/lab5/PID_Nointerp_samegain_fixtimes.png width=600><p>So I had to modify the max values a bit:<h2 id=collaborations><a aria-label="Anchor link for: collaborations" class=zola-anchor href=#collaborations>Collaborations</a></h2><p>I worked with <a href=https://correial.github.io/>Lucca Correia</a> and <a href=https://trevordales.github.io/>Trevor Dales</a> extensively, and referenced <a href=https://pages.github.coecis.cornell.edu/dak267/dak267.github.io/#contact>Daria's</a> and <a href=https://mavisfu.github.io/lab3.html>Mavis'</a> site for wiring and local test code snippets.<h1 id=next-lab-5-fast-robots-lab4><a aria-label="Anchor link for: next-lab-5-fast-robots-lab4" class=zola-anchor href=#next-lab-5-fast-robots-lab4>Next: [Lab 5](/fast-robots/lab4</a></h1></section></article></main><div class=giscus></div><script -- <!-- <-- change repo src=https://utteranc.es/client.js this to your>issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script></div>
