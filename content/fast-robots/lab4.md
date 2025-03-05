@@ -16,7 +16,7 @@ comment = true
 
 I decided to connect my motor drivers to Artemis pins A13, A14, A15, and A16, and wire the car like so: 
 
-<img src="/files/lab/wired.jpg" alt="Wiring diagram"  width = 600 >
+<img src="/files/lab4/diag.png" alt="Wiring diagram"  width = 600 >
 
 We power the motors with a separate battery from the Artemis to reduce the effect of back-EMF on the Artemis. There's no reason to have the varying load of the motors effect the stability of the Artemis' computations. Two smaller batteries in separate locations also helps with reducing the form factor of the whole car. 
 
@@ -109,7 +109,7 @@ With battery leads soldered and batteries attached, I performed the following te
 
 This was my initial setup:
 
-<img src="/files/lab/wired.jpg" alt="wired"  width = 600 >
+<img src="/files/lab4/wired.jpg" alt="Wiring diagram"  width = 600 >
 
 
 
