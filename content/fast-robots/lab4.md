@@ -18,7 +18,7 @@ I decided to connect my motor drivers to Artemis pins A13, A14, A15, and A16, an
 
 <img src="/files/lab4/diag.png" alt="Wiring diagram"  width = 600 >
 
-We power the motors with a separate battery from the Artemis to reduce the effect of back-EMF on the Artemis. There's no reason to have the varying load of the motors effect the stability of the Artemis' computations. Two smaller batteries in separate locations also helps with reducing the form factor of the whole car. 
+We power the motors with a separate battery from the Artemis to reduce the effect of back-EMF on the Artemis. There's no reason to have the varying load of the motors effect the stability of the Artemis' computations. Two smaller battçeries in separate locations also helps with reducing the form factor of the whole car. 
 
 
 
