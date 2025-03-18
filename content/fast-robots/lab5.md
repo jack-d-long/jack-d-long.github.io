@@ -1,6 +1,6 @@
 +++
 title = "Lab 5"
-date = "2025-03-02"
+date = "2025-03-12"
 
 [taxonomies]
 
@@ -376,7 +376,6 @@ I was able to generate the following response:
 
 <iframe width="600" height = "400" src="https://youtube.com/embed/KgYb4N_u1VQ"allowfullscreen></iframe>
 
-<img src="/files/lab5/PID_final.png" alt="firsrt extrapolation .1|.00005|0|300" width = 600 >
 
 
 I'm satisfied with this for now. 
