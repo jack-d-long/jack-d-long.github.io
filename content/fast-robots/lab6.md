@@ -9,9 +9,6 @@ comment = true
 +++ 
 # Previous: [Lab 5](/fast-robots/lab5)
 
-
-ADDITIONAL HEADER
-
 ## Setup 
 
 To begin implementing orientation control within my current code structure, I added an additional piece of logic in my main loop. This will make controlling both position *and* orientation at the same time simpler. The `dataReady()` check is a leftover from previous IMU data recording in Lab 2, and I may have to modify my `record_IMU()` to use it instead if I run into problems with FIFO overflow issues in the future.  
@@ -257,4 +254,4 @@ In order to measure the effect of derivative kick, I set the robot to 0, 90, -90
 I worked with [Lucca Correia](https://correial.github.io/) and [Trevor Dales](https://trevordales.github.io/) extensively, and referenced [Daria's](https://pages.github.coecis.cornell.edu/dak267/dak267.github.io/#contact) and [Stephan's](https://fast.synthghost.com/lab-5-linear-pid-control/) for specific PID orientation control considerations.
 
 
-# Next: [Lab 5](/fast-robots/lab4)
+# Next: [Lab 7](/fast-robots/lab7)
