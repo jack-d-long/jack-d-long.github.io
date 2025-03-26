@@ -234,13 +234,20 @@ As a sanity check, I tried modifying my gains in a similar manner to the above, 
 
 Although there are a few differences between the measured and predicted Kalman filter data, they have similar enough characteristics that I don't think the controller will have any trouble. 
 
-I then tried a test run with motor input:
-
-This one was a bit heavy on the gains, but showcases the smoothness of the filter well:
+This one was a bit heavy on the P gain, but showcases the smoothness of the filter well:
 
 <iframe width="800" height = "500" src="https://youtube.com/embed/ThPhT8SlPv0"allowfullscreen></iframe>
 <img src="/files/lab7/kf-first-go.png" alt="KF 4"  width = 800 >
 
+After some tuning, I got the following response: 
+
+
+<iframe width="800" height = "500" src="https://youtube.com/embed/uIMHTydcZ9w"allowfullscreen></iframe>
+<img src="/files/lab7/kffinal.png" alt="KF 6"  width = 800 >
+
+
+
+**Note**: Fix of the initial TOF zero values coming soon! 
 
 
 
