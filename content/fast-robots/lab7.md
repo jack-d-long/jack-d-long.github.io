@@ -257,7 +257,7 @@ I worked with [Lucca Correia](https://correial.github.io/) and [Trevor Dales](ht
  
 
 
-# Next: [Lab 7](/fast-robots/lab7)
+# Next: [Lab 8](/fast-robots/lab8)
 
 
 
