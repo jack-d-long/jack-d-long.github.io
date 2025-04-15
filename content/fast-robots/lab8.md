@@ -7,9 +7,15 @@ date = "2025-04-02"
 [extra]
 comment = true
 +++ 
-# Previous: [Lab 6](/fast-robots/lab6)
+# Previous: [Lab 7](/fast-robots/lab7)
 
 ## Lab Tasks
+### Decorations
+Shoutout [Lucca](https://correial.github.io/) and [Trevor](https://trevordales.github.io/)! Also, find the blooper [here](https://www.youtube.com/embed/FM8RI6x_7O0)
+
+<img src="/files/lab8/tongue.png" alt="sys delay afetr slowdown"  height = 500 >
+
+
 
 ### Kalman Filter Refinements
 
@@ -294,7 +300,7 @@ Below are the position and orientation components of the stunt:
 
 
 ### Blooper 
-I was alsos able to get this blooper video:
+I was also able to get this blooper video:
 
 <iframe width="1000" height = "700" src="https://youtube.com/embed/FM8RI6x_7O0"allowfullscreen></iframe>
 
@@ -308,7 +314,7 @@ I worked with [Lucca Correia](https://correial.github.io/) and [Trevor Dales](ht
  
 
 
-# Next: [Lab 8](/fast-robots/lab8)
+# Next: [Lab 9](/fast-robots/lab9)
 
 
 
