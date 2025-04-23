@@ -131,7 +131,7 @@ def prediction_step(cur_odom, prev_odom)
                           loc.bel_bar[x_curr, y_curr, theta_curr] += p * loc.bel[x_prev, y_prev, theta_prev]
 
   # Normalize the belief
-  loc.bel_bar /= np.sum(loc.bel_bar)
+  loc.bel_bar = np.sum(loc.bel_bar)
 
 
 ```

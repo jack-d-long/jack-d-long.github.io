@@ -11,13 +11,12 @@
 
     {% block post_list %}
         <main class="list">
-            {%- if paginator %}
-                {%- set show_pages = paginator.pages -%}
-            {% else %}
-                {%- set show_pages = section.pages -%}
-            {% endif -%}
-
-            {{ post_macros::list_posts(pages=show_pages) }}
+        {% if paginator %}
+            {% set show_pages = paginator.pages %}
+        {% else %}
+            {% set show_pages = section.pages %}
+        {% endif %}
+        {{ post_macros::list_posts(pages=show_pages) }}
         </main>
     {% endblock post_list %}
 
