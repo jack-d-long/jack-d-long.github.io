@@ -219,7 +219,7 @@ There was more variability in the estimates than I expected, especially in open 
 I worked with [Lucca Correia](https://correial.github.io/) and [Trevor Dales](https://trevordales.github.io/) extensively. I referenced [Stephan Wagner's](https://fast.synthghost.com/lab-10-simulated-localization) and [Mavis Fu's](https://mavisfu.github.io/lab10.html) sites for code examples. 
 
 
-# Next: [Lab 10](/fast-robots/lab10)
+# Next: [Lab 11](/fast-robots/lab11)
 
 
 
