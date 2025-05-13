@@ -1,3 +1,21 @@
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/DMSans/DMSans-Regular.ttf'), local('ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('fonts/DMSans/DMSans-Bold.ttf'), local('ttf');
+  font-display: swap
+}
+
+
 @font-face {
   font-family: 'Jetbrains Mono';
   font-style: normal;

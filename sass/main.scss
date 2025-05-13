@@ -16,7 +16,7 @@
   --border-color: var(--border-color);
 
   /* Fonts */
-  --text-font: 'Jetbrains Mono';
+  --text-font: 'DM Sans';
   --header-font: 'Space Grotesk', 'Helvetica', sans-serif;
   --code-font: 'Jetbrains Mono';
 }
@@ -43,13 +43,13 @@ html {
 
 @media all and (min-width:640px) {
   html {
-    font-size: 16.5px;
+    font-size: 20 px;
   }
 }
 
 @media all and (min-width:720px) {
   html {
-    font-size: 17px;
+    font-size: 20 px;
   }
 }
 
