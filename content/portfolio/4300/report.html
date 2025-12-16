@@ -1,0 +1,524 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (https://tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (https://tug.org/tex4ht/)"> 
+<!-- html --> 
+<meta name="src" content="report.tex"> 
+<link rel="stylesheet" type="text/css" href="report.css"> 
+</head><body 
+>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Executive summary</h3>
+<!--l. 3--><p class="noindent" >Two Boeing 737 MAX aircraft&#8212;Lion Air Flight 610 (Oct. 29, 2018) and Ethiopian Airlines Flight 302
+(Mar. 10, 2019)&#8212;were lost in accidents that exposed a tightly coupled failure across automation design,
+certification practice, organizational decision-making, and operator information/training. The U.S.
+FAA grounded the MAX on Mar. 13, 2019 and rescinded the grounding on Nov. 18, 2020.
+<span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+<!--l. 5--><p class="indent" >   At a high level:
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 7--><p class="noindent" >A safety-relevant control function (MCAS) could command stabilizer trim based on erroneous
+     angle-of-attack (AoA) input and repeatedly re-engage in a way crews struggled to arrest in
+     time-critical conditions. In the Lion Air accident sequence, MCAS reportedly activated <span 
+class="ecbx-1095">24</span>
+     <span 
+class="ecbx-1095">times </span>after receiving faulty data from one AoA sensor. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+     </li>
+     <li class="itemize">
+     <!--l. 8--><p class="noindent" >The safety case and certification ecosystem did not reliably surface &#8220;what changed,&#8221;  &#8220;what
+     assumptions are embedded,&#8221; and &#8220;what operators must know,&#8221; especially as MCAS evolved
+     and as training determinations were formalized. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span> <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+     </li>
+     <li class="itemize">
+     <!--l. 9--><p class="noindent" >Post-accident  investigations  and  enforcement  actions  describe  breakdowns  in  truthful
+     disclosure to regulators and downstream effects on training/manual content. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span> <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span></li></ul>
+<!--l. 12--><p class="indent" >   These failures are best understood as a breakdown in <span 
+class="ecbx-1095">engineering safety governance</span>
+rather than a single-point technical flaw. The MAX case illustrates how modest-seeming design
+and certification decisions can combine&#8212;through information asymmetries, organizational
+incentives, and operational variability&#8212;into an accident pathway that is difficult to interrupt once
+triggered.
+<!--l. 14--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
+ id="x1-20001.1"></a>Ethical framing through ASME Canons</h4>
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 17--><p class="noindent" ><span 
+class="ecbx-1095">Canon 1 (Hold paramount the safety, health, and welfare of the public). </span>When
+     a  safety-relevant  automation  function  can  drive  hazardous  aircraft  states  under  credible
+     sensor  fault  conditions,  the  ethical  burden  is  to  demonstrate  robust  fault  tolerance  and
+     recoverability&#8212;not merely to satisfy minimum compliance arguments or assume ideal operator
+     response. The repeated activation behavior described in the Lion Air sequence underscores
+     how quickly a safety margin can be consumed when a single failure mode cascades. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+                                                                                         
+                                                                                         
+     </li>
+     <li class="itemize">
+     <!--l. 18--><p class="noindent" ><span 
+class="ecbx-1095">Canon  2  (Perform  services  only  in  areas  of  competence)  and  Canon  3</span>
+     <span 
+class="ecbx-1095">(Continue professional development; provide opportunities for development under</span>
+     <span 
+class="ecbx-1095">supervision). </span>Safety-critical system development demands competence not only in software
+     or aerodynamics in isolation, but also in integrated human&#8211;automation interaction, hazard
+     analysis, and certification logic. The institutional record suggests that key assumptions and
+     changes were not consistently surfaced to the right reviewers and decision-makers, which is a
+     competence and process problem as much as a &#8220;bad design&#8221; problem. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+     </li>
+     <li class="itemize">
+     <!--l. 19--><p class="noindent" ><span 
+class="ecbx-1095">Canon 7 (Issue public statements only in an objective and truthful manner).</span>
+     Enforcement actions describe breakdowns in truthful disclosure to regulators with downstream
+     implications for training and manuals; in aviation safety, that kind of information integrity
+     failure functions as a direct risk amplifier because it constrains what operators and oversight
+     bodies can do to build procedural defenses. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span> <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+     </li>
+     <li class="itemize">
+     <!--l. 20--><p class="noindent" ><span 
+class="ecbx-1095">Canon 4 (Act as faithful agents; avoid conflicts of interest or the appearance</span>
+     <span 
+class="ecbx-1095">thereof). </span>The certification ecosystem and internal incentives can create structural conflicts
+     between schedule/market goals and conservative safety practice. When those tensions are not
+     actively managed through governance and transparency, ethical obligations to the public are
+     effectively subordinated by default. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span> <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span></li></ul>
+<!--l. 23--><p class="noindent" >The ethical lesson is not &#8220;automation is bad&#8221; or &#8220;pilots made mistakes,&#8221; but that safety-critical engineering
+requires (i) conservative fault tolerance, (ii) transparent, decision-relevant communication, and (iii)
+institutions designed to resist incentive-driven erosion of safety margins.
+<!--l. 25--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">1.2   </span> <a 
+ id="x1-30001.2"></a>Concrete next steps (actionable reforms)</h4>
+<!--l. 27--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">1.2.1   </span> <a 
+ id="x1-40001.2.1"></a>1) Technical safeguards (design + verification)</h5>
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 29--><p class="noindent" ><span 
+class="ecbx-1095">Require  sensor  plausibility  and  disagreement  handling  </span>for  any  safety-relevant
+     automation authority path (e.g., AoA cross-checking, validity gating, explicit fault modes).
+     This directly addresses the failure mode where erroneous AoA input can drive repeated trim
+     commands. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+     </li>
+     <li class="itemize">
+                                                                                         
+                                                                                         
+     <!--l. 30--><p class="noindent" ><span 
+class="ecbx-1095">Expand  verification  to  worst-case  repetition  and  coupled  failures,  </span>not  just
+     single-event scenarios, including stress testing under realistic pilot workload. The accident
+     pathway involved persistence and time pressure, so verification must explicitly cover &#8220;repeat,
+     escalate, saturate&#8221; dynamics.
+     </li>
+     <li class="itemize">
+     <!--l. 31--><p class="noindent" ><span 
+class="ecbx-1095">Treat pilot recoverability as a formal requirement </span>with measurable acceptance criteria
+     (time-to-recognition,  time-to-arrest,  control  authority  margins),  rather  than  an  assumed
+     property.</li></ul>
+<!--l. 34--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">1.2.2   </span> <a 
+ id="x1-50001.2.2"></a>2) Organizational controls (culture + information integrity)</h5>
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 36--><p class="noindent" ><span 
+class="ecbx-1095">Implement  a  safety-critical  change  disclosure  gate</span>:  any  change  that  alters  system
+     authority, activation conditions, or failure behavior must trigger a documented cross-functional
+     review  (engineering,  flight  ops,  training,  certification)  and  an  explicit  regulator-facing
+     summary.
+     </li>
+     <li class="itemize">
+     <!--l. 37--><p class="noindent" ><span 
+class="ecbx-1095">Establish protected escalation channels and audit trails </span>for safety concerns so they
+     cannot be silently re-scoped or absorbed by schedule pressure. This is a governance mechanism
+     for Canon 1 in practice.
+     </li>
+     <li class="itemize">
+     <!--l. 38--><p class="noindent" ><span 
+class="ecbx-1095">Strengthen &#8220;truthfulness controls&#8221; in regulator-facing interactions </span>(review boards,
+     legal/compliance sign-off, and penalties for omission). The enforcement record shows why
+     treating disclosure as optional is ethically and operationally unsafe. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span></li></ul>
+<!--l. 41--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">1.2.3   </span> <a 
+ id="x1-60001.2.3"></a>3) Institutional reforms (oversight + training governance)</h5>
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 43--><p class="noindent" ><span 
+class="ecbx-1095">Reduce dependence on manufacturer signaling for &#8220;significant changes.&#8221; </span>Oversight
+     processes should include independent triggers for deeper review when safety-relevant functions
+     change, addressing the OIG&#8217;s findings about certification/delegation weaknesses. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+                                                                                         
+                                                                                         
+     </li>
+     <li class="itemize">
+     <!--l. 44--><p class="noindent" ><span 
+class="ecbx-1095">Bind  training  determinations  to  the  safety  case.  </span>If  safe  operation  depends  on
+     understanding a function or failure mode, that knowledge must be embedded in standardized
+     training and documentation pathways&#8212;not left to informal diffusion. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+     </li>
+     <li class="itemize">
+     <!--l. 45--><p class="noindent" ><span 
+class="ecbx-1095">Require explicit documentation of embedded assumptions </span>(pilot response models,
+     workload assumptions, global operator variability) and make those assumptions auditable
+     artifacts in certification review.</li></ul>
+<!--l. 48--><p class="noindent" >Taken together, these steps operationalize engineering ethics: they turn &#8220;hold paramount public safety&#8221;
+into concrete design constraints, review gates, disclosure requirements, and oversight mechanisms that
+remain effective under real-world incentives.
+<!--l. 50--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-70002"></a>What happened</h3>
+<!--l. 52--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">2.1   </span> <a 
+ id="x1-80002.1"></a>The accident pair and grounding timeline</h4>
+<!--l. 54--><p class="noindent" >Lion Air Flight 610 (Oct. 29, 2018) and Ethiopian Airlines Flight 302 (Mar. 10, 2019) were fatal accidents
+involving 737 MAX aircraft; the FAA issued a U.S. grounding order on Mar. 13, 2019 and later rescinded it
+on Nov. 18, 2020. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+<!--l. 56--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">2.2   </span> <a 
+ id="x1-90002.2"></a>The immediate technical signature: erroneous AoA and repeated trim</h4>
+<!--l. 58--><p class="noindent" >Investigations describe a mismatch between sensed AoA and aircraft reality, followed by automatic
+nose-down trim commands that crews attempted to counter.
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 60--><p class="noindent" >For Lion Air, the FAA&#8217;s return-to-service review summarizes that a replacement AoA sensor
+     had been <span 
+class="ecbx-1095">mis-calibrated </span>during an earlier repair and the mis-calibration was not detected.
+     <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+     </li>
+     <li class="itemize">
+     <!--l. 61--><p class="noindent" >For Ethiopian Airlines Flight 302, the preliminary report states there was an AoA disagreement
+     shortly after takeoff (left AoA <span 
+class="cmsy-10x-x-109">~ </span><span 
+class="cmr-10x-x-109">74</span><span 
+class="cmmi-10x-x-109">.</span><span 
+class="cmr-10x-x-109">5</span><sup><span 
+class="cmsy-8">&#x2218;</span></sup> vs right <span 
+class="cmsy-10x-x-109">~ </span><span 
+class="cmr-10x-x-109">15</span><span 
+class="cmmi-10x-x-109">.</span><span 
+class="cmr-10x-x-109">3</span><sup><span 
+class="cmsy-8">&#x2218;</span></sup>) and multiple automatic nose-down
+     trim commands without pilot input; the crew performed the runaway stabilizer checklist and
+     moved stabilizer trim cutout switches to cutout. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span></li></ul>
+                                                                                         
+                                                                                         
+<!--l. 64--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-100003"></a>Why it happened</h3>
+<!--l. 66--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">3.1   </span> <a 
+ id="x1-110003.1"></a>1) Safety-critical automation bounded by weak sensing and weak cross-checking</h4>
+<!--l. 68--><p class="noindent" >A core design vulnerability was allowing a stability-related control function to command trim in the
+presence of bad sensor input without robust, conservative validation of that input. The U.S. House
+investigation report states the original MCAS design lacked &#8220;rudimentary provisions&#8221; to cross-check AoA
+outputs. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+<!--l. 70--><p class="indent" >   This is an engineering ethics issue because foreseeable sensor faults are not exotic edge cases in
+aviation; in high-stakes systems, a single-point failure that can drive the aircraft toward loss of
+control should trigger unusually high design conservatism and unusually strong evidence for
+recoverability.
+<!--l. 72--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">3.2   </span> <a 
+ id="x1-120003.2"></a>2) Human factors assumptions treated as a substitute for technical fault tolerance</h4>
+<!--l. 74--><p class="noindent" >Operator response was effectively part of the control loop. Boeing pilots and engineers assumed crews
+would recognize unintended MCAS activation as a runaway stabilizer condition and respond accordingly.
+<span class="cite">[<span 
+class="ecbx-1095">?</span>]</span> But the operational reality included time pressure, startle effects, workload, and uneven training
+environments.
+<!--l. 76--><p class="indent" >   A safety argument that &#8220;the crew will always respond correctly&#8221; is ethically fragile unless it is backed
+by evidence across realistic conditions and realistic operator variance&#8212;and unless the system is designed so
+incorrect or delayed response does not quickly become unrecoverable.
+<!--l. 78--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">3.3   </span> <a 
+ id="x1-130003.3"></a>3) Verification and test scope that did not match the worst-case dynamics</h4>
+<!--l. 80--><p class="noindent" >The House report also documents that Boeing tested a single unintended MCAS activation but did <span 
+class="ecbx-1095">not</span>
+test repeated activations, with internal discussions assuming multiple activations would be no worse than a
+single activation. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span> In safety-critical domains, that kind of assumption is exactly the type that must be
+stress-tested, not merely reasoned about.
+<!--l. 82--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">3.4   </span> <a 
+ id="x1-140003.4"></a>4) Certification and delegation gaps that obscured system-level risk</h4>
+<!--l. 84--><p class="noindent" >Certification is not external to the system; it is part of the system. DOT OIG concludes that gaps in FAA
+guidance and processes contributed to misunderstanding MCAS, including reliance on manufacturers
+to flag &#8220;significant&#8221; changes and incomplete visibility into assumptions embedded in safety
+assessments. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span> The OIG also notes that FAA certification engineers were not aware of significant
+MCAS changes during certification, limiting their ability to understand aircraft-level impact.
+<span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+<!--l. 86--><p class="indent" >   The Joint Authorities Technical Review (JATR) report is part of the broader record documenting
+concerns around certification practice and system-level review of the MAX flight control system.
+<span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+                                                                                         
+                                                                                         
+<!--l. 88--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">3.5   </span> <a 
+ id="x1-150003.5"></a>5) Information integrity failures that distorted downstream training and documentation</h4>
+<!--l. 90--><p class="noindent" >Post-incident legal actions describe a breakdown in truthful disclosure. DOJ states Boeing&#8212;through two
+737 MAX Flight Technical Pilots&#8212;deceived the FAA&#8217;s Aircraft Evaluation Group about an important
+MCAS change, contributing to training/manual materials lacking MCAS information. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span> DOJ
+also describes the deferred prosecution agreement and related remedies totaling over $2.5B.
+<span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+<!--l. 92--><p class="indent" >   This matters ethically because transparency is not a public-relations preference; it is a safety control.
+When pilots, airlines, and regulators do not have decision-relevant information about system behavior,
+they cannot build the procedural defenses (training, checklists, operational limits) that compensate for
+technical complexity.
+<!--l. 94--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">3.6   </span> <a 
+ id="x1-160003.6"></a>6) Global deployment and uneven operator environments</h4>
+<!--l. 96--><p class="noindent" >The MAX operated globally across airlines with different training resources and safety cultures. Training
+determinations were formalized through processes like the FAA Flight Standardization Board report
+(e.g., the finding that Level B differences training was sufficient for certain differences). <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+Where a design&#8217;s safety depends on operator knowledge and access to robust training, ethical
+responsibility requires treating that variability as a first-order design input&#8212;not as background
+noise.
+<!--l. 98--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-170004"></a>Ethical analysis</h3>
+<!--l. 100--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">4.1   </span> <a 
+ id="x1-180004.1"></a>Holding public safety paramount</h4>
+<!--l. 102--><p class="noindent" >In this case, &#8220;public safety first&#8221; is not a slogan; it is a design and governance requirement. For aviation
+automation, that means:
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 104--><p class="noindent" >Conservative fault tolerance: treat bad sensor input and ambiguous states as normal threats,
+     not rare anomalies.
+     </li>
+     <li class="itemize">
+     <!--l. 105--><p class="noindent" >Clear recoverability: ensure that reasonable pilot actions can reliably restore safe flight, and
+     that the system does not &#8220;fight&#8221; those actions in a confusing way.
+     </li>
+     <li class="itemize">
+     <!--l. 106--><p class="noindent" >Evidence-driven  human  factors:  do  not  assume  idealized  operator  performance;  validate
+     operator interactions under realistic time pressure and surprise.</li></ul>
+                                                                                         
+                                                                                         
+<!--l. 109--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">4.2   </span> <a 
+ id="x1-190004.2"></a>Responsibility in a distributed system</h4>
+<!--l. 111--><p class="noindent" >Responsibility in the MAX case cannot be assigned to a single person or a single mechanism. It is
+distributed across:
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 113--><p class="noindent" >Engineers responsible for requirements, hazard analyses, sensor/logic architecture, and test
+     scope.
+     </li>
+     <li class="itemize">
+     <!--l. 114--><p class="noindent" >Managers and executives responsible for incentive structures and for ensuring safety concerns
+     can surface and change decisions.
+     </li>
+     <li class="itemize">
+     <!--l. 115--><p class="noindent" >Regulators  responsible  for  creating  oversight  processes  that  do  not  depend  on  perfect
+     manufacturer signaling and that maintain system-level visibility. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span></li></ul>
+<!--l. 118--><p class="indent" >   A key ethical failure mode here is &#8220;diffusion by design&#8221;: complex organizations can create structures
+where each actor has a defensible local rationale while the overall system drifts toward unacceptable
+risk.
+<!--l. 120--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">4.3   </span> <a 
+ id="x1-200004.3"></a>Transparency as an operational safety control</h4>
+<!--l. 122--><p class="noindent" >The MAX case shows how transparency failures can become causal rather than merely reputational. If
+regulators and operators lack accurate, salient information about a safety-relevant function and its
+evolution, then training, manuals, and operational safeguards can be mis-specified&#8212;raising the probability
+that an error becomes fatal. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span> <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+<!--l. 124--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-210005"></a>What we can do</h3>
+<!--l. 126--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">5.1   </span> <a 
+ id="x1-220005.1"></a>Engineering and technical changes</h4>
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 128--><p class="noindent" ><span 
+class="ecbx-1095">Design  automation  for  fault  tolerance,  not  for  &#8220;pilot  catch.&#8221;  </span>If  a  function  can
+     move primary control surfaces or trim in a way that can become unrecoverable, then sensor
+     disagreement, plausibility checks, and conservative authority limits should be non-negotiable
+     design constraints. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+                                                                                         
+                                                                                         
+     </li>
+     <li class="itemize">
+     <!--l. 129--><p class="noindent" ><span 
+class="ecbx-1095">Expand verification to cover worst-case repetition and coupled failures. </span>If a hazard
+     becomes catastrophic through repetition (not just a single activation), that repetition must
+     be explicitly tested and analyzed&#8212;not assumed away. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+     </li>
+     <li class="itemize">
+     <!--l. 130--><p class="noindent" ><span 
+class="ecbx-1095">Treat operator interaction as part of the system requirements. </span>Validate procedures
+     and interfaces under high workload and startle effects; build automation behavior that is
+     legible and consistent with pilot mental models.</li></ul>
+<!--l. 133--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">5.2   </span> <a 
+ id="x1-230005.2"></a>Organizational changes</h4>
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 135--><p class="noindent" ><span 
+class="ecbx-1095">Create  internal  &#8220;information  integrity&#8221;  obligations.  </span>Safety-relevant  changes  and
+     assumptions must be communicated clearly across engineering, test, training, and certification
+     interfaces&#8212;especially when changes alter system-level behavior.
+     </li>
+     <li class="itemize">
+     <!--l. 136--><p class="noindent" ><span 
+class="ecbx-1095">Strengthen escalation pathways for safety concerns. </span>If raising risk is career-limiting,
+     the organization will systematically under-detect hazards. A healthy safety culture makes it
+     easier to stop the line than to explain a tragedy.
+     </li>
+     <li class="itemize">
+     <!--l. 137--><p class="noindent" ><span 
+class="ecbx-1095">Align incentives with safety margins. </span>Schedule and market pressure will always exist;
+     the ethical question is whether governance prevents those pressures from silently redefining
+     &#8220;acceptable risk.&#8221;</li></ul>
+<!--l. 140--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">5.3   </span> <a 
+ id="x1-240005.3"></a>Regulatory and institutional changes</h4>
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 142--><p class="noindent" ><span 
+class="ecbx-1095">Reduce dependence on manufacturer signaling for &#8220;significant changes.&#8221; </span>Oversight
+     processes should not assume perfect disclosure; they should be robust to the realistic incentive
+     landscape. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+                                                                                         
+                                                                                         
+     </li>
+     <li class="itemize">
+     <!--l. 143--><p class="noindent" ><span 
+class="ecbx-1095">Maintain system-level visibility in delegated certification structures. </span>The regulator
+     must be able to see not only compliance artifacts but also the assumptions driving hazard
+     classifications and pilot-response models. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+     </li>
+     <li class="itemize">
+     <!--l. 144--><p class="noindent" ><span 
+class="ecbx-1095">Treat training determinations as safety-critical decisions. </span>Training and documentation
+     are part of the safety case; if a system&#8217;s safe operation depends on understanding a function,
+     then minimizing training burden cannot be the dominant objective. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span></li></ul>
+<!--l. 147--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">6   </span> <a 
+ id="x1-250006"></a>Practical constraints (and why they don&#8217;t excuse preventable risk)</h3>
+<!--l. 149--><p class="noindent" >Real constraints exist&#8212;competitive pressure, certification timelines, legacy platform constraints, and
+global airline economics. But these constraints are exactly why safety-critical engineering ethics demands
+institutional guardrails: when pressures are predictable, designing processes to resist them is part of
+competent practice, not an optional ideal.
+<!--l. 151--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">7   </span> <a 
+ id="x1-260007"></a>Conclusion</h3>
+<!--l. 153--><p class="noindent" >The Boeing 737 MAX incidents illustrate a classic sociotechnical failure: a safety-relevant
+automation function interacted with sensor faults, human factors realities, organizational incentives,
+and certification processes in ways that made catastrophic outcomes possible. The prevention
+strategy is therefore also sociotechnical: better fault-tolerant design, better evidence-based
+validation of operator interaction, stronger internal transparency and safety culture, and oversight
+mechanisms that remain effective under real-world incentives and information asymmetries. <span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+<span class="cite">[<span 
+class="ecbx-1095">?</span>]</span>
+<!--l. 155--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">8   </span> <a 
+ id="x1-270008"></a>References</h3>
+<!--l. 158--><p class="noindent" >
+     <dl class="enumerate-enumitem"><dt class="enumerate-enumitem">
+   1. </dt><dd 
+class="enumerate-enumitem"><span 
+class="ecbx-1095">[1] </span>U.S. Department of Transportation, Office of Inspector General. &#8220;FAA Oversight of Boeing&#8217;s
+     737 MAX Certification: Timeline of Activities.&#8221; (2020).   <a 
+href="https://www.oig.dot.gov/sites/default/files/FAA%20Oversight%20of%20Boeing%20737%20MAX%20Certification%20Timeline%20Final%20Report.pdf" class="url" ><span 
+class="ectt-1095">https://www.oig.dot.gov/sites/default/files/FAA%20Oversight%20of%20Boeing%20737%20MAX%20Certification%20Timeline%20Final%20Report.pdf</span></a>
+     </dd><dt class="enumerate-enumitem">
+   2. </dt><dd 
+class="enumerate-enumitem"><span 
+class="ecbx-1095">[2] </span>U.S. Department of Transportation, Office of Inspector General. &#8220;Weaknesses in FAA&#8217;s
+     Certification and Delegation Processes Hindered Its Oversight of the 737 MAX 8.&#8221;  (2021).
+     <a 
+href="https://www.oig.dot.gov/sites/default/files/FAA%20Certification%20of%20737%20MAX%20Boeing%20II%20Final%20Report%5E2-23-2021.pdf" class="url" ><span 
+class="ectt-1095">https://www.oig.dot.gov/sites/default/files/FAA%20Certification%20of%20737%20MAX%20Boeing%20II%20Final%20Report%5E2-23-2021.pdf</span></a>
+                                                                                         
+                                                                                         
+     </dd><dt class="enumerate-enumitem">
+   3. </dt><dd 
+class="enumerate-enumitem"><span 
+class="ecbx-1095">[3] </span>Federal Aviation Administration. &#8220;Summary of the FAA&#8217;s Review of the Boeing 737 MAX.&#8221;
+     (2020).     <a 
+href="https://www.faa.gov/sites/faa.gov/files/2022-08/737_RTS_Summary.pdf" class="url" ><span 
+class="ectt-1095">https://www.faa.gov/sites/faa.gov/files/2022-08/737_RTS_Summary.pdf</span></a>
+     </dd><dt class="enumerate-enumitem">
+   4. </dt><dd 
+class="enumerate-enumitem"><span 
+class="ecbx-1095">[4] </span>Federal Aviation Administration. &#8220;Boeing 737 MAX Flight Control System Observations&#8221;
+     (Joint Authorities Technical Review Report). (2019).   <a 
+href="https://www.faa.gov/sites/faa.gov/files/2021-08/Final_JATR_Submittal_to_FAA_Oct_2019.pdf" class="url" ><span 
+class="ectt-1095">https://www.faa.gov/sites/faa.gov/files/2021-08/Final_JATR_Submittal_to_FAA_Oct_2019.pdf</span></a>
+     </dd><dt class="enumerate-enumitem">
+   5. </dt><dd 
+class="enumerate-enumitem"><span 
+class="ecbx-1095">[5]                                           </span>Federal                                                 Aviation
+     Administration. &#8220;Flight Standardization Board Report: The Boeing Company 737, Revision
+     17.&#8221; (2020).    <a 
+href="https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf" class="url" ><span 
+class="ectt-1095">https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf</span></a>
+     </dd><dt class="enumerate-enumitem">
+   6. </dt><dd 
+class="enumerate-enumitem"><span 
+class="ecbx-1095">[6] </span>U.S. House of Representatives, Committee on Transportation and Infrastructure. &#8220;Final
+     Committee Report: The Design, Development &amp; Certification of the Boeing 737 MAX.&#8221; (2020).
+     <a 
+href="https://www.govinfo.gov/content/pkg/GOVPUB-Y4_T68_2-PURL-gpo144993/pdf/GOVPUB-Y4_T68_2-PURL-gpo144993.pdf" class="url" ><span 
+class="ectt-1095">https://www.govinfo.gov/content/pkg/GOVPUB-Y4_T68_2-PURL-gpo144993/pdf/GOVPUB-Y4_T68_2-PURL-gpo144993.pdf</span></a>
+     </dd><dt class="enumerate-enumitem">
+   7. </dt><dd 
+class="enumerate-enumitem"><span 
+class="ecbx-1095">[7] </span>Aircraft Accident Investigation Bureau (Ethiopia). &#8220;Preliminary Report: Ethiopian Airlines
+     Flight 302 (Boeing 737-8 MAX, ET-AVJ).&#8221; (2019).   <a 
+href="https://leehamnews.com/wp-content/uploads/2019/04/Preliminary-Report-B737-800MAX-ET-AVJ.pdf" class="url" ><span 
+class="ectt-1095">https://leehamnews.com/wp-content/uploads/2019/04/Preliminary-Report-B737-800MAX-ET-AVJ.pdf</span></a>
+     </dd><dt class="enumerate-enumitem">
+   8. </dt><dd 
+class="enumerate-enumitem"><span 
+class="ecbx-1095">[8]              </span>U.S.                Department                of                Justice.                &#8220;U.S.
+     v. The Boeing Company: Deferred Prosecution Agreement and Statement of Facts.&#8221; (2021).
+     <a 
+href="https://www.justice.gov/criminal/criminal-vns/file/1482911/dl?inline=" class="url" ><span 
+class="ectt-1095">https://www.justice.gov/criminal/criminal-vns/file/1482911/dl?inline=</span></a>
+     </dd><dt class="enumerate-enumitem">
+   9. </dt><dd 
+class="enumerate-enumitem"><span 
+class="ecbx-1095">[9] </span>U.S. Department of Justice, Office of Public Affairs. &#8220;Boeing Charged with 737 Max Fraud
+     Conspiracy and Agrees to Pay Over $2.5 Billion.&#8221; (2021).   <a 
+href="https://www.justice.gov/archives/opa/pr/boeing-charged-737-max-fraud-conspiracy-and-agrees-pay-over-25-billion" class="url" ><span 
+class="ectt-1095">https://www.justice.gov/archives/opa/pr/boeing-charged-737-max-fraud-conspiracy-and-agrees-pay-over-25-billion</span></a></dd></dl>
+    
+</body></html> 
+
+                                                                                         
+
+

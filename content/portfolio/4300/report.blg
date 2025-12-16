@@ -1,0 +1,20 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'report.blg'
+[88] biber-darwin:340> INFO - === Tue Dec 16, 2025, 01:33:17
+[107] Biber.pm:418> INFO - Reading 'report.bcf'
+[225] Biber.pm:972> INFO - Found 9 citekeys in bib section 0
+[243] Biber.pm:4383> INFO - Processing section 0
+[256] Biber.pm:4574> INFO - Looking for bibtex file 'refs.bib' for section 0
+[260] bibtex.pm:1713> INFO - LaTeX decoding ...
+[272] bibtex.pm:1518> INFO - Found BibTeX data source 'refs.bib'
+[326] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[326] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[326] Biber.pm:4203> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[326] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[336] bbl.pm:654> INFO - Writing 'report.bbl' with encoding 'UTF-8'
+[339] bbl.pm:757> INFO - Output to report.bbl
+[339] Biber.pm:130> WARN - Entry 'faa_fsb_report_737max_2020' (refs.bib): Invalid format '2020-11-xx' of date field 'date' - ignoring
+[339] Biber.pm:130> WARN - Entry 'faa_rts_summary_2020' (refs.bib): Invalid format '2020-11-xx' of date field 'date' - ignoring
+[339] Biber.pm:130> WARN - Entry 'aib_ethiopia_et302_prelim_2019' (refs.bib): Invalid format '2019-04-xx' of date field 'date' - ignoring
+[339] Biber.pm:130> WARN - Entry 'house_ti_737max_final_2020' (refs.bib): Invalid format '2020-09-xx' of date field 'date' - ignoring
+[339] Biber.pm:132> INFO - WARNINGS: 4

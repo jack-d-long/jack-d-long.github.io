@@ -1,0 +1,117 @@
+.latex-viewer {
+  margin-top: 2.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--bg-1);
+  display: grid;
+  gap: 1rem;
+}
+
+.latex-viewer__header {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.latex-viewer__title {
+  font-family: var(--header-font);
+  font-size: 1.35rem;
+  margin: 0;
+}
+
+.latex-viewer__description {
+  margin: 0;
+  color: var(--text-1);
+}
+
+.latex-viewer__meta {
+  margin: 0;
+  color: var(--text-1);
+  font-size: 0.85rem;
+}
+
+.latex-viewer__body {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.latex-viewer__render,
+.latex-viewer__source {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  background: var(--bg-0);
+}
+
+.latex-viewer__render--html {
+  iframe {
+    width: 100%;
+    min-height: 600px;
+    border: none;
+  }
+}
+
+.latex-viewer__render--html {
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-family: var(--header-font);
+    line-height: 1.25;
+  }
+
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.15rem; }
+  h4 { font-size: 1rem; }
+  h5 { font-size: 0.95rem; }
+  h6 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; }
+}
+
+.latex-viewer__source {
+  margin: 0;
+  overflow-x: auto;
+  font-family: var(--code-font);
+  font-size: 0.9rem;
+}
+
+.latex-viewer__source code {
+  white-space: pre;
+}
+
+.latex-viewer--pdf-embed {
+  padding: 0;
+  border: none;
+  background: transparent;
+
+  .latex-viewer__header {
+    padding: 1rem 0;
+  }
+
+  .latex-viewer__body {
+    padding: 0;
+    display: block;
+  }
+}
+
+.latex-pdf-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 1.5rem 0 2rem;
+}
+
+.latex-pdf-frame {
+  width: min(70vw, 1100px);
+  height: 90vh;
+  min-height: 720px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media all and (min-width: 820px) {
+  .latex-viewer__body {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}

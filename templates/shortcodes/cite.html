@@ -1,0 +1,21 @@
+{% set num = key %}
+{% if key == "dot_oig_av2020037_2020" %}
+    {% set num = 1 %}
+{% elif key == "dot_oig_av2021020_2021" %}
+    {% set num = 2 %}
+{% elif key == "faa_rts_summary_2020" %}
+    {% set num = 3 %}
+{% elif key == "faa_jatr_2019" %}
+    {% set num = 4 %}
+{% elif key == "faa_fsb_report_737max_2020" %}
+    {% set num = 5 %}
+{% elif key == "house_ti_737max_final_2020" %}
+    {% set num = 6 %}
+{% elif key == "aib_ethiopia_et302_prelim_2019" %}
+    {% set num = 7 %}
+{% elif key == "doj_boeing_dpa_2021" %}
+    {% set num = 8 %}
+{% elif key == "doj_press_release_2021" %}
+    {% set num = 9 %}
+{% endif %}
+<a class="citation" data-cite="{{ key }}" href="#ref-{{ key }}">[{{ num }}]</a>
