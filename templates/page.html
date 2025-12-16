@@ -2,4 +2,19 @@
 
 {% block main_content %}
     {{ post_macros::content(page=page)}}
+
+    {% if page.extra.latex_viewer and page.extra.latex_viewer.path %}
+        {{ post_macros::latex_viewer(
+            path=page.extra.latex_viewer.path,
+            title=page.extra.latex_viewer.title | default(value="LaTeX viewer"),
+            description=page.extra.latex_viewer.description | default(value=false),
+            html_path=page.extra.latex_viewer.html_path | default(value=false),
+            pdf_path=page.extra.latex_viewer.pdf_path | default(value=false)
+        ) }}
+    {% elif page.extra.latex_file %}
+        {{ post_macros::latex_viewer(
+            path=page.extra.latex_file,
+            title=page.extra.latex_title | default(value="LaTeX viewer")
+        ) }}
+    {% endif %}
 {% endblock main_content %}

@@ -205,6 +205,41 @@
 </main>
 {% endmacro content %}
 
+{% macro latex_viewer(path, title="LaTeX viewer", description=false, html_path=false, pdf_path=false) %}
+    {% if path %}
+        {% set tex_content = load_data(path=path, format="plain") %}
+        <section class="latex-viewer" aria-labelledby="latex-viewer-title">
+            <header class="latex-viewer__header">
+                <h2 id="latex-viewer-title" class="latex-viewer__title">{{ title }}</h2>
+                {% if description %}
+                    <p class="latex-viewer__description">{{ description }}</p>
+                {% endif %}
+                <p class="latex-viewer__meta">Source: {{ path }}</p>
+            </header>
+            <div class="latex-viewer__body">
+                {% if html_path %}
+                    {% set tex_html = load_data(path=html_path, format="plain") %}
+                    <div class="latex-viewer__render latex-viewer__render--html" aria-label="Rendered LaTeX document">
+                        {{ tex_html | safe }}
+                    </div>
+                {% elseif pdf_path %}
+                    <div class="latex-viewer__render latex-viewer__render--pdf" aria-label="Rendered LaTeX PDF">
+                        <iframe src="{{ get_url(path=pdf_path) }}" title="LaTeX PDF" loading="lazy"></iframe>
+                    </div>
+                {% else %}
+                    <div class="latex-viewer__render" aria-label="Rendered LaTeX (math only)">
+                        <script type="math/tex; mode=display">
+{{ tex_content | safe }}
+                        </script>
+                    </div>
+                {% endif %}
+
+                <pre class="latex-viewer__source"><code class="language-tex">{{ tex_content | safe }}</code></pre>
+            </div>
+        </section>
+    {% endif %}
+{% endmacro latex_viewer %}
+
 {% macro cards_posts(pages) %}
     <div class="cards">
     {%- for page in pages %}
