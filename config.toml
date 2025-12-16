@@ -2,7 +2,7 @@
 # theme config
 
 base_url = "https://jack-d-long.github.io/"
-title = "jdl298"
+title = "Jack Long"
 description = "This is an example description"
 build_search_index = true
 generate_feeds = true
@@ -44,9 +44,11 @@ socials = [
   {name = "github", url = "https://github.com/jack-d-long/", icon = "github"}
 ]
 menu = [
-  { name = "/fast robots", url = "/fast-robots", weight = 1 },
-    { name = "/projects", url = "/projects", weight = 2 },
-    { name = "/about", url = "/about", weight = 3 }
+      { name = "/portfolio", url = "/portfolio", weight = 1 },
+  { name = "/fast robots", url = "/fast-robots", weight = 2},
+    { name = "/projects", url = "/projects", weight = 3 },
+    { name = "/about", url = "/about", weight = 4 }
+
     
 ]
 
