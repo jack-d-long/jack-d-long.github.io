@@ -205,16 +205,14 @@
 </main>
 {% endmacro content %}
 
-{% macro latex_viewer(path, title="LaTeX viewer", description=false, html_path=false, pdf_path=false) %}
+{% macro latex_viewer(path, title="LaTeX viewer", description=false, html_path=false, md_path=false, pdf_path=false) %}
     {% if path %}
-        {% set tex_content = load_data(path=path, format="plain") %}
-        <section class="latex-viewer" aria-labelledby="latex-viewer-title">
+        <section class="latex-viewer {% if pdf_path %}latex-viewer--pdf-embed{% endif %}" aria-labelledby="latex-viewer-title">
             <header class="latex-viewer__header">
                 <h2 id="latex-viewer-title" class="latex-viewer__title">{{ title }}</h2>
                 {% if description %}
                     <p class="latex-viewer__description">{{ description }}</p>
                 {% endif %}
-                <p class="latex-viewer__meta">Source: {{ path }}</p>
             </header>
             <div class="latex-viewer__body">
                 {% if html_path %}
@@ -222,19 +220,22 @@
                     <div class="latex-viewer__render latex-viewer__render--html" aria-label="Rendered LaTeX document">
                         {{ tex_html | safe }}
                     </div>
-                {% elseif pdf_path %}
-                    <div class="latex-viewer__render latex-viewer__render--pdf" aria-label="Rendered LaTeX PDF">
-                        <iframe src="{{ get_url(path=pdf_path) }}" title="LaTeX PDF" loading="lazy"></iframe>
+                {% elif md_path %}
+                    {% set tex_md = load_data(path=md_path, format="plain") %}
+                    <div class="latex-viewer__render latex-viewer__render--html" aria-label="Rendered Markdown document">
+                        {{ tex_md | markdown | safe }}
+                    </div>
+                {% elif pdf_path %}
+                    <div class="latex-pdf-wrapper">
+                        <iframe class="latex-pdf-frame" src="{{ get_url(path=pdf_path) }}" title="LaTeX PDF" loading="lazy"></iframe>
                     </div>
                 {% else %}
                     <div class="latex-viewer__render" aria-label="Rendered LaTeX (math only)">
                         <script type="math/tex; mode=display">
-{{ tex_content | safe }}
+{{ load_data(path=path, format="plain") | safe }}
                         </script>
                     </div>
                 {% endif %}
-
-                <pre class="latex-viewer__source"><code class="language-tex">{{ tex_content | safe }}</code></pre>
             </div>
         </section>
     {% endif %}

@@ -6,7 +6,7 @@ weight = 1
 date = 2025-11-17
 
 [extra] 
-local_image = "/portfolio/fastrobots.png" 
+local_image = "/portfolio/comt_old_untethered.png" 
 github = "https://github.com/Helbling-Lab" 
 
  +++
