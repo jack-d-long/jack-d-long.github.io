@@ -8,6 +8,12 @@ date = 2025-11-18
 [extra] 
 local_image = "/portfolio/4272.jpg" 
 
+[extra.latex_viewer]
+path = "static/4272/allDragNoSwag.pdf"
+title = "Project report"
+description = ""
+pdf_path = "4272/allDragNoSwag.pdf"
+
  +++
 <!-- 
 As part of MAE 4272, you will create a simple professional engineering portfolio and publish a short webpage describing your Blade Design Project. This page is something you can share externally for example with recruiters.
@@ -62,7 +68,6 @@ where \( U \) is the incoming wind velocity in m/s.
 # Testing Summary 
 
 # My Contribution
-
 
 
 
