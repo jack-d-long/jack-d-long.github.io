@@ -45,9 +45,9 @@ For this class' final project, students (in teams of 3 to 4) were tasked with de
 # Project Constraints
 
 Key constraints we designed around included:
-- **Blade span $\le 6\,\text{in}$**, **root compatible with a $1\,\text{in}$ hub**, and **speed $\le 3000\,\text{RPM}$** for safe operation
+- **Blade span $\le 6~\text{in}$**, **root compatible with a $1~\text{in}$ hub**, and **speed $\le 3000~\text{RPM}$** for safe operation
 - **Resin 3D-printed blades** (grey resin) and a required **factor of safety ($\text{FOS} = 1.5$)**
-- Wind tunnel operating conditions characterized using a **Weibull wind-speed distribution**, with **mean wind speed $4.782\,\text{m/s}$** and **$\pm 1.052\,\text{m/s}$** standard deviation
+- Wind tunnel operating conditions characterized using a **Weibull wind-speed distribution**, with **mean wind speed $4.782~\text{m/s}$** and **$\pm 1.052~\text{m/s}$** standard deviation
 
 ---
 
@@ -84,18 +84,18 @@ The final blade geometry was lofted in **Fusion 360** using interpolated **NACA 
 
 ## Test method (wind tunnel)
 We tested across multiple wind tunnel fan settings to capture performance outside a single “design point”:
-- Zeroed the pressure transducer, then increased fan speed until the turbine began spinning (below $\sim 3\,\text{Hz}$ it did not spin)
-- At each fan speed, incremented the torque brake voltage by **$0.4\,\text{V}$**, waited for steady RPM, recorded data, and continued until the rotor **stalled** (interpreted as reaching max power) or the brake hit its voltage limit
+- Zeroed the pressure transducer, then increased fan speed until the turbine began spinning (below $\sim 3~\text{Hz}$ it did not spin)
+- At each fan speed, incremented the torque brake voltage by **$0.4~\text{V}$**, waited for steady RPM, recorded data, and continued until the rotor **stalled** (interpreted as reaching max power) or the brake hit its voltage limit
 
 ## Data products (what we analyzed)
-We generated **power curves** at **$4\,\text{Hz}$, $6\,\text{Hz}$, $8\,\text{Hz}$, and $10\,\text{Hz}$**, corresponding to wind speeds of **$2.18\,\text{m/s}$, $3.17\,\text{m/s}$, $4.33\,\text{m/s}$, and $5.394\,\text{m/s}$**.
+We generated **power curves** at **$4~\text{Hz}$, $6~\text{Hz}$, $8~\text{Hz}$, and $10~\text{Hz}$**, corresponding to wind speeds of **$2.18~\text{m/s}$, $3.17~\text{m/s}$, $4.33~\text{m/s}$, and $5.394~\text{m/s}$**.
 
 Key outcomes reported:
-- At **$4\,\text{Hz}$** and **$6\,\text{Hz}$**, the turbine **stalled before** reaching the **$10\,\text{V}$** brake limit (so max power could be identified in those trials)
-- At **$8\,\text{Hz}$** and **$10\,\text{Hz}$**, the turbine **did not stall** before hitting the brake limit, indicating additional power capability beyond the test hardware limit
-- With a **$9.6\,\text{V}$** brake max setting, the **$8\,\text{Hz}$** and **$10\,\text{Hz}$** trials produced **$0.73\,\text{W}$ at $1126\,\text{RPM}$** and **$1.4\,\text{W}$ at $2213\,\text{RPM}$**, respectively
-- The **maximum torque ($0.0062\,\text{N}\cdot\text{m}$)** occurred near the wind speed closest to the optimizer’s design point, supporting the modeling/optimization approach
-- The most efficient reported case was the **$8\,\text{Hz}$ ($4.33\,\text{m/s}$)** condition, with an example efficiency calculation yielding **$C_P \approx 21\%$**
+- At **$4~\text{Hz}$** and **$6~\text{Hz}$**, the turbine **stalled before** reaching the **$10~\text{V}$** brake limit (so max power could be identified in those trials)
+- At **$8~\text{Hz}$** and **$10~\text{Hz}$**, the turbine **did not stall** before hitting the brake limit, indicating additional power capability beyond the test hardware limit
+- With a **$9.6~\text{V}$** brake max setting, the **$8~\text{Hz}$** and **$10~\text{Hz}$** trials produced **$0.73~\text{W}$ at $1126~\text{RPM}$** and **$1.4~\text{W}$ at $2213~\text{RPM}$**, respectively
+- The **maximum torque ($0.0062~\text{N}\cdot\text{m}$)** occurred near the wind speed closest to the optimizer’s design point, supporting the modeling/optimization approach
+- The most efficient reported case was the **$8~\text{Hz}$ ($4.33~\text{m/s}$)** condition, with an example efficiency calculation yielding **$C_P \approx 21\%$**
 
 ## What we’d improve next
 Proposed next iteration ideas:
