@@ -43,6 +43,10 @@ html {
   word-wrap: break-word;
 }
 
+.content--wide {
+  max-width: 1300px;
+}
+
 @media all and (min-width:640px) {
   html {
     font-size: 21px;

@@ -8,6 +8,7 @@ date = 2025-11-17
 [extra] 
 local_image = "/portfolio/fastrobots.png" 
 github = "https://github.com/jack-d-long/fast-robots" 
+link_to = "/fast-robots"
 
  +++
 

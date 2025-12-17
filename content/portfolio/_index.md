@@ -5,8 +5,7 @@ template = "cards.html"
 
 
 [extra]
-cards_columns = 2
+cards_columns = 3
 card_media_height = 250
+content_wide = true
 +++
-
-

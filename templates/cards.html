@@ -14,7 +14,8 @@
             {%- set show_pages = section.pages -%}
         {% endif -%}
 
-        {{ post_macros::cards_posts(pages=show_pages) }}
+        {% set cards_columns = section.extra.cards_columns | default(value=2) %}
+        {{ post_macros::cards_posts(pages=show_pages, columns=cards_columns) }}
     </main>
 
     {% if paginator %}

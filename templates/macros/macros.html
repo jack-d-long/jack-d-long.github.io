@@ -241,8 +241,8 @@
     {% endif %}
 {% endmacro latex_viewer %}
 
-{% macro cards_posts(pages) %}
-    <div class="cards">
+{% macro cards_posts(pages, columns=2) %}
+    <div class="cards" style="--cards-columns: {{ columns }};">
     {%- for page in pages %}
         <div class="card">
             {% if page.extra.local_image %}

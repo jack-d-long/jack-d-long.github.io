@@ -6,7 +6,14 @@
 {% include "partials/header.html" %}
 
 <body>
-    <div class="content">
+    {% set content_class = "content" %}
+    {% if section is defined and section.extra.content_wide | default(value=false) %}
+        {% set content_class = content_class ~ " content--wide" %}
+    {% endif %}
+    {% if page is defined and page.extra.content_wide | default(value=false) %}
+        {% set content_class = content_class ~ " content--wide" %}
+    {% endif %}
+    <div class="{{ content_class }}">
         {% include "partials/nav.html" %}
 
         {# Post page is the default #}
