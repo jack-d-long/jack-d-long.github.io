@@ -1,0 +1,196 @@
+<!doctype html><html class="dark light" lang=en><head><meta charset=UTF-8><meta content="IE=edge" http-equiv=X-UA-Compatible><meta content="width=device-width,initial-scale=1.0" name=viewport><meta content=https://jack-d-long.github.io/ name=base><title>
+         Lab 8
+        
+    </title><meta content="Lab 8" property=og:title><meta content="This is an example description" property=og:description><meta content="This is an example description" name=description><link href=/alien.png rel=icon type=image/png><link href=https://jack-d-long.github.io/fonts.css rel=stylesheet><script src=https://jack-d-long.github.io/js/codeblock.js></script><script src=https://jack-d-long.github.io/js/toc.js></script><script src=https://jack-d-long.github.io/js/note.js></script><script>MathJax = {
+              tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+              }
+            };</script><script async id=MathJax-script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script><link title="Jack Long" href=https://jack-d-long.github.io/atom.xml rel=alternate type=application/atom+xml><link href=https://jack-d-long.github.io/theme/light.css rel=stylesheet><link href=https://jack-d-long.github.io/theme/dark.css id=darkModeStyle rel=stylesheet><script src=https://jack-d-long.github.io/js/themetoggle.js></script><script>setTheme(getSavedTheme());</script><link href=https://jack-d-long.github.io/main.css media=screen rel=stylesheet><script src=https://jack-d-long.github.io/js/mermaid.js></script><script src="https://jack-d-long.github.io/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e" defer></script><body><div class=content><header><div class=main><a href=https://jack-d-long.github.io/>Jack Long</a><div class=socials><a class=social href=https://linkedin.com/in/jacklong257 rel=me> <img alt=linkedin src=https://jack-d-long.github.io/social_icons/linkedin.svg> </a><a class=social href=https://github.com/jack-d-long/ rel=me> <img alt=github src=https://jack-d-long.github.io/social_icons/github.svg> </a></div></div><nav><a href=https://jack-d-long.github.io/portfolio style=margin-left:.25em>/portfolio</a><a href=https://jack-d-long.github.io/about style=margin-left:.25em>/about</a><button title="$SHORTCUT to open search" class=search-button id=search-button><img alt=Search class=search-icon src=https://jack-d-long.github.io/search.svg></button><div class="search-modal js" aria-labelledby=modalTitle id=searchModal role=dialog><div id=modal-content><h1 class=page-header id=modalTitle>Search</h1><div id=searchBar><input aria-controls=results-container aria-expanded=false autocomplete=off id=searchInput placeholder=Search... role=combobox spellcheck=false><button title="Clear search" class=clear-button id=clear-search><svg viewbox="0 -960 960 960" xmlns=http://www.w3.org/2000/svg><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button></div><div id=results-container><div id=results-info><span id=zero_results style=display:none>No results</span><span id=one_result style=display:none>1 result</span><span id=many_results style=display:none>$NUMBER results</span></div><div id=results role=listbox></div></div></div></div><a onclick="toggleTheme(); event.preventDefault();" href=# id=dark-mode-toggle> <img alt=Light id=sun-icon src=https://jack-d-long.github.io/feather/sun.svg style=filter:invert()> <img alt=Dark id=moon-icon src=https://jack-d-long.github.io/feather/moon.svg> </a><script>updateItemToggleTheme()</script></nav></header><main><article><div class=title><div class=page-header>Lab 8<span class=primary-color style=font-size:1.6em>.</span></div><div class=meta>Posted on <time>2025-04-02</time></div></div><div class=toc-container><h1 class=toc-title>Table of Contents</h1><ul class=toc-list><li><a href=https://jack-d-long.github.io/fast-robots/lab8/#previous-lab-7>Previous: Lab 7</a> <ul><li><a href=https://jack-d-long.github.io/fast-robots/lab8/#lab-tasks>Lab Tasks</a></li><ul><li><a href=https://jack-d-long.github.io/fast-robots/lab8/#decorations>Decorations</a><li><a href=https://jack-d-long.github.io/fast-robots/lab8/#kalman-filter-refinements>Kalman Filter Refinements</a><li><a href=https://jack-d-long.github.io/fast-robots/lab8/#orientation-control-refinements>Orientation Control Refinements</a><li><a href=https://jack-d-long.github.io/fast-robots/lab8/#open-loop-stunt>Open-Loop Stunt</a><li><a href=https://jack-d-long.github.io/fast-robots/lab8/#integrating-position-and-orientation-pid>Integrating Position and Orientation PID</a><li><a href=https://jack-d-long.github.io/fast-robots/lab8/#the-stunt>The Stunt</a><li><a href=https://jack-d-long.github.io/fast-robots/lab8/#blooper>Blooper</a></ul><li><a href=https://jack-d-long.github.io/fast-robots/lab8/#collaborations>Collaborations</a></ul><li><a href=https://jack-d-long.github.io/fast-robots/lab8/#next-lab-9>Next: Lab 9</a></ul></div><section class=body><h1 id=previous-lab-7><a aria-label="Anchor link for: previous-lab-7" class=zola-anchor href=#previous-lab-7>Previous: <a href=/fast-robots/lab7>Lab 7</a></a></h1><h2 id=lab-tasks><a aria-label="Anchor link for: lab-tasks" class=zola-anchor href=#lab-tasks>Lab Tasks</a></h2><h3 id=decorations><a aria-label="Anchor link for: decorations" class=zola-anchor href=#decorations>Decorations</a></h3><p>Shoutout <a href=https://correial.github.io/>Lucca</a> and <a href=https://trevordales.github.io/>Trevor</a>! Also, find the blooper <a href=https://www.youtube.com/embed/FM8RI6x_7O0>here</a></p><img alt="sys delay afetr slowdown" height=500 src=/files/lab8/tongue.png><h3 id=kalman-filter-refinements><a aria-label="Anchor link for: kalman-filter-refinements" class=zola-anchor href=#kalman-filter-refinements>Kalman Filter Refinements</a></h3><p>As a first step in speeding up my process, I implemented update logic into my Kalman filter. In its previous iteration, the filter interpreted all values in my raw TOF array as sensor measurements, even those that were reused from a previous measurement. Now, when a new TOF value is received, the <code>update</code> flag flips high and the filter performs all steps. With <code>update</code> low (i.e. at all other timesteps), the filter only performs prediction and returns predicted values.<pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span>
+</span><span>
+</span><span>
+</span><span style=color:#abb0b6;font-style:italic>// state, uncertainties, measured val
+</span><span>KF_vars </span><span style=color:#f29718>kalman_filter</span><span>(Matrix&lt;</span><span style=color:#ff8f40>2</span><span style=color:#61676ccc>,</span><span style=color:#ff8f40>1</span><span>> </span><span style=color:#ff8f40>mu</span><span style=color:#61676ccc>,</span><span> Matrix&lt;</span><span style=color:#ff8f40>2</span><span style=color:#61676ccc>, </span><span style=color:#ff8f40>2</span><span>> </span><span style=color:#ff8f40>sigma</span><span style=color:#61676ccc>,</span><span> Matrix&lt;</span><span style=color:#ff8f40>1</span><span style=color:#61676ccc>,</span><span style=color:#ff8f40>1</span><span>>  </span><span style=color:#ff8f40>u</span><span style=color:#61676ccc>,</span><span> Matrix&lt;</span><span style=color:#ff8f40>1</span><span style=color:#61676ccc>,</span><span style=color:#ff8f40>1</span><span>>  </span><span style=color:#ff8f40>y</span><span style=color:#61676ccc>, </span><span style=color:#fa6e32>bool </span><span style=color:#ff8f40>update</span><span>){
+</span><span>
+</span><span>    </span><span style=color:#abb0b6;font-style:italic>// PREDICT
+</span><span>
+</span><span>    mu_p </span><span style=color:#ed9366>=</span><span> Ad </span><span style=color:#ed9366>* </span><span>(mu) </span><span style=color:#ed9366>+</span><span> Bd </span><span style=color:#ed9366>*</span><span> u</span><span style=color:#61676ccc>;
+</span><span>    
+</span><span>
+</span><span>    sigma_p </span><span style=color:#ed9366>=</span><span> Ad </span><span style=color:#ed9366>*</span><span> sigma </span><span style=color:#ed9366>* ~</span><span>Ad </span><span style=color:#ed9366>+</span><span> sigma_u</span><span style=color:#61676ccc>; 
+</span><span>
+</span><span>    </span><span style=color:#fa6e32>if </span><span>(update){
+</span><span>    
+</span><span>    </span><span style=color:#abb0b6;font-style:italic>// UPDATE
+</span><span>
+</span><span>    sigma_m </span><span style=color:#ed9366>=  </span><span>(C </span><span style=color:#ed9366>*</span><span> sigma_p </span><span style=color:#ed9366>* ~</span><span>C) </span><span style=color:#ed9366>+</span><span> sigma_z</span><span style=color:#61676ccc>;
+</span><span>    
+</span><span>
+</span><span>    sigma_m_scalar_inv </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>1</span><span style=color:#ed9366>/</span><span style=color:#f29718>sigma_m</span><span>(</span><span style=color:#ff8f40>0</span><span>)</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>    sigma_m_inv </span><span style=color:#ed9366>= </span><span>{sigma_m_scalar_inv}</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>    
+</span><span>
+</span><span>    kkf_gain </span><span style=color:#ed9366>=</span><span>  sigma_p </span><span style=color:#ed9366>* ~</span><span>C </span><span style=color:#ed9366>*</span><span> sigma_m_inv </span><span style=color:#61676ccc>; 
+</span><span>    
+</span><span>
+</span><span>    y_m </span><span style=color:#ed9366>=</span><span>   y </span><span style=color:#ed9366>-  </span><span>( C </span><span style=color:#ed9366>*</span><span> mu_p)</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>    mu_out </span><span style=color:#ed9366>=</span><span> mu_p </span><span style=color:#ed9366>+</span><span> kkf_gain </span><span style=color:#ed9366>*</span><span> y_m </span><span style=color:#61676ccc>;
+</span><span>
+</span><span>    
+</span><span>    
+</span><span>    sigma_out </span><span style=color:#ed9366>=</span><span> I  </span><span style=color:#ed9366>-</span><span> kkf_gain </span><span style=color:#ed9366>*</span><span> C </span><span style=color:#ed9366>*</span><span> sigma_p </span><span style=color:#61676ccc>; 
+</span><span>
+</span><span>    }</span><span style=color:#fa6e32>else</span><span>{
+</span><span>
+</span><span>      mu_out </span><span style=color:#ed9366>=</span><span> mu_p</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic>// if no new value, set mu, sigma to predicted instead of updated
+</span><span>      sigma_out </span><span style=color:#ed9366>=</span><span> sigma_p</span><span style=color:#61676ccc>;
+</span><span>      
+</span><span>    }
+</span><span>    
+</span><span>
+</span><span>    KF_vars out</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>
+</span><span>
+</span><span>    
+</span><span>
+</span><span>    out</span><span style=color:#ed9366>.</span><span>mu </span><span style=color:#ed9366>=</span><span> mu_out</span><span style=color:#61676ccc>;
+</span><span>    out</span><span style=color:#ed9366>.</span><span>sigma </span><span style=color:#ed9366>=</span><span> sigma_out</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>    </span><span style=color:#fa6e32>return</span><span> out</span><span style=color:#61676ccc>;
+</span><span>  
+</span><span>}
+</span><span>
+</span><span>
+</span></code></pre><h3 id=orientation-control-refinements><a aria-label="Anchor link for: orientation-control-refinements" class=zola-anchor href=#orientation-control-refinements>Orientation Control Refinements</a></h3><p>To make testing easier, I needed to make orientation control to a given real-world path repeatable. To do this, I added a function which 'zeroes' the measured yaw to the current orientation of the robot. The snippet below is called every time the TOF measures data, to simplify DMP calculations.<pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span>
+</span><span style=color:#abb0b6;font-style:italic>// DMP yaw calculations
+</span><span>
+</span><span style=color:#ed9366>...
+</span><span>
+</span><span> </span><span style=color:#fa6e32>if </span><span>(do_zero_DMP){ </span><span style=color:#abb0b6;font-style:italic>// if we're zeroing the measured yaw, set an offset to current yaw
+</span><span>    offset </span><span style=color:#ed9366>=</span><span> yaw</span><span style=color:#61676ccc>;
+</span><span>    Serial</span><span style=color:#ed9366>.</span><span style=color:#f29718>print</span><span>(</span><span style=color:#86b300>"Setting offset to "</span><span>)</span><span style=color:#61676ccc>;
+</span><span>    Serial</span><span style=color:#ed9366>.</span><span style=color:#f29718>println</span><span>(offset)</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>}</span><span style=color:#fa6e32>else</span><span>{
+</span><span>    pid_yaw_dmp[pid_c] </span><span style=color:#ed9366>=</span><span> yaw </span><span style=color:#ed9366>-</span><span> offset</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic>// if we're not zeroing yaw, begin to record zeroed measurements to the array
+</span><span>}
+</span><span>
+</span></code></pre><p>I also added a small piece of logic to compensate for sudden jumps in angle when the robot measures yaw around 180 degrees.<pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span>
+</span><span>target_recip </span><span style=color:#ed9366>=</span><span> target_orientation </span><span style=color:#ed9366>- </span><span>(target_orientation </span><span style=color:#ed9366>&lt; </span><span style=color:#ff8f40>0 </span><span style=color:#ed9366>? -</span><span style=color:#ff8f40>1 </span><span style=color:#ed9366>: </span><span style=color:#ff8f40>1</span><span>) </span><span style=color:#ed9366>* </span><span style=color:#ff8f40>180</span><span style=color:#61676ccc>;
+</span><span style=color:#fa6e32>if </span><span>(</span><span style=color:#f07171>abs</span><span>(err) </span><span style=color:#ed9366>> </span><span style=color:#ff8f40>180</span><span style=color:#61676ccc>.</span><span style=color:#ff8f40>0</span><span>) {
+</span><span>    err </span><span style=color:#ed9366>+= </span><span>(target_recip </span><span style=color:#ed9366>-</span><span> pid_yaw_dmp[pid_c]) </span><span style=color:#ed9366>/ </span><span style=color:#f07171>abs</span><span>(target_recip </span><span style=color:#ed9366>-</span><span> pid_yaw_dmp[pid_c]) </span><span style=color:#ed9366>* </span><span style=color:#ff8f40>360</span><span style=color:#61676ccc>.</span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>;
+</span><span>}
+</span><span>
+</span></code></pre><h3 id=open-loop-stunt><a aria-label="Anchor link for: open-loop-stunt" class=zola-anchor href=#open-loop-stunt>Open-Loop Stunt</a></h3><p>I first tried the simplest approach I could think of -- driving the car at a wall open-loop, actively braking, and applying orientation control to turn it around, before driving back open-loop. The Python workflow looked like this:<pre class=language-python data-lang=python style=color:#61676c;background-color:#fafafa><code class=language-python data-lang=python><span>
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>SET_PID_GAINS</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"2|2|0.0001|0"</span><span>) </span><span style=color:#abb0b6;font-style:italic># structure: 2 = orientation PID, Kp, ki, kd
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>SET_PID_TYPE</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"2"</span><span>) </span><span style=color:#abb0b6;font-style:italic># 1 = position, 2 = orientation, 3 = both
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>START_PID</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"600|0|1"</span><span>) </span><span style=color:#abb0b6;font-style:italic># position setpoint, orientation setpoint, record y/n
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>DRIVE_OPENLOOP</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"255|0|.5"</span><span>) </span><span style=color:#abb0b6;font-style:italic># PWM value | record or no | timespan (s)
+</span><span>
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>DRIVE_OPENLOOP</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"999|0|.5"</span><span>) </span><span style=color:#abb0b6;font-style:italic># PWM value | record or no | timespan (s)
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>START_PID</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"600|180|1"</span><span>) </span><span style=color:#abb0b6;font-style:italic># position setpoint, orientation setpoint, record y/n
+</span><span>
+</span><span>time</span><span style=color:#ed9366>.</span><span style=color:#f29718>sleep</span><span>(</span><span style=color:#ff8f40>4</span><span>)
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>DRIVE_OPENLOOP</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"255|0|.5"</span><span>) </span><span style=color:#abb0b6;font-style:italic># PWM value | record or no | timespan (s)
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>STOP_PID</span><span style=color:#61676ccc>, </span><span style=color:#86b300>""</span><span>) </span><span style=color:#abb0b6;font-style:italic># stop
+</span><span>
+</span><span>
+</span><span style=color:#abb0b6;font-style:italic>##
+</span><span>
+</span></code></pre><p>There were a few issues in practice, though -- my orientation control was delaying a lot, and the long settling time of the control made the return inconsistent.</p><iframe allowfullscreen height=500 src=https://youtube.com/embed/UYFwrHU1fdg width=800></iframe><h3 id=integrating-position-and-orientation-pid><a aria-label="Anchor link for: integrating-position-and-orientation-pid" class=zola-anchor href=#integrating-position-and-orientation-pid>Integrating Position and Orientation PID</a></h3><p>I tried this process again with position PID to the wall and orientation after, using the following workflow:<pre class=language-python data-lang=python style=color:#61676c;background-color:#fafafa><code class=language-python data-lang=python><span>
+</span><span>
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>ZERO_DMP</span><span style=color:#61676ccc>, </span><span style=color:#86b300>""</span><span>)
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>SET_PID_GAINS</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"2|1|0.0001|-100"</span><span>) </span><span style=color:#abb0b6;font-style:italic># structure: 2 = orientation PID, Kp, ki, kd
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>SET_PID_GAINS</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"1|.2|0.000002|-80"</span><span>) </span><span style=color:#abb0b6;font-style:italic># pos gains
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>ZERO_DMP</span><span style=color:#61676ccc>, </span><span style=color:#86b300>""</span><span>) </span><span style=color:#abb0b6;font-style:italic># start at 0 angle
+</span><span>
+</span><span>
+</span><span style=color:#abb0b6;font-style:italic>## initial setup, let orientation cook for a sec
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>SET_PID_TYPE</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"2"</span><span>) </span><span style=color:#abb0b6;font-style:italic># 1 = position, 2 = orientation, 3 = both
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>START_PID</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"100|0|1"</span><span>) </span><span style=color:#abb0b6;font-style:italic># position setpoint, orientation setpoint, record y/n
+</span><span>time</span><span style=color:#ed9366>.</span><span style=color:#f29718>sleep</span><span>(</span><span style=color:#ff8f40>1</span><span>)
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>STOP_PID</span><span style=color:#61676ccc>, </span><span style=color:#86b300>""</span><span>) 
+</span><span>
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>SET_PID_TYPE</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"1"</span><span>) </span><span style=color:#abb0b6;font-style:italic># 1 = position, 2 = orientation, 3 = both
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>START_PID</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"100|180|1"</span><span>) </span><span style=color:#abb0b6;font-style:italic># position setpoint, orientation setpoint, record y/n
+</span><span>
+</span><span>time</span><span style=color:#ed9366>.</span><span style=color:#f29718>sleep</span><span>(</span><span style=color:#ff8f40>2</span><span>)
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>SET_PID_TYPE</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"2"</span><span>) </span><span style=color:#abb0b6;font-style:italic># 1 = position, 2 = orientation, 3 = both
+</span><span>
+</span></code></pre><p>This led to an interesting issue. The DMP appeared to delay in measuring yaw for a second or so, meaning the controller wouldn't detect that its inputs were having any effect, and so would continue to apply motor input in the direction of error. This caused some serious overshoot:</p><img alt=susdelya src=/files/lab8/susdelay.png width=800><p>I tried to apply Stephan's fix of slowing down the DMP output data rate (ODR) even more than it already was, and got the following response:<pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span>  success </span><span style=color:#ed9366>&= </span><span>(myICM</span><span style=color:#ed9366>.</span><span style=color:#f29718>setDMPODRrate</span><span>(DMP_ODR_Reg_Quat6</span><span style=color:#61676ccc>, </span><span style=color:#ff8f40>4</span><span>) </span><span style=color:#ed9366>==</span><span> ICM_20948_Stat_Ok)</span><span style=color:#61676ccc>; 
+</span><span>
+</span></code></pre><img alt="sys delay afetr slowdown" height=500 src=/files/lab8/delay_after_slowdown.png><p>Although the delay did decrease slightly, I don't think that DMP ODR is the culprit, as we can see from the steps in the yaw curve that we are retrying to sample the DMP faster than it can produce values. So I looked elsewhere.<p>After checking out my mainloop, I found that I wasn't sampling from the DMP during the initial stage of position control, so the DMP buffer was filling with zeroes while the car was driving towards the wall. When I asked the IMU to begin sampling the yaw angle, it grabbed the most distant values of the FIFO buffer, resulting in a time delay. This delay caused the closed-loop orientation to become much less stable, resulting in >300% overshoot in the first case.<p>To fix this, I simply had to sample from the DMP buffer during position control in my mainloop using a function <code>milk_dmp()</code>, which pulls the DMP quaternions from the buffer and stores them to an unused variable:<pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span style=color:#abb0b6;font-style:italic>// In IMU header
+</span><span style=color:#fa6e32>void </span><span style=color:#f29718>milk_dmp</span><span>()
+</span><span>{
+</span><span>  icm_20948_DMP_data_t data</span><span style=color:#61676ccc>;
+</span><span>  myICM</span><span style=color:#ed9366>.</span><span style=color:#f29718>readDMPdataFromFIFO</span><span>(</span><span style=color:#ed9366>&</span><span>data)</span><span style=color:#61676ccc>;
+</span><span>}
+</span><span>
+</span><span style=color:#ed9366>...
+</span><span>
+</span><span style=color:#abb0b6;font-style:italic>// In mainloop
+</span><span>
+</span><span style=color:#fa6e32>if </span><span>(doPID){
+</span><span>    
+</span><span>    </span><span style=color:#fa6e32>if </span><span>(doPositionPID){
+</span><span>    </span><span style=color:#f29718>record_TOF</span><span>(</span><span style=color:#ff8f40>2</span><span>)</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic>// store TOF data to global var
+</span><span>    </span><span style=color:#f29718>pid_position_tof</span><span>()</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic>// do position PID control with recorded TOF, drive motors 
+</span><span>    </span><span style=color:#f29718>milk_dmp</span><span>()</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic>//    NEW     - keep pulling DMP values even when not using angle data 
+</span><span>    }
+</span><span>    </span><span style=color:#fa6e32>if </span><span>( doOrientationPID){ 
+</span><span>    </span><span style=color:#fa6e32>if </span><span>(pid_c </span><span style=color:#ed9366>&lt; </span><span style=color:#ff8f40>1</span><span>){ </span><span style=color:#abb0b6;font-style:italic>// on startup, milk the DMP for a bit to mitigate weirdness
+</span><span>        start_time_milk </span><span style=color:#ed9366>= </span><span style=color:#f29718>millis</span><span>()</span><span style=color:#61676ccc>;
+</span><span>        </span><span style=color:#fa6e32>while</span><span>(</span><span style=color:#f29718>millis</span><span>() </span><span style=color:#ed9366>-</span><span> start_time_milk </span><span style=color:#ed9366>&lt; </span><span style=color:#ff8f40>2000</span><span>){
+</span><span>        </span><span style=color:#f29718>milk_dmp</span><span>()</span><span style=color:#61676ccc>;
+</span><span>        }
+</span><span>    }     
+</span><span>    </span><span style=color:#f29718>record_IMU</span><span>()</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic>// store DMP yaw to global var
+</span><span>    </span><span style=color:#f29718>pid_orientation_tof</span><span>()</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic>// do orientation PID with recorded yaw, drive motors
+</span><span>
+</span><span>    }
+</span><span>
+</span><span>    pid_c</span><span style=color:#ed9366>++</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>}
+</span></code></pre><p>After turning the ODR back up to half speed, I was able to get the following response:</p><iframe allowfullscreen height=500 src=https://youtube.com/embed/94ysu8LzmYM width=800></iframe><img alt="turn around good!!" src=/files/lab8/turnaround_success.png width=1000><p>Now my orientation control runs exactly when called! All that was left was to speed this up and increase the distance on the ground.<h3 id=the-stunt><a aria-label="Anchor link for: the-stunt" class=zola-anchor href=#the-stunt>The Stunt</a></h3><p>After unsuccessfully trying to implement simultaneous position and orientation control, I decided to just run the two sequentially. It didn't produce a very fast response, but under a time crunch it was the best I could do.<p>This was the Python workflow I used:<pre class=language-python data-lang=python style=color:#61676c;background-color:#fafafa><code class=language-python data-lang=python><span style=color:#abb0b6;font-style:italic># ZEROOOO - adds current angle as an offset to DMP readings for easier moving around the lab
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>ZERO_DMP</span><span style=color:#61676ccc>, </span><span style=color:#86b300>""</span><span>)
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>SET_PID_GAINS</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"2|.3|0.0000|-100"</span><span>) </span><span style=color:#abb0b6;font-style:italic># structure: 2 = orientation PID, Kp, ki, kd
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>SET_PID_GAINS</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"1|.15|0.000002|-80"</span><span>) </span><span style=color:#abb0b6;font-style:italic># pos gains as above
+</span><span>
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>SET_PID_TYPE</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"1"</span><span>) </span><span style=color:#abb0b6;font-style:italic># 1 = position, 2 = orientation, 3 = both
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>START_PID</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"300|180|1"</span><span>) </span><span style=color:#abb0b6;font-style:italic># position setpoint, orientation setpoint, record y/n
+</span><span>
+</span><span>time</span><span style=color:#ed9366>.</span><span style=color:#f29718>sleep</span><span>(</span><span style=color:#ff8f40>1</span><span>) </span><span style=color:#abb0b6;font-style:italic># in range of rise time for these gains
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>SET_PID_TYPE</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"2"</span><span>) </span><span style=color:#abb0b6;font-style:italic># 1 = position, 2 = orientation, 3 = both
+</span><span>
+</span><span>
+</span><span>time</span><span style=color:#ed9366>.</span><span style=color:#f29718>sleep</span><span>(</span><span style=color:#ff8f40>1</span><span>) </span><span style=color:#abb0b6;font-style:italic># in range of rise time for these gains
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>STOP_PID</span><span style=color:#61676ccc>, </span><span style=color:#86b300>""</span><span>)
+</span><span>
+</span><span>
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>SET_PID_TYPE</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"1"</span><span>) </span><span style=color:#abb0b6;font-style:italic># return to position control
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>START_PID</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"300|180|1"</span><span>) </span><span style=color:#abb0b6;font-style:italic># drive back to start
+</span><span>
+</span></code></pre><p>Although I was able to perform a few successful stunts, they were slow and inconsistent.</p><iframe allowfullscreen height=700 src=https://youtube.com/embed/6AhekgcmaMM width=1000></iframe><iframe allowfullscreen height=700 src=https://youtube.com/embed/tUV7W-p9Uzk width=1000></iframe><iframe allowfullscreen height=700 src=https://youtube.com/embed/Zk7PFMSIwVA width=1000></iframe><p>Below are the position and orientation components of the stunt:</p><img alt="turn around good!!" src=/files/lab8/finalstunt.png width=1000><h3 id=blooper><a aria-label="Anchor link for: blooper" class=zola-anchor href=#blooper>Blooper</a></h3><p>I was also able to get this blooper video:</p><iframe allowfullscreen height=700 src=https://youtube.com/embed/FM8RI6x_7O0 width=1000></iframe><h2 id=collaborations><a aria-label="Anchor link for: collaborations" class=zola-anchor href=#collaborations>Collaborations</a></h2><p>I worked with <a href=https://correial.github.io/>Lucca Correia</a> and <a href=https://trevordales.github.io/>Trevor Dales</a> extensively. I used ChatGPT to help with curve fitting and generating nice plots.<h1 id=next-lab-9><a aria-label="Anchor link for: next-lab-9" class=zola-anchor href=#next-lab-9>Next: <a href=/fast-robots/lab9>Lab 9</a></a></h1></section></article></main><div class=giscus></div><script -- <!-- <-- change repo src=https://utteranc.es/client.js this to your>issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script></div>

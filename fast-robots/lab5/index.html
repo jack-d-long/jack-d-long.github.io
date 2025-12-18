@@ -1,0 +1,227 @@
+<!doctype html><html class="dark light" lang=en><head><meta charset=UTF-8><meta content="IE=edge" http-equiv=X-UA-Compatible><meta content="width=device-width,initial-scale=1.0" name=viewport><meta content=https://jack-d-long.github.io/ name=base><title>
+         Lab 5
+        
+    </title><meta content="Lab 5" property=og:title><meta content="This is an example description" property=og:description><meta content="This is an example description" name=description><link href=/alien.png rel=icon type=image/png><link href=https://jack-d-long.github.io/fonts.css rel=stylesheet><script src=https://jack-d-long.github.io/js/codeblock.js></script><script src=https://jack-d-long.github.io/js/toc.js></script><script src=https://jack-d-long.github.io/js/note.js></script><script>MathJax = {
+              tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+              }
+            };</script><script async id=MathJax-script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script><link title="Jack Long" href=https://jack-d-long.github.io/atom.xml rel=alternate type=application/atom+xml><link href=https://jack-d-long.github.io/theme/light.css rel=stylesheet><link href=https://jack-d-long.github.io/theme/dark.css id=darkModeStyle rel=stylesheet><script src=https://jack-d-long.github.io/js/themetoggle.js></script><script>setTheme(getSavedTheme());</script><link href=https://jack-d-long.github.io/main.css media=screen rel=stylesheet><script src=https://jack-d-long.github.io/js/mermaid.js></script><script src="https://jack-d-long.github.io/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e" defer></script><body><div class=content><header><div class=main><a href=https://jack-d-long.github.io/>Jack Long</a><div class=socials><a class=social href=https://linkedin.com/in/jacklong257 rel=me> <img alt=linkedin src=https://jack-d-long.github.io/social_icons/linkedin.svg> </a><a class=social href=https://github.com/jack-d-long/ rel=me> <img alt=github src=https://jack-d-long.github.io/social_icons/github.svg> </a></div></div><nav><a href=https://jack-d-long.github.io/portfolio style=margin-left:.25em>/portfolio</a><a href=https://jack-d-long.github.io/about style=margin-left:.25em>/about</a><button title="$SHORTCUT to open search" class=search-button id=search-button><img alt=Search class=search-icon src=https://jack-d-long.github.io/search.svg></button><div class="search-modal js" aria-labelledby=modalTitle id=searchModal role=dialog><div id=modal-content><h1 class=page-header id=modalTitle>Search</h1><div id=searchBar><input aria-controls=results-container aria-expanded=false autocomplete=off id=searchInput placeholder=Search... role=combobox spellcheck=false><button title="Clear search" class=clear-button id=clear-search><svg viewbox="0 -960 960 960" xmlns=http://www.w3.org/2000/svg><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button></div><div id=results-container><div id=results-info><span id=zero_results style=display:none>No results</span><span id=one_result style=display:none>1 result</span><span id=many_results style=display:none>$NUMBER results</span></div><div id=results role=listbox></div></div></div></div><a onclick="toggleTheme(); event.preventDefault();" href=# id=dark-mode-toggle> <img alt=Light id=sun-icon src=https://jack-d-long.github.io/feather/sun.svg style=filter:invert()> <img alt=Dark id=moon-icon src=https://jack-d-long.github.io/feather/moon.svg> </a><script>updateItemToggleTheme()</script></nav></header><main><article><div class=title><div class=page-header>Lab 5<span class=primary-color style=font-size:1.6em>.</span></div><div class=meta>Posted on <time>2025-03-12</time></div></div><div class=toc-container><h1 class=toc-title>Table of Contents</h1><ul class=toc-list><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#previous-lab-4>Previous: Lab 4</a><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#prelab>Prelab</a> <ul><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#sending-and-receiving-data>Sending and Receiving Data</a></ul><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#lab-tasks>Lab Tasks</a> <ul><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#proportional-control>Proportional Control</a><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#integral-control>Integral Control</a><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#frequency-range>Frequency/Range</a><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#extrapolation>Extrapolation</a></li><ul><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#side-note-extrapolation-debugging>Side Note: Extrapolation Debugging</a></ul><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#full-pid-control>Full PID Control</a><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#collaborations>Collaborations</a></ul><li><a href=https://jack-d-long.github.io/fast-robots/lab5/#next-lab-6>Next: Lab 6</a></ul></div><section class=body><h1 id=previous-lab-4><a aria-label="Anchor link for: previous-lab-4" class=zola-anchor href=#previous-lab-4>Previous: <a href=/fast-robots/lab4>Lab 4</a></a></h1><h1 id=prelab><a aria-label="Anchor link for: prelab" class=zola-anchor href=#prelab>Prelab</a></h1><h2 id=sending-and-receiving-data><a aria-label="Anchor link for: sending-and-receiving-data" class=zola-anchor href=#sending-and-receiving-data>Sending and Receiving Data</a></h2><p>To make continued additions easier, I decided to refactor my code in a way similar to <a href=https://fast.synthghost.com/lab-5-linear-pid-control/>Stephan's</a>. I added the following headers:<ul><li><code>TOF.h</code>: Record and store TOF sensor data<li><code>IMU.h</code>: Record and store IMU data<li><code>PID.h</code>: Perform the PID control loop<li><code>MotorControl.h</code>: Handle PWM control of the motors from controller outputs</ul><p>The dependency structure of the new system, in addition to already included libraries, is as follows:<pre class=mermaid>
+  graph TD;
+    TOF.h --> ble_arduino.ino;
+    IMU.h --> ble_arduino.ino;
+    PID.h --> ble_arduino.ino;
+    
+    MotorControl.h --> TOF.h;
+    PID.h --> IMU.h;
+    PID.h --> TOF.h
+    MotorControl.h --> PID.h;
+    MotorControl.h --> ble_arduino.ino;
+
+    style TOF.h fill:#f9f,stroke:#333
+    style PID.h fill:#f9f,stroke:#333
+
+    style IMU.h fill:#f9f,stroke:#333
+
+    style MotorControl.h fill:#f9f,stroke:#333
+
+    style ble_arduino.ino fill:#9f9,stroke:#333
+</pre><p>I use a series of flags to enable position control as well as TOF recording. This makes my mainloop relatively simple:<div class=note-container><button class=note-toggle><div class=note-icon><p>ble_arduino.ino mainloop</div></button><div class=note-content style=display:block><pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span style=color:#fa6e32>while </span><span>(central</span><span style=color:#ed9366>.</span><span style=color:#f29718>connected</span><span>()) {
+</span><span>            </span><span style=color:#abb0b6;font-style:italic>// Send data
+</span><span>            </span><span style=color:#f29718>write_data</span><span>()</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>            looped</span><span style=color:#ed9366>++</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic>// counts mainloop executions for overall speed calculations
+</span><span>            </span><span style=color:#abb0b6;font-style:italic>//TOF
+</span><span>            </span><span style=color:#fa6e32>if</span><span>(startTOFRecording){ </span><span style=color:#abb0b6;font-style:italic>// for recording of TOFs without any motor control 
+</span><span>        
+</span><span>              </span><span style=color:#fa6e32>if</span><span>(distanceSensor1</span><span style=color:#ed9366>.</span><span style=color:#f29718>checkForDataReady</span><span>()){
+</span><span>                </span><span style=color:#f29718>record_TOF</span><span>(</span><span style=color:#ff8f40>1</span><span>)</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic>// records TOF 1
+</span><span>              }
+</span><span>
+</span><span>              </span><span style=color:#fa6e32>if</span><span>(distanceSensor2</span><span style=color:#ed9366>.</span><span style=color:#f29718>checkForDataReady</span><span>()){
+</span><span>                </span><span style=color:#f29718>record_TOF</span><span>(</span><span style=color:#ff8f40>2</span><span>)</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic>// records TOF 2
+</span><span>              }
+</span><span>            }   
+</span><span>            </span><span style=color:#abb0b6;font-style:italic>//IMU
+</span><span>            </span><span style=color:#fa6e32>if</span><span>(startIMURecording</span><span style=color:#ed9366>&&</span><span>myICM</span><span style=color:#ed9366>.</span><span style=color:#f29718>dataReady</span><span>()){ </span><span style=color:#abb0b6;font-style:italic>// for recording of IMU without any motor control 
+</span><span>              </span><span style=color:#f29718>record_IMU</span><span>()</span><span style=color:#61676ccc>;
+</span><span>              
+</span><span>            }
+</span><span>
+</span><span>            </span><span style=color:#fa6e32>if </span><span>(doPID){ </span><span style=color:#abb0b6;font-style:italic>// for PID execution 
+</span><span>              
+</span><span>              </span><span style=color:#fa6e32>if </span><span>(doPositionPID){ </span><span style=color:#abb0b6;font-style:italic>// for position control 
+</span><span>                </span><span style=color:#f29718>record_TOF</span><span>(</span><span style=color:#ff8f40>2</span><span>)</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic>// record TOF 2 (front) data and update current_pos value
+</span><span>                </span><span style=color:#f29718>pid_position_tof</span><span>()</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic>// perform PID with 
+</span><span>              }
+</span><span>
+</span><span>              pid_c</span><span style=color:#ed9366>++</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic>// counts PID control steps
+</span><span>
+</span><span>            }
+</span><span>
+</span><span>            </span><span style=color:#abb0b6;font-style:italic>// Read data
+</span><span>            </span><span style=color:#f29718>read_data</span><span>()</span><span style=color:#61676ccc>;
+</span><span>        }
+</span></code></pre></div></div><p>I flip each of these flags with separate commands for more precise remote controllability of the robot, and have an additional command to send relevant PID control data:<div class=note-container><button class=note-toggle><div class=note-icon><p>SEND_PID_DATA</div></button><div class=note-content style=display:block><pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span style=color:#fa6e32>case</span><span> SEND_PID_DATA</span><span style=color:#61676ccc>:
+</span><span>
+</span><span>        </span><span style=color:#f29718>stop</span><span>()</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic>// Stop the motor (just in case) and begin to send data
+</span><span>        Serial</span><span style=color:#ed9366>.</span><span style=color:#f29718>println</span><span>(</span><span style=color:#86b300>"Sending Data..."</span><span>)</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>              </span><span style=color:#abb0b6;font-style:italic>// Data for time
+</span><span>        tx_estring_value</span><span style=color:#ed9366>.</span><span style=color:#f29718>clear</span><span>()</span><span style=color:#61676ccc>;
+</span><span>        
+</span><span>        tx_characteristic_string</span><span style=color:#ed9366>.</span><span style=color:#f29718>writeValue</span><span>(tx_estring_value</span><span style=color:#ed9366>.</span><span style=color:#f29718>c_str</span><span>())</span><span style=color:#61676ccc>;
+</span><span>        </span><span style=color:#fa6e32>for </span><span>(</span><span style=color:#fa6e32>int</span><span> i </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>;</span><span> i </span><span style=color:#ed9366>&lt;</span><span> pid_c</span><span style=color:#61676ccc>;</span><span> i </span><span style=color:#ed9366>++</span><span>) {
+</span><span>          </span><span style=color:#abb0b6;font-style:italic>// time
+</span><span>
+</span><span>          tx_estring_value</span><span style=color:#ed9366>.</span><span style=color:#f29718>clear</span><span>()</span><span style=color:#61676ccc>;
+</span><span>          tx_estring_value</span><span style=color:#ed9366>.</span><span style=color:#f29718>append</span><span>(</span><span style=color:#86b300>"T:"</span><span>)</span><span style=color:#61676ccc>;
+</span><span>          tx_estring_value</span><span style=color:#ed9366>.</span><span style=color:#f29718>append</span><span>(pid_time[i])</span><span style=color:#61676ccc>;
+</span><span>          tx_estring_value</span><span style=color:#ed9366>.</span><span style=color:#f29718>append</span><span>(</span><span style=color:#86b300>","</span><span>)</span><span style=color:#61676ccc>;
+</span><span>          </span><span style=color:#abb0b6;font-style:italic>// raw distance
+</span><span>
+</span><span>          tx_estring_value</span><span style=color:#ed9366>.</span><span style=color:#f29718>append</span><span>(</span><span style=color:#86b300>"S:"</span><span>)</span><span style=color:#61676ccc>;
+</span><span>          tx_estring_value</span><span style=color:#ed9366>.</span><span style=color:#f29718>append</span><span>(pid_tof[i])</span><span style=color:#61676ccc>;
+</span><span>          tx_estring_value</span><span style=color:#ed9366>.</span><span style=color:#f29718>append</span><span>(</span><span style=color:#86b300>","</span><span>)</span><span style=color:#61676ccc>;
+</span><span>          </span><span style=color:#abb0b6;font-style:italic>// total control input
+</span><span>
+</span><span>          tx_estring_value</span><span style=color:#ed9366>.</span><span style=color:#f29718>append</span><span>(</span><span style=color:#86b300>"C:"</span><span>)</span><span style=color:#61676ccc>;
+</span><span>          tx_estring_value</span><span style=color:#ed9366>.</span><span style=color:#f29718>append</span><span>(pid_u[i])</span><span style=color:#61676ccc>;
+</span><span>          tx_estring_value</span><span style=color:#ed9366>.</span><span style=color:#f29718>append</span><span>(</span><span style=color:#86b300>","</span><span>)</span><span style=color:#61676ccc>;
+</span><span>          </span><span style=color:#abb0b6;font-style:italic>// proportional input
+</span><span>
+</span><span>
+</span><span>          </span><span style=color:#ed9366>... 
+</span><span>
+</span><span>
+</span><span>          tx_characteristic_string</span><span style=color:#ed9366>.</span><span style=color:#f29718>writeValue</span><span>(tx_estring_value</span><span style=color:#ed9366>.</span><span style=color:#f29718>c_str</span><span>())</span><span style=color:#61676ccc>;
+</span><span>        }
+</span><span>
+</span><span>        </span><span style=color:#abb0b6;font-style:italic>// reset counters, errors
+</span><span>        prev_time </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>;
+</span><span>        dt </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>; 
+</span><span>        err </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>.</span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>; 
+</span><span>        err_i </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>.</span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>;
+</span><span>        pid_c </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>; 
+</span><span>
+</span><span>        </span><span style=color:#abb0b6;font-style:italic>// stop sensor ranging
+</span><span>        distanceSensor1</span><span style=color:#ed9366>.</span><span style=color:#f29718>stopRanging</span><span>()</span><span style=color:#61676ccc>; 
+</span><span>        distanceSensor2</span><span style=color:#ed9366>.</span><span style=color:#f29718>stopRanging</span><span>()</span><span style=color:#61676ccc>;
+</span><span>        </span><span style=color:#fa6e32>break</span><span style=color:#61676ccc>;
+</span><span>
+</span></code></pre></div></div><p>I record this data in a series of CSV files in Jupyter, making them easy to plot and store for the system ID portion of Lab 7.<h1 id=lab-tasks><a aria-label="Anchor link for: lab-tasks" class=zola-anchor href=#lab-tasks>Lab Tasks</a></h1><h2 id=proportional-control><a aria-label="Anchor link for: proportional-control" class=zola-anchor href=#proportional-control>Proportional Control</a></h2><p>I first implemented basic P control, where pid_tof[i] is updated :<pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span> </span><span style=color:#abb0b6;font-style:italic>// PROPORTIONAL
+</span><span>  err </span><span style=color:#ed9366>= - </span><span>(target_pos </span><span style=color:#ed9366>-</span><span> pid_tof[pid_c])</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>  </span><span style=color:#fa6e32>if </span><span>( </span><span style=color:#f07171>abs</span><span>(err) </span><span style=color:#ed9366>&lt; </span><span style=color:#ff8f40>10</span><span>){  </span><span style=color:#abb0b6;font-style:italic>// if in general range of setpoint (within TOF variance), don't worry about it.
+</span><span>    err </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>;
+</span><span>  }
+</span><span>
+</span><span>  u_p </span><span style=color:#ed9366>=</span><span> err </span><span style=color:#ed9366>*</span><span> Kp</span><span style=color:#61676ccc>;
+</span></code></pre><p>The final control input is then passed into my motor controller, which takes in a desired PWM value (from the PID controller) and returns the actual applied PWM signal. It accounts for the deadband of the motors, within which a signal won't be able to overcome the static friction of the motors and wheels. The forward() and backward() functions implement the scaling factor discussed in <a href=/fast-robots/lab4>Lab 4</a>.<div class=note-container><button class=note-toggle><div class=note-icon><p>drive()</div></button><div class=note-content style=display:block><pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span>
+</span><span style=color:#fa6e32>float </span><span style=color:#f29718>drive </span><span>(</span><span style=color:#fa6e32>float </span><span style=color:#ff8f40>speed_control</span><span>)
+</span><span>{
+</span><span>  </span><span style=color:#fa6e32>float</span><span> applied_pwm</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>></span><span> max_speed) {
+</span><span>      applied_pwm </span><span style=color:#ed9366>=</span><span> max_speed</span><span style=color:#61676ccc>;
+</span><span>      </span><span style=color:#f29718>forward</span><span>(max_speed)</span><span style=color:#61676ccc>;
+</span><span>    }
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>&lt; </span><span>(</span><span style=color:#ed9366>-</span><span style=color:#ff8f40>1 </span><span style=color:#ed9366>*</span><span> max_speed)) {
+</span><span>    </span><span style=color:#f29718>backward</span><span>(max_speed)</span><span style=color:#61676ccc>;
+</span><span>    applied_pwm </span><span style=color:#ed9366>= -</span><span style=color:#ff8f40>1 </span><span style=color:#ed9366>*</span><span> max_speed</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>    
+</span><span>  }
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>> </span><span style=color:#ff8f40>0</span><span>) {
+</span><span>    </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>></span><span> deadband){
+</span><span>      applied_pwm </span><span style=color:#ed9366>=</span><span> speed_control</span><span style=color:#61676ccc>; 
+</span><span>    }</span><span style=color:#fa6e32>else </span><span>{
+</span><span>      applied_pwm </span><span style=color:#ed9366>=</span><span> deadband</span><span style=color:#61676ccc>;
+</span><span>    }
+</span><span>  
+</span><span>
+</span><span>    </span><span style=color:#f29718>forward</span><span>(applied_pwm)</span><span style=color:#61676ccc>;
+</span><span>    
+</span><span>    
+</span><span>  }
+</span><span>  </span><span style=color:#fa6e32>else if </span><span>(speed_control </span><span style=color:#ed9366>&lt; </span><span style=color:#ff8f40>0</span><span>) {
+</span><span>    </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>&lt; -</span><span style=color:#ff8f40>1</span><span style=color:#ed9366>*</span><span>deadband){
+</span><span>      applied_pwm </span><span style=color:#ed9366>= -</span><span style=color:#ff8f40>1</span><span style=color:#ed9366>*</span><span> speed_control</span><span style=color:#61676ccc>;
+</span><span>      </span><span style=color:#f29718>backward</span><span>(applied_pwm)</span><span style=color:#61676ccc>;
+</span><span>      applied_pwm </span><span style=color:#ed9366>=</span><span> speed_control</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic>// make output make sense
+</span><span>    }</span><span style=color:#fa6e32>else </span><span>{
+</span><span>
+</span><span>      applied_pwm </span><span style=color:#ed9366>=</span><span> deadband</span><span style=color:#61676ccc>;
+</span><span>      </span><span style=color:#f29718>backward</span><span>(applied_pwm)</span><span style=color:#61676ccc>;
+</span><span>      applied_pwm </span><span style=color:#ed9366>= -</span><span style=color:#ff8f40>1</span><span style=color:#ed9366>*</span><span> deadband</span><span style=color:#61676ccc>;
+</span><span>      </span><span style=color:#abb0b6;font-style:italic>//speed_control = speed_control;
+</span><span>    }
+</span><span>
+</span><span>    
+</span><span>    
+</span><span>  }</span><span style=color:#fa6e32>else</span><span>{
+</span><span>
+</span><span>    </span><span style=color:#f29718>stop</span><span>()</span><span style=color:#61676ccc>;
+</span><span>    </span><span style=color:#fa6e32>return</span><span>(</span><span style=color:#ff8f40>0</span><span>)</span><span style=color:#61676ccc>;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style=color:#fa6e32>return </span><span>(applied_pwm)</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>}
+</span></code></pre></div></div><p>One of my first tries with P-control, at a gain of .08, is shown below. As you can see, the settling time is ok, but steady-state error leaves a bit to be desired.</p><iframe allowfullscreen height=400 src=https://youtube.com/embed/VePA4fcmuzQ width=600></iframe><img alt="Initial P control: kp = .1" src=/files/lab5/pControlInitial.png width=600><h2 id=integral-control><a aria-label="Anchor link for: integral-control" class=zola-anchor href=#integral-control>Integral Control</a></h2><p>To fix this, I implemented integral control like so:<pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span>  </span><span style=color:#abb0b6;font-style:italic>// INTEGRAL
+</span><span>
+</span><span>  err_i </span><span style=color:#ed9366>=</span><span> err_i </span><span style=color:#ed9366>+</span><span> err </span><span style=color:#ed9366>*</span><span> pid_dt</span><span style=color:#61676ccc>;
+</span><span>  u_i </span><span style=color:#ed9366>=</span><span> Ki</span><span style=color:#ed9366>*</span><span>err_i</span><span style=color:#61676ccc>; 
+</span><span>
+</span></code></pre><p>with gains of .1 and 0.00001 for proportional and integral error, respectively.</p><img alt="Initial P control: kp = .08 ki = 0.00002" src=/files/lab5/letmecook.png width=600><p>Integral control did its job in reducing steady-state error, and settling time wasn't bad. However, to speed up the system with derivative control, I needed to smooth my TOF measurements in order to avoid serious derivative kick from the small steps in TOF distance.<h2 id=frequency-range><a aria-label="Anchor link for: frequency-range" class=zola-anchor href=#frequency-range>Frequency/Range</a></h2><p>By tracking the changes in TOF data over the course of a few 10-second measurements in long mode, I was able to receieve updated TOF data at around 9.6 Hz, and provide control input at around 75 Hz.<p>I chose long mode mostly because it would provide more consistent outputs on the scale of an average room. In short mode, I found the sensor to be incredibly noisy (providing values from 1000 to 6000 mm) when out of range, and I suspect that this would cause problems with derivative control.<p>In open-loop testing, I was able to measure around 990 mm/s as a maximum linear speed, but this may be lower than the truth due to the low battery level I had at the time of testing.<h2 id=extrapolation><a aria-label="Anchor link for: extrapolation" class=zola-anchor href=#extrapolation>Extrapolation</a></h2><p>With the sensor in long mode, I implemented a linear extrapolator. It simply stores the slope between the two most recent TOF measurements (if they exist) and uses that, along with the time interval of the last control loop, to calculate an expected TOF reading.<pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span>
+</span><span style=color:#fa6e32>if </span><span>(distanceSensor2</span><span style=color:#ed9366>.</span><span style=color:#f29718>checkForDataReady</span><span>()){
+</span><span>  </span><span style=color:#abb0b6;font-style:italic>//Get the result of the measurement from the sensor
+</span><span>  distance2 </span><span style=color:#ed9366>=</span><span> distanceSensor2</span><span style=color:#ed9366>.</span><span style=color:#f29718>getDistance</span><span>()</span><span style=color:#61676ccc>; 
+</span><span>  distanceSensor2</span><span style=color:#ed9366>.</span><span style=color:#f29718>clearInterrupt</span><span>()</span><span style=color:#61676ccc>;
+</span><span>  recorded_time </span><span style=color:#ed9366>= </span><span style=color:#f29718>millis</span><span>()</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>  tof_dt </span><span style=color:#ed9366>=</span><span> recorded_time </span><span style=color:#ed9366>-</span><span> last_recorded_time</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(recorded_c </span><span style=color:#ed9366>>= </span><span style=color:#ff8f40>1</span><span>){
+</span><span>    </span><span style=color:#abb0b6;font-style:italic>// we have enough data to extrapolate
+</span><span>    slope </span><span style=color:#ed9366>= </span><span>(distance2 </span><span style=color:#ed9366>-</span><span> last_recorded_value) </span><span style=color:#ed9366>/ </span><span>(tof_dt)</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>
+</span><span>  }
+</span><span>  </span><span style=color:#abb0b6;font-style:italic>// we don't have enough data to extrapolate
+</span><span>  pid_tof[pid_c] </span><span style=color:#ed9366>=</span><span> distance2</span><span style=color:#61676ccc>;
+</span><span>  pid_tof_ext[pid_c] </span><span style=color:#ed9366>=</span><span> distance2</span><span style=color:#61676ccc>;
+</span><span>  last_recorded_time </span><span style=color:#ed9366>=</span><span> recorded_time</span><span style=color:#61676ccc>;
+</span><span>  
+</span><span>  last_recorded_value </span><span style=color:#ed9366>=</span><span> distance2</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>  
+</span><span>  recorded_c</span><span style=color:#ed9366>++</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>}</span><span style=color:#fa6e32>else</span><span>{
+</span><span>  
+</span><span>    </span><span style=color:#abb0b6;font-style:italic>// EXTRAPOLATING
+</span><span>    pid_tof[pid_c] </span><span style=color:#ed9366>=</span><span> distance2</span><span style=color:#61676ccc>;
+</span><span>    pid_tof_ext[pid_c] </span><span style=color:#ed9366>=</span><span> pid_tof_ext[pid_c</span><span style=color:#ed9366>-</span><span style=color:#ff8f40>1</span><span>] </span><span style=color:#ed9366>+</span><span> slope </span><span style=color:#ed9366>* </span><span>(pid_dt)</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>
+</span><span>}
+</span><span>      
+</span></code></pre><p>This produced a much nicer response, with better settling time than both previous examples and negligible steady-state error.</p><img alt="Initial P control: kp = .08 ki = 0.00002" src=/files/lab5/PI_extrap.png width=600><iframe allowfullscreen height=400 src=https://youtube.com/embed/OFoByJJzR04 width=600></iframe><h3 id=side-note-extrapolation-debugging><a aria-label="Anchor link for: side-note-extrapolation-debugging" class=zola-anchor href=#side-note-extrapolation-debugging>Side Note: Extrapolation Debugging</a></h3><p>I ran into a lot of trouble with extrapolation over the course of the lab -- the <code>checkForDataReady()</code> function seemed to slow my robot down to an unsustainable degree. I solved this by starting and stopping the ranging of both TOFs in separate BLE commands, and not every loop. After that, careful inspection of my counters led to a successful extrapolation implementation.<h2 id=full-pid-control><a aria-label="Anchor link for: full-pid-control" class=zola-anchor href=#full-pid-control>Full PID Control</a></h2><p>I then implemented derivative control as below, but found its effect to be too noisy.<pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span>  </span><span style=color:#abb0b6;font-style:italic>// DERIVATIVE
+</span><span>   err_d </span><span style=color:#ed9366>= - </span><span>(pid_tof_ext[pid_c] </span><span style=color:#ed9366>-</span><span> pid_tof_ext[pid_c</span><span style=color:#ed9366>-</span><span style=color:#ff8f40>1</span><span>]) </span><span style=color:#ed9366>/</span><span> pid_dt</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>   u_d </span><span style=color:#ed9366>=</span><span> Kd </span><span style=color:#ed9366>*</span><span> err_d_f</span><span style=color:#61676ccc>;
+</span></code></pre><img alt="firsrt extrapolation .1|.00005|2|300" src=/files/lab5/derivative_gain_pt1.png width=600><p>So I implemented a low-pass filter.<pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span>  </span><span style=color:#abb0b6;font-style:italic>// DERIVATIVE
+</span><span>   err_d </span><span style=color:#ed9366>= - </span><span>(err </span><span style=color:#ed9366>-</span><span> prev_err) </span><span style=color:#ed9366>/</span><span> pid_dt</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>  </span><span style=color:#abb0b6;font-style:italic>// DERIVATIVE LPF
+</span><span>  alpha_d </span><span style=color:#ed9366>= </span><span style=color:#61676ccc>.</span><span style=color:#ff8f40>1</span><span style=color:#61676ccc>;
+</span><span>  err_d_f </span><span style=color:#ed9366>=</span><span> err_d </span><span style=color:#ed9366>*</span><span> alpha_d </span><span style=color:#ed9366>+ </span><span>(</span><span style=color:#ff8f40>1 </span><span style=color:#ed9366>-</span><span> alpha_d) </span><span style=color:#ed9366>*</span><span> prev_err_d</span><span style=color:#61676ccc>; 
+</span><span>  prev_err_d </span><span style=color:#ed9366>=</span><span> err_d_f</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>   u_d </span><span style=color:#ed9366>=</span><span> Kd </span><span style=color:#ed9366>*</span><span> err_d_f</span><span style=color:#61676ccc>;
+</span></code></pre><p>I performed the following test without motor battery installed:</p><img alt="firsrt extrapolation .1|.00005|0|300" src=/files/lab5/derivative_kick.png width=600><p>The derivative gain may have been set too high, but the response also exhibited significant kick due to the step input. To solve this, I calculated my derivative input from the change in distance from the wall instead of error:<pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span>   err_d </span><span style=color:#ed9366>= - </span><span>(pid_tof_ext[pid_c] </span><span style=color:#ed9366>-</span><span> pid_tof_ext[pid_c</span><span style=color:#ed9366>-</span><span style=color:#ff8f40>1</span><span>]) </span><span style=color:#ed9366>/</span><span> pid_dt</span><span style=color:#61676ccc>;
+</span><span>
+</span></code></pre><p>This also didn't solve the issue, though, as the extrapolated distance also ended up stepping from zero.</p><img alt="firsrt extrapolation .1|.00005|0|300" src=/files/lab5/pid_ess.png width=600><iframe allowfullscreen height=400 src=https://youtube.com/embed/bnIVPGwQuAs width=600></iframe><p>After tuning the gains over a couple rounds of heuristic 1 (and realizing my derivative gain was reversed):<ul><li>Set kp to small value, kd and ki to 0<li>Increase kd until oscillation, then decrease by a factor of 2-4<li>Increase kp until oscillation or overshoot, decreases by a factor of 2-4<li>Increase ki until oscillation or overshoot<li>Iterate</ul><p>I was able to generate the following response:</p><iframe allowfullscreen height=400 src=https://youtube.com/embed/KgYb4N_u1VQ width=600></iframe><p>I'm satisfied with this for now.<h2 id=collaborations><a aria-label="Anchor link for: collaborations" class=zola-anchor href=#collaborations>Collaborations</a></h2><p>I worked with <a href=https://correial.github.io/>Lucca Correia</a> and <a href=https://trevordales.github.io/>Trevor Dales</a> extensively, and referenced <a href=https://pages.github.coecis.cornell.edu/dak267/dak267.github.io/#contact>Daria's</a> and <a href=https://fast.synthghost.com/lab-5-linear-pid-control/>Stephan's</a> for code structure and implementation of extrapolation.<h1 id=next-lab-6><a aria-label="Anchor link for: next-lab-6" class=zola-anchor href=#next-lab-6>Next: <a href=/fast-robots/lab6>Lab 6</a></a></h1></section></article></main><div class=giscus></div><script -- <!-- <-- change repo src=https://utteranc.es/client.js this to your>issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script></div>

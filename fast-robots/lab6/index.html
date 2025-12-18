@@ -1,0 +1,139 @@
+<!doctype html><html class="dark light" lang=en><head><meta charset=UTF-8><meta content="IE=edge" http-equiv=X-UA-Compatible><meta content="width=device-width,initial-scale=1.0" name=viewport><meta content=https://jack-d-long.github.io/ name=base><title>
+         Lab 6
+        
+    </title><meta content="Lab 6" property=og:title><meta content="This is an example description" property=og:description><meta content="This is an example description" name=description><link href=/alien.png rel=icon type=image/png><link href=https://jack-d-long.github.io/fonts.css rel=stylesheet><script src=https://jack-d-long.github.io/js/codeblock.js></script><script src=https://jack-d-long.github.io/js/toc.js></script><script src=https://jack-d-long.github.io/js/note.js></script><script>MathJax = {
+              tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+              }
+            };</script><script async id=MathJax-script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script><link title="Jack Long" href=https://jack-d-long.github.io/atom.xml rel=alternate type=application/atom+xml><link href=https://jack-d-long.github.io/theme/light.css rel=stylesheet><link href=https://jack-d-long.github.io/theme/dark.css id=darkModeStyle rel=stylesheet><script src=https://jack-d-long.github.io/js/themetoggle.js></script><script>setTheme(getSavedTheme());</script><link href=https://jack-d-long.github.io/main.css media=screen rel=stylesheet><script src=https://jack-d-long.github.io/js/mermaid.js></script><script src="https://jack-d-long.github.io/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e" defer></script><body><div class=content><header><div class=main><a href=https://jack-d-long.github.io/>Jack Long</a><div class=socials><a class=social href=https://linkedin.com/in/jacklong257 rel=me> <img alt=linkedin src=https://jack-d-long.github.io/social_icons/linkedin.svg> </a><a class=social href=https://github.com/jack-d-long/ rel=me> <img alt=github src=https://jack-d-long.github.io/social_icons/github.svg> </a></div></div><nav><a href=https://jack-d-long.github.io/portfolio style=margin-left:.25em>/portfolio</a><a href=https://jack-d-long.github.io/about style=margin-left:.25em>/about</a><button title="$SHORTCUT to open search" class=search-button id=search-button><img alt=Search class=search-icon src=https://jack-d-long.github.io/search.svg></button><div class="search-modal js" aria-labelledby=modalTitle id=searchModal role=dialog><div id=modal-content><h1 class=page-header id=modalTitle>Search</h1><div id=searchBar><input aria-controls=results-container aria-expanded=false autocomplete=off id=searchInput placeholder=Search... role=combobox spellcheck=false><button title="Clear search" class=clear-button id=clear-search><svg viewbox="0 -960 960 960" xmlns=http://www.w3.org/2000/svg><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button></div><div id=results-container><div id=results-info><span id=zero_results style=display:none>No results</span><span id=one_result style=display:none>1 result</span><span id=many_results style=display:none>$NUMBER results</span></div><div id=results role=listbox></div></div></div></div><a onclick="toggleTheme(); event.preventDefault();" href=# id=dark-mode-toggle> <img alt=Light id=sun-icon src=https://jack-d-long.github.io/feather/sun.svg style=filter:invert()> <img alt=Dark id=moon-icon src=https://jack-d-long.github.io/feather/moon.svg> </a><script>updateItemToggleTheme()</script></nav></header><main><article><div class=title><div class=page-header>Lab 6<span class=primary-color style=font-size:1.6em>.</span></div><div class=meta>Posted on <time>2025-03-17</time></div></div><div class=toc-container><h1 class=toc-title>Table of Contents</h1><ul class=toc-list><li><a href=https://jack-d-long.github.io/fast-robots/lab6/#previous-lab-5>Previous: Lab 5</a> <ul><li><a href=https://jack-d-long.github.io/fast-robots/lab6/#setup>Setup</a><li><a href=https://jack-d-long.github.io/fast-robots/lab6/#recording-yaw-angle>Recording Yaw Angle</a><li><a href=https://jack-d-long.github.io/fast-robots/lab6/#orientation-pid-control>Orientation PID Control</a><li><a href=https://jack-d-long.github.io/fast-robots/lab6/#derivative-control-considerations>Derivative Control Considerations</a><li><a href=https://jack-d-long.github.io/fast-robots/lab6/#collaborations>Collaborations</a></ul><li><a href=https://jack-d-long.github.io/fast-robots/lab6/#next-lab-7>Next: Lab 7</a></ul></div><section class=body><h1 id=previous-lab-5><a aria-label="Anchor link for: previous-lab-5" class=zola-anchor href=#previous-lab-5>Previous: <a href=/fast-robots/lab5>Lab 5</a></a></h1><h2 id=setup><a aria-label="Anchor link for: setup" class=zola-anchor href=#setup>Setup</a></h2><p>To begin implementing orientation control within my current code structure, I added an additional piece of logic in my main loop. This will make controlling both position <em>and</em> orientation at the same time simpler. The <code>dataReady()</code> check is a leftover from previous IMU data recording in Lab 2, and I may have to modify my <code>record_IMU()</code> to use it instead if I run into problems with FIFO overflow issues in the future.<pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span>
+</span><span> </span><span style=color:#fa6e32>if </span><span>(doPID){
+</span><span>              
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(doPositionPID){
+</span><span>    </span><span style=color:#f29718>record_TOF</span><span>(</span><span style=color:#ff8f40>2</span><span>)</span><span style=color:#61676ccc>;
+</span><span>    </span><span style=color:#f29718>pid_position_tof</span><span>()</span><span style=color:#61676ccc>;
+</span><span>  }
+</span><span>  </span><span style=color:#fa6e32>if </span><span>( myICM</span><span style=color:#ed9366>.</span><span style=color:#f29718>dataReady</span><span>()</span><span style=color:#ed9366>&&</span><span>doOrientationPID){
+</span><span>    </span><span style=color:#f29718>record_IMU</span><span>()</span><span style=color:#61676ccc>;
+</span><span>    </span><span style=color:#f29718>pid_orientation_tof</span><span>()</span><span style=color:#61676ccc>;
+</span><span>  }
+</span><span>  pid_c</span><span style=color:#ed9366>++</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>}
+</span></code></pre><p>I made slight modifgications to my <code>SET_PID_GAINS</code> and <code>START_PID</code> commands, to accomodate setting separate orientation gains and setpoints. I also added a command <code>SET_PID_TYPE</code> to flag which control(s) should be active upon starting PID.<div class=note-container><button class=note-toggle><div class=note-icon><p>SET_PID_TYPE</div></button><div class=note-content style=display:block><pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span style=color:#fa6e32>case</span><span> SET_PID_TYPE</span><span style=color:#61676ccc>:
+</span><span>  success </span><span style=color:#ed9366>=</span><span> robot_cmd</span><span style=color:#ed9366>.</span><span style=color:#f29718>get_next_value</span><span>(pid_type)</span><span style=color:#61676ccc>;
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(</span><span style=color:#ed9366>!</span><span>success) </span><span style=color:#fa6e32>return</span><span style=color:#61676ccc>;
+</span><span>  </span><span style=color:#abb0b6;font-style:italic>// success = robot_cmd.get_next_value(recordIGuess);
+</span><span>  </span><span style=color:#abb0b6;font-style:italic>// if (!success) return;
+</span><span>
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(pid_type </span><span style=color:#ed9366>== </span><span style=color:#ff8f40>1</span><span>){
+</span><span>    doOrientationPID </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>0 </span><span style=color:#61676ccc>;
+</span><span>    doPositionPID </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>1</span><span style=color:#61676ccc>;
+</span><span>  
+</span><span>  }</span><span style=color:#fa6e32>else if </span><span>(pid_type </span><span style=color:#ed9366>== </span><span style=color:#ff8f40>2</span><span>){
+</span><span>    doOrientationPID </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>1 </span><span style=color:#61676ccc>;
+</span><span>    doPositionPID </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>;
+</span><span>  }
+</span><span>  </span><span style=color:#fa6e32>else if </span><span>(pid_type </span><span style=color:#ed9366>== </span><span style=color:#ff8f40>2</span><span>){
+</span><span>    doOrientationPID </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>1 </span><span style=color:#61676ccc>;
+</span><span>    doPositionPID </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>1</span><span style=color:#61676ccc>;
+</span><span>  }
+</span><span>  </span><span style=color:#fa6e32>else</span><span>{
+</span><span>    doOrientationPID </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>0 </span><span style=color:#61676ccc>;
+</span><span>    doPositionPID </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>;
+</span><span>  }
+</span><span>  
+</span><span style=color:#fa6e32>break</span><span style=color:#61676ccc>;
+</span></code></pre></div></div><p>On the client side, my workflow looks like this. It's worth noting that repeatedly sending <code>START_PID</code> with different setpoints allows for changes while control is active:<pre class=language-python data-lang=python style=color:#61676c;background-color:#fafafa><code class=language-python data-lang=python><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>SET_PID_GAINS</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"2|1.2|0.00005|10"</span><span>) </span><span style=color:#abb0b6;font-style:italic># 2 = orientation PID, Kp, ki, kd
+</span><span>
+</span><span>time</span><span style=color:#ed9366>.</span><span style=color:#f29718>sleep</span><span>(</span><span style=color:#ff8f40>3</span><span>)</span><span style=color:#61676ccc>; </span><span style=color:#abb0b6;font-style:italic># wait for physical robot setup (start recording, put on ground, etc)
+</span><span>
+</span><span style=color:#abb0b6;font-style:italic># start PID with recording (true)
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>SET_PID_TYPE</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"2"</span><span>) </span><span style=color:#abb0b6;font-style:italic># 1 = position, 2 = orientation, 3 = both
+</span><span>ble</span><span style=color:#ed9366>.</span><span style=color:#f29718>send_command</span><span>(CMD</span><span style=color:#ed9366>.</span><span>START_PID</span><span style=color:#61676ccc>, </span><span style=color:#86b300>"600|0|1"</span><span>) </span><span style=color:#abb0b6;font-style:italic># position setpoint, orientation setpoint, record y/n
+</span></code></pre><h2 id=recording-yaw-angle><a aria-label="Anchor link for: recording-yaw-angle" class=zola-anchor href=#recording-yaw-angle>Recording Yaw Angle</a></h2><p>I used the DMP method to record yaw angle, explained step-by-step in <a href=https://fastrobotscornell.github.io/FastRobots-2025/tutorials/dmp.html>Stephan's tutorial</a> on the course site.<p>It appeared to record data without any issues, as shown in the plot below, where the car was manually turned back and forth.</p><img alt="DMP FISRT TRY" src=/files/lab6/DMP_firstTry.png width=600><p>I manually set the DMP sample rate to 10 Hz, to avoid any issues with FIFO overflow, and the maximum possible speed of 2000 dps is more than sufficient for our purposes. In a open-loop testing, I was never able to get more than three rotations (~1000 degrees) in one second.<h2 id=orientation-pid-control><a aria-label="Anchor link for: orientation-pid-control" class=zola-anchor href=#orientation-pid-control>Orientation PID Control</a></h2><p>To actually implement orientation PID control, I added a separate function within <code>PID.h</code> (see <a href=/fast-robots/lab5##Sending-and-Receiving-Data>structure</a>) which uses DMP yaw data, along with separate proportional, integral, and derivative gains from position control. operates the same way as <a href=/fast-robots/lab5##Full-PID-Control>PID from lab 5</a>, just with different parameters and a new motor control function, <code>turn()</code>.<p><code>turn()</code> operates using the spin deadband measured in Lab 4, as well as a higher max speed, to accommodate the higher friction involved in an in-place turn.<div class=note-container><button class=note-toggle><div class=note-icon><p>turn() V1</div></button><div class=note-content style=display:block><pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span style=color:#fa6e32>float </span><span style=color:#f29718>turn </span><span>(</span><span style=color:#fa6e32>float </span><span style=color:#ff8f40>speed_control</span><span>){
+</span><span>  
+</span><span>  </span><span style=color:#fa6e32>float</span><span> applied_pwm</span><span style=color:#61676ccc>;
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>></span><span> max_spin) {
+</span><span>    applied_pwm </span><span style=color:#ed9366>=</span><span> max_spin</span><span style=color:#61676ccc>;
+</span><span>    </span><span style=color:#f29718>spinleft</span><span>(max_spin)</span><span style=color:#61676ccc>;
+</span><span>  }
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>&lt; </span><span>(</span><span style=color:#ed9366>-</span><span style=color:#ff8f40>1 </span><span style=color:#ed9366>*</span><span> max_speed)) {
+</span><span>    </span><span style=color:#f29718>spinright</span><span>(max_spin)</span><span style=color:#61676ccc>;
+</span><span>    applied_pwm </span><span style=color:#ed9366>= -</span><span style=color:#ff8f40>1 </span><span style=color:#ed9366>*</span><span> max_speed</span><span style=color:#61676ccc>;
+</span><span>  } 
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>> </span><span style=color:#ff8f40>0</span><span>) {
+</span><span>    </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>></span><span> deadband_spin){
+</span><span>      applied_pwm </span><span style=color:#ed9366>=</span><span> speed_control</span><span style=color:#61676ccc>; 
+</span><span>    }</span><span style=color:#fa6e32>else </span><span>{
+</span><span>      applied_pwm </span><span style=color:#ed9366>=</span><span> deadband_spin</span><span style=color:#61676ccc>;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style=color:#f29718>spinleft</span><span>(applied_pwm)</span><span style=color:#61676ccc>;
+</span><span>    
+</span><span>  }
+</span><span>  </span><span style=color:#fa6e32>else if </span><span>(speed_control </span><span style=color:#ed9366>&lt; </span><span style=color:#ff8f40>0</span><span>) {
+</span><span>    </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>&lt; -</span><span style=color:#ff8f40>1</span><span style=color:#ed9366>*</span><span>deadband_spin){
+</span><span>      applied_pwm </span><span style=color:#ed9366>= -</span><span style=color:#ff8f40>1</span><span style=color:#ed9366>*</span><span> speed_control</span><span style=color:#61676ccc>;
+</span><span>      </span><span style=color:#f29718>spinright</span><span>(applied_pwm)</span><span style=color:#61676ccc>;
+</span><span>      applied_pwm </span><span style=color:#ed9366>=</span><span> speed_control</span><span style=color:#61676ccc>; 
+</span><span>    }</span><span style=color:#fa6e32>else </span><span>{
+</span><span>
+</span><span>      applied_pwm </span><span style=color:#ed9366>=</span><span> deadband_spin</span><span style=color:#61676ccc>;
+</span><span>      </span><span style=color:#f29718>spinright</span><span>(applied_pwm)</span><span style=color:#61676ccc>;
+</span><span>      applied_pwm </span><span style=color:#ed9366>= -</span><span style=color:#ff8f40>1</span><span style=color:#ed9366>*</span><span> deadband_spin</span><span style=color:#61676ccc>;
+</span><span>    }
+</span><span>
+</span><span>    
+</span><span>  }</span><span style=color:#fa6e32>else</span><span>{
+</span><span>    </span><span style=color:#f29718>stop</span><span>()</span><span style=color:#61676ccc>;
+</span><span>    </span><span style=color:#fa6e32>return</span><span>(</span><span style=color:#ff8f40>0</span><span>)</span><span style=color:#61676ccc>;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style=color:#fa6e32>return</span><span> applied_pwm</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>}
+</span></code></pre></div></div><p>My first try went like so, with gains of 2, 0.0005, and 10 for K_p, K_i and K_d respectively:</p><iframe allowfullscreen height=500 src=https://youtube.com/embed/_O1D_noCNA0 width=800></iframe><img alt="PID ORIETNATION FIRST RTRY" src=/files/lab6/first-try3.png width=800><p>While the corrections looked pretty good after the first second or so, it's worth noting that the robot got significantly off angle initially.<p>It appeared that the DMP yaw data wasn't updating for the first 1.5 seconds, and unfortunately I wasn't able to figure out why. I had to implement a delay when the control loop initialized in order to prevent the initial overshoot.<p>With that settled (for now) I then moved on to tuning gains.</p><iframe allowfullscreen height=500 src=https://youtube.com/embed/d37b58sLwmM width=800></iframe><p>Despite iterating through multiple rounds of <a href=/fast-robots/lab5##Full-PID-Control>heuristic 1</a>, I didn't really find a set of gains that worked better than pure P control. I attribute this to the way I handled my deadband. Instead of clipping low values, it might work better to map the set of reasonable PID outputs onto the interval [deadband_spin, max_spin].<p>This seemed to work best with [0, 255] approximately mapped onto [135, 250] for the lab floor, using the following formula:<div class=note-container><button class=note-toggle><div class=note-icon><p>turn() V2</div></button><div class=note-content style=display:block><pre class=language-c++ data-lang=c++ style=color:#61676c;background-color:#fafafa><code class=language-c++ data-lang=c++><span style=color:#fa6e32>float </span><span style=color:#f29718>turn </span><span>(</span><span style=color:#fa6e32>float </span><span style=color:#ff8f40>speed_control</span><span>){
+</span><span>  
+</span><span>  </span><span style=color:#fa6e32>float</span><span> applied_pwm</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>></span><span> max_spin) {
+</span><span>    applied_pwm </span><span style=color:#ed9366>=</span><span> max_spin</span><span style=color:#61676ccc>;
+</span><span>    </span><span style=color:#f29718>spinleft</span><span>(max_spin)</span><span style=color:#61676ccc>;
+</span><span>  }</span><span style=color:#fa6e32>else
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>&lt; </span><span>(</span><span style=color:#ed9366>-</span><span style=color:#ff8f40>1 </span><span style=color:#ed9366>*</span><span> max_speed)) {
+</span><span>    </span><span style=color:#f29718>spinright</span><span>(max_spin)</span><span style=color:#61676ccc>;
+</span><span>    applied_pwm </span><span style=color:#ed9366>= -</span><span style=color:#ff8f40>1 </span><span style=color:#ed9366>*</span><span> max_speed</span><span style=color:#61676ccc>;
+</span><span>  } </span><span style=color:#fa6e32>else
+</span><span>  </span><span style=color:#fa6e32>if </span><span>(speed_control </span><span style=color:#ed9366>> </span><span style=color:#ff8f40>5</span><span>) {
+</span><span>    </span><span style=color:#abb0b6;font-style:italic>// map to valid values 
+</span><span>
+</span><span>    applied_pwm </span><span style=color:#ed9366>= </span><span style=color:#61676ccc>.</span><span style=color:#ff8f40>33 </span><span style=color:#ed9366>*</span><span> speed_control </span><span style=color:#ed9366>+</span><span> deadband_spin</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>    </span><span style=color:#f29718>spinleft </span><span>(applied_pwm)</span><span style=color:#61676ccc>;
+</span><span>    
+</span><span>    
+</span><span>  }
+</span><span>  </span><span style=color:#fa6e32>else if </span><span>(speed_control </span><span style=color:#ed9366>&lt; -</span><span style=color:#ff8f40>5</span><span>) {
+</span><span>    applied_pwm </span><span style=color:#ed9366>= -</span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>.</span><span style=color:#ff8f40>33 </span><span style=color:#ed9366>*</span><span> speed_control </span><span style=color:#ed9366>+</span><span> deadband_spin</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>    </span><span style=color:#f29718>spinright</span><span>(applied_pwm)</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>    applied_pwm </span><span style=color:#ed9366>= -</span><span style=color:#ff8f40>1 </span><span style=color:#ed9366>*</span><span> applied_pwm</span><span style=color:#61676ccc>;
+</span><span>    
+</span><span>  }</span><span style=color:#fa6e32>else</span><span>{ </span><span style=color:#abb0b6;font-style:italic>// input is 0
+</span><span>
+</span><span>    </span><span style=color:#abb0b6;font-style:italic>// Serial.println("Stopping");
+</span><span>    </span><span style=color:#f29718>stop</span><span>()</span><span style=color:#61676ccc>;
+</span><span>    applied_pwm </span><span style=color:#ed9366>= </span><span style=color:#ff8f40>0</span><span style=color:#61676ccc>;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style=color:#abb0b6;font-style:italic>//debug 
+</span><span>
+</span><span>  </span><span style=color:#fa6e32>return</span><span> applied_pwm</span><span style=color:#61676ccc>;
+</span><span>
+</span><span>}
+</span><span>
+</span></code></pre></div></div><p>I tested on a table in another room (after lowering the deadband to accommodate for lower surface friction), and found a lot more success tuning gains with heuristic 1.<p>Below is one such example, with a better response than both previous.</p><iframe allowfullscreen height=500 src=https://youtube.com/embed/qq5McDSDIt4 width=800></iframe><img alt="Orientation tuning, v2" src=/files/lab6/tuning_v2.png width=800><h2 id=derivative-control-considerations><a aria-label="Anchor link for: derivative-control-considerations" class=zola-anchor href=#derivative-control-considerations>Derivative Control Considerations</a></h2><p>It's worth noting that derivative control of orientation is pretty much a derivative of an integrated signal (as the gyroscope measures angular velocity). However, the onboard DMP process fuses the accelerometer and magnetometer to output yaw. I don't necessarily want to use gyroscope yaw velocity as my derivative error if other sensor data is being taken into account to produce my measurements.<p>In order to measure the effect of derivative kick, I set the robot to 0, 90, -90, and 0 in sequence. If the following results are any indication, the controller does a fairly good job of accounting for derivative kick. It also seemed to work well enough without a low pass filter.</p><iframe allowfullscreen height=500 src=https://youtube.com/embed/3bgpWvPqUxs width=800></iframe><img alt="varying setpoint" src=/files/lab6/vary_setpoint.png width=800><h2 id=collaborations><a aria-label="Anchor link for: collaborations" class=zola-anchor href=#collaborations>Collaborations</a></h2><p>I worked with <a href=https://correial.github.io/>Lucca Correia</a> and <a href=https://trevordales.github.io/>Trevor Dales</a> extensively, and referenced <a href=https://pages.github.coecis.cornell.edu/dak267/dak267.github.io/#contact>Daria's</a> and <a href=https://fast.synthghost.com/lab-5-linear-pid-control/>Stephan's</a> for specific PID orientation control considerations.<h1 id=next-lab-7><a aria-label="Anchor link for: next-lab-7" class=zola-anchor href=#next-lab-7>Next: <a href=/fast-robots/lab7>Lab 7</a></a></h1></section></article></main><div class=giscus></div><script -- <!-- <-- change repo src=https://utteranc.es/client.js this to your>issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script></div>

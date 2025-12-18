@@ -1,0 +1,220 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{dot_oig_av2020037_2020}{report}{}
+      \list{institution}{1}{%
+        {U.S. Department of Transportation, Office of Inspector General}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{day}{29}
+      \field{month}{6}
+      \field{note}{PDF}
+      \field{title}{FAA Oversight of Boeing's 737 MAX Certification: Timeline of Activities}
+      \field{type}{Report (Final)}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://www.oig.dot.gov/sites/default/files/FAA%20Oversight%20of%20Boeing%20737%20MAX%20Certification%20Timeline%20Final%20Report.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.oig.dot.gov/sites/default/files/FAA%20Oversight%20of%20Boeing%20737%20MAX%20Certification%20Timeline%20Final%20Report.pdf
+      \endverb
+    \endentry
+    \entry{dot_oig_av2021020_2021}{report}{}
+      \list{institution}{1}{%
+        {U.S. Department of Transportation, Office of Inspector General}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{day}{23}
+      \field{month}{2}
+      \field{note}{PDF}
+      \field{title}{Weaknesses in FAA's Certification and Delegation Processes Hindered Its Oversight of the 737 MAX 8}
+      \field{type}{Report No. AV2021020}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://www.oig.dot.gov/sites/default/files/FAA%20Certification%20of%20737%20MAX%20Boeing%20II%20Final%20Report%5E2-23-2021.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.oig.dot.gov/sites/default/files/FAA%20Certification%20of%20737%20MAX%20Boeing%20II%20Final%20Report%5E2-23-2021.pdf
+      \endverb
+    \endentry
+    \entry{faa_fsb_report_737max_2020}{report}{}
+      \list{institution}{1}{%
+        {Federal Aviation Administration}%
+      }
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{note}{PDF; exact publication day may be listed inside the PDF}
+      \field{title}{Flight Standardization Board Report: The Boeing Company 737, Revision 17}
+      \field{type}{FSB Report}
+      \verb{urlraw}
+      \verb https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+      \endverb
+      \warn{\item Entry 'faa_fsb_report_737max_2020' (refs.bib): Invalid format '2020-11-xx' of date field 'date' - ignoring}
+    \endentry
+    \entry{doj_boeing_dpa_2021}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=1c35604f21834f4c6c9740deaebbd7c0}{%
+           family={{U.S. Department of Justice}},
+           familyi={U\bibinitperiod}}}%
+      }
+      \strng{namehash}{1c35604f21834f4c6c9740deaebbd7c0}
+      \strng{fullhash}{1c35604f21834f4c6c9740deaebbd7c0}
+      \strng{bibnamehash}{1c35604f21834f4c6c9740deaebbd7c0}
+      \strng{authorbibnamehash}{1c35604f21834f4c6c9740deaebbd7c0}
+      \strng{authornamehash}{1c35604f21834f4c6c9740deaebbd7c0}
+      \strng{authorfullhash}{1c35604f21834f4c6c9740deaebbd7c0}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{7}
+      \field{howpublished}{Court filing (PDF)}
+      \field{month}{1}
+      \field{note}{PDF}
+      \field{title}{U.S. v. The Boeing Company: Deferred Prosecution Agreement and Statement of Facts}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://www.justice.gov/criminal/criminal-vns/file/1482911/dl?inline=
+      \endverb
+      \verb{url}
+      \verb https://www.justice.gov/criminal/criminal-vns/file/1482911/dl?inline=
+      \endverb
+    \endentry
+    \entry{doj_press_release_2021}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=031ab94cc19a44a98760a2a5a9c7f968}{%
+           family={{U.S. Department of Justice, Office of Public Affairs}},
+           familyi={U\bibinitperiod}}}%
+      }
+      \strng{namehash}{031ab94cc19a44a98760a2a5a9c7f968}
+      \strng{fullhash}{031ab94cc19a44a98760a2a5a9c7f968}
+      \strng{bibnamehash}{031ab94cc19a44a98760a2a5a9c7f968}
+      \strng{authorbibnamehash}{031ab94cc19a44a98760a2a5a9c7f968}
+      \strng{authornamehash}{031ab94cc19a44a98760a2a5a9c7f968}
+      \strng{authorfullhash}{031ab94cc19a44a98760a2a5a9c7f968}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{7}
+      \field{howpublished}{Press release}
+      \field{month}{1}
+      \field{title}{Boeing Charged with 737 Max Fraud Conspiracy and Agrees to Pay Over \$2.5 Billion}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://www.justice.gov/archives/opa/pr/boeing-charged-737-max-fraud-conspiracy-and-agrees-pay-over-25-billion
+      \endverb
+      \verb{url}
+      \verb https://www.justice.gov/archives/opa/pr/boeing-charged-737-max-fraud-conspiracy-and-agrees-pay-over-25-billion
+      \endverb
+    \endentry
+    \entry{faa_rts_summary_2020}{report}{}
+      \list{institution}{1}{%
+        {Federal Aviation Administration}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{note}{PDF; month/day may be listed inside the PDF}
+      \field{title}{Summary of the FAA's Review of the Boeing 737 MAX}
+      \field{type}{Report}
+      \verb{urlraw}
+      \verb https://www.faa.gov/sites/faa.gov/files/2022-08/737_RTS_Summary.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.faa.gov/sites/faa.gov/files/2022-08/737_RTS_Summary.pdf
+      \endverb
+      \warn{\item Entry 'faa_rts_summary_2020' (refs.bib): Invalid format '2020-11-xx' of date field 'date' - ignoring}
+    \endentry
+    \entry{aib_ethiopia_et302_prelim_2019}{report}{}
+      \list{institution}{1}{%
+        {Aircraft Accident Investigation Bureau (Ethiopia)}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{note}{PDF copy hosted by a third-party site; use official host if your course requires primary hosting}
+      \field{title}{Aircraft Accident Investigation Bureau Preliminary Report: Ethiopian Airlines Flight 302 (Boeing 737-8 MAX, ET-AVJ)}
+      \field{type}{Preliminary Report}
+      \verb{urlraw}
+      \verb https://leehamnews.com/wp-content/uploads/2019/04/Preliminary-Report-B737-800MAX-ET-AVJ.pdf
+      \endverb
+      \verb{url}
+      \verb https://leehamnews.com/wp-content/uploads/2019/04/Preliminary-Report-B737-800MAX-ET-AVJ.pdf
+      \endverb
+      \warn{\item Entry 'aib_ethiopia_et302_prelim_2019' (refs.bib): Invalid format '2019-04-xx' of date field 'date' - ignoring}
+    \endentry
+    \entry{house_ti_737max_final_2020}{report}{}
+      \list{institution}{2}{%
+        {U.S. House of Representatives, Committee on Transportation}%
+        {Infrastructure}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{note}{PDF; exact publication day may be listed inside the report}
+      \field{title}{Final Committee Report: The Design, Development \& Certification of the Boeing 737 MAX}
+      \field{type}{Committee Report}
+      \verb{urlraw}
+      \verb https://www.govinfo.gov/content/pkg/GOVPUB-Y4_T68_2-PURL-gpo144993/pdf/GOVPUB-Y4_T68_2-PURL-gpo144993.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.govinfo.gov/content/pkg/GOVPUB-Y4_T68_2-PURL-gpo144993/pdf/GOVPUB-Y4_T68_2-PURL-gpo144993.pdf
+      \endverb
+      \warn{\item Entry 'house_ti_737max_final_2020' (refs.bib): Invalid format '2020-09-xx' of date field 'date' - ignoring}
+    \endentry
+    \entry{faa_jatr_2019}{report}{}
+      \list{institution}{1}{%
+        {Federal Aviation Administration}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{day}{11}
+      \field{month}{10}
+      \field{note}{PDF}
+      \field{title}{Boeing 737 MAX Flight Control System Observations}
+      \field{type}{Joint Authorities Technical Review (JATR) Report}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://www.faa.gov/sites/faa.gov/files/2021-08/Final_JATR_Submittal_to_FAA_Oct_2019.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.faa.gov/sites/faa.gov/files/2021-08/Final_JATR_Submittal_to_FAA_Oct_2019.pdf
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
