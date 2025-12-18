@@ -8,6 +8,11 @@
     {{ post_macros::page_header(title=section.title) }}
 
     <main>
+        {% if section.content and section.extra.show_intro | default(value=false) %}
+            <section class="section-intro">
+                {{ section.content | safe }}
+            </section>
+        {% endif %}
         {%- if paginator %}
             {%- set show_pages = paginator.pages -%}
         {% else %}

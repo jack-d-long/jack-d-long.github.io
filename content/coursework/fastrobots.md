@@ -1,7 +1,7 @@
 +++
 
 title = "MAE 4190: Fast Robots" 
-description = "A modern and minimalistic blog theme for Zola" 
+description = "Onboard sensing and control of a dynamic autonomous robot" 
 weight = 1 
 date = 2025-11-17
 

@@ -9,7 +9,7 @@ date = 2025-11-17
 local_image = "/portfolio/4300.jpg"
 
 [extra.latex_viewer]
-path = "content/portfolio/4300/index.tex"
+path = "content/coursework/4300/index.tex"
 title = "Report"
 description = ""
 pdf_path = "4300/report.pdf"
