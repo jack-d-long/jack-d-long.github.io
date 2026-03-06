@@ -18,7 +18,8 @@ include_content = true
 index_format = "elasticlunr_json"
 
 [markdown]
-highlighting = { code = true }
+[markdown.highlighting]
+theme = "github-light"
 
 [extra]
 toc = true
@@ -29,11 +30,6 @@ fancy_code = true
 dynamic_note = true           # a note that can be toggled
 
 
-
-
-# Whether to do syntax highlighting
-# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
-highlight_code = false
 
 
 # Put all your custom variables here
