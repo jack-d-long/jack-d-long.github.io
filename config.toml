@@ -18,8 +18,7 @@ include_content = true
 index_format = "elasticlunr_json"
 
 [markdown]
-highlight_code = true
-highlight_theme = "ayu-light"
+highlighting = { code = true, theme = "ayu-light" }
 
 [extra]
 toc = true
