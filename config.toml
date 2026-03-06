@@ -45,6 +45,7 @@ socials = [
 ]
 menu = [
       { name = "/portfolio", url = "/portfolio", weight = 1 },
+    { name = "/fast robots", url = "/fast-robots", weight = 2 },
     { name = "/about", url = "/about", weight = 4 }
 
     
