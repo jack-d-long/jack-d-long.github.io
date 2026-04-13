@@ -1,5 +1,5 @@
 +++
-title = "OIE Poster — Contact & References"
+title = "OIE Poster Session 2026: Contact & References"
 path = "oie-poster-contact"
 +++
 
