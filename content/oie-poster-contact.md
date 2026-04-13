@@ -1,9 +1,9 @@
 +++
-title = "OIE Poster Session 2026: Contact & References"
+title = "Thanks for Scanning!"
 path = "oie-poster-contact"
 +++
 
-## Thanks for scanning!
+<p style="text-align:center;"><img src="/comt-scope.jpg" alt="backg-transp" width="60%"></p>
 
 I'm Jack Long, a fourth-year Mechanical Engineering student at Cornell University working on insect-scale robotics in the [Helbling Robotics Laboratory](https://helbling-lab.github.io/).
 
@@ -15,7 +15,7 @@ If you'd like to chat about the work presented in this poster, feel free to reac
 
 ---
 
-## References
+<h1>References</h1>
 
 1. B. G. et al., “Power and control autonomy for high-speed locomotion with an insect-scale legged robot,” IEEE Robotics and Automation Letters, vol. 3, no. 2, pp. 987–993, apr 2018.
 2. Z. Zhakypov, K. Mori, K. Hosoda, and J. Paik, “Designing minimal and scalable insect-inspired multi-locomotion millirobots,” Nature, vol. 571, no. 7765, pp. 381–386, Jul. 2019
